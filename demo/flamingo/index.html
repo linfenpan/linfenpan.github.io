@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <title></title>
+    <!-- 如果没有reset样式的同学，引入这份 -->
+    <link rel="stylesheet" href="./reset.css" />
+
+    <style>
+        body { padding-top: 5rem; }
+        .item { display: block; width: 10rem; padding: 1rem 0; margin: 1rem; font-size: 1.4rem; text-align: center; background: #FBA800; color: #fff; }
+        .line { overflow: hidden; display: block; height: 1px; width: 10rem; margin: 0 1rem; background: #ddd; }
+        .footer { margin-top: 5rem; }
+        .hide { display: none; }
+
+        /** 应对那些，在大屏幕看效果的同学，别把这段拷贝过去啊！！！！ */
+        @media only screen and (min-width: 480px) {
+            .pop-dialog.pop-dialog-confirm { min-width: 280px; }
+        }
+
+        /** 加个弹窗动画 */
+        .active.pop-lock-layer { opacity: 1; -webkit-transition: opacity .2s ease; transition: opacity .2s ease; }
+        .pop-lock-layer { opacity: 0; -webkit-transition: opacity .2s ease, visibility .2s ease .2s; transition: opacity .2s ease, visibility .2s ease .2s; }
+    </style>
+</head>
+<body>
+
+    <a href="javascript:;" class="item insertHeader">插入header</a>
+    <a href="javascript:;" class="item setHeaderLogin hide">header登录状态</a>
+    <a href="javascript:;" class="item setHeaderLogout hide">header退出状态</a>
+    <span class="line"></span>
+    <a href="javascript:;" class="item insertFooter">插入footer</a>
+    <span class="line"></span>
+    <a href="javascript:;" class="item popupInit">弹窗组件</a>
+    <a href="javascript:;" class="item popupAuto hide">自动提醒</a>
+    <a href="javascript:;" class="item popupConfirm hide">confirm弹出</a>
+    <a href="javascript:;" class="item popupCustom1 hide">自定义弹出1</a>
+    <a href="javascript:;" class="item popupCustom2 hide">自定义弹出2</a>
+    <span class="line"></span>
+    <!-- 感觉不怎么好用，如有朋友重写之，万分感谢~ -->
+    <a href="javascript:;" class="item bindPhoneWithTip">绑定手机[带提醒]</a>
+    <a href="javascript:;" class="item bindPhoneNoTip">绑定手机[直接]</a>
+    <span class="line"></span>
+    <a href="http://linfenpan.github.io/demo/lottery/" target="_blank" class="item lottery">抽奖例子</a>
+    <span class="line"></span>
+    <a href="./announcement.html" target="_blank" class="item">滚动消息例子</a>
+    <span class="line"></span>
+    <a href="./swipe.html" class="item" target="_blank">swipe切换</a>
+	<a href="/demo/swiper/index.html" class="item" target="_blank">swiper切换</a>
+    <span class="line"></span>
+    <a href="./gallery/gallery.html" class="item" target="_blank">点击放大的相册</a>
+    <!-- 老虎机 -->
+    <!-- 支付功能 @标爷 -->
+
+
+    <div class="hide">
+        <div class="popupCustom2Dialog pop-dialog-confirm pop-dialog-white">
+            <div class="content">这是自定义弹窗<br/>通过在页面中的元素生成</div>
+            <div class="operation">
+                <!-- data-role="close"的监听，默认是关闭弹窗 -->
+                <a href="javascript:;" class="pop-dialog-btn pop-dialog-cancel" data-role="close">关闭</a>
+                <!-- data-role="sure"，是我们这里定义的 -->
+                <a href="javascript:;" class="pop-dialog-btn pop-dialog-sure" data-role="sure">确定</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"><!-- 将被插入页脚 --></div>
+
+<script src="http://cdn.guopan.cn/uploads/deploy/huodongshuangdanvip/js/jquery.js"></script>
+<script src="./project.full.min.js"></script>
+<script>
+    // require.config({ basePath: "./" });  // 指定寻址路径，默认是当前页面地址的目录
+    // 注入已有的 jquery，某些插件，会依赖jquery，这一句，一定要带上
+    require.config({
+        alias: {
+            jquery: window.jQuery
+        }
+    });
+
+    $(".insertHeader").one("click", function(){
+        var $elem = $(this);
+        require("./siteHeader/siteHeader.js", function(siteHeader){
+            siteHeader.init();
+            // 不设置，“登录”按钮不显示
+            siteHeader.setLogin(function(){
+                // 点击登录的操作
+                alert("点击了登录");
+            });
+            // 不设置，“注销”按钮不显示
+            siteHeader.setLogout(function(){
+                alert("点击了注销");
+            });
+            // 不设置，用户信息不显示
+            siteHeader.setUserInfo(function(){
+                return { name: "da宗熊", src: "http://img4.3lian.com/sucai/img6/230/29.jpg" };
+            });
+            // 不设置，左侧logo默认是“首页”，没链接
+            siteHeader.setHomeInfo(function(fn){
+                return { text: "果盘小组", link: "http://www.guopan.cn/"};
+            });
+
+            $(".setHeaderLogin, .setHeaderLogout").removeClass("hide");
+            $elem.addClass("hide");
+        });
+    });
+
+    // 因为下面两个按钮，是siteHeader.js加载完毕后，才显示的，所以，放心使用 var siteHeader = require("./siteHeader/siteHeader.js") 操作
+    // 如果不能保证 siteHeader.js 加载完成的同学，请继续使用上面的回调方式，万分保险！！
+    $(".setHeaderLogin").click(function(){
+        var siteHeader = require("./siteHeader/siteHeader.js");
+        siteHeader.setStatus(siteHeader.STATUS.LOGIN);
+    });
+    $(".setHeaderLogout").click(function(){
+        var siteHeader = require("./siteHeader/siteHeader.js");
+        siteHeader.setStatus(siteHeader.STATUS.LOGOUT);
+    });
+
+
+    $(".insertFooter").one("click", function(){
+        require("./siteFooter/siteFooter.js", function(siteFooter){
+            siteFooter.init($(".footer")[0]);
+        });
+    });
+
+
+    $(".popupInit").one("click", function(){
+        var $elem = $(this);
+        require("./popup/popup.js", function(){
+            $(".popupAuto, .popupConfirm, .popupCustom1, .popupCustom2").removeClass("hide");
+            $elem.addClass("hide");
+        });
+    });
+
+    $(".popupAuto").click(function(){
+        // 最安全的用法
+        require("./popup/popup.js", function(popup){
+            popup.autoTip("自动提醒");
+        });
+    });
+    $(".popupConfirm").click(function(){
+        // 熟悉原理的同学，可以这么用
+        // 不熟悉的，禁止、并杜绝如此使用
+        var popup = require("./popup/popup.js");
+        popup.confirm("确认选择吗?", {
+            btns: [
+                {},
+                { text: "确定", color: "sure", callback: function(elem, e){
+                    var dialog = this;
+                    // 自己控制关闭
+                    setTimeout(function(){
+                        dialog.hide();
+                    }, 1000);
+                    return false;   // 告诉弹窗，这个按钮，点击后，不关闭
+                }}
+            ]
+        });
+    });
+    $(".popupCustom1").click(function(){
+        var popup = require("./popup/popup.js");
+        var dialog = popup.dialog.create('<div class="popupCustom1Dialog pop-dialog-confirm pop-dialog-white">\
+            <div class="content">这是自定义弹窗<br/>通过字符串生成</div>\
+            <div class="operation">\
+                <a href="javascript:;" class="pop-dialog-btn pop-dialog-cancel" data-role="close">关闭</a>\
+                <a href="javascript:;" class="pop-dialog-btn pop-dialog-sure" data-role="sure">确定</a>\
+            </div>\
+        </div>');
+        dialog.show();
+        dialog.on("sure", function(elem, e){
+            console.log("点击了确定");
+            this.hide();
+        });
+    });
+    $(".popupCustom2").click(function(){
+        var popup = require("./popup/popup.js");
+        var dialog = popup.dialog.create($(".popupCustom2Dialog"));
+        dialog.show();
+        // 因为每次都是相同的弹窗，所以再次点击时，需要先off掉之前的事件
+        dialog.off("sure").on("sure", function(elem, e){
+            console.log("点击了确定");
+            this.hide();
+        });
+    });
+
+
+    $(".bindPhoneWithTip").click(function(){
+        require("./bindPhone/bindPhone.js", function(bindPhone){
+            // @bug: 第1次init设置参数，才会生效，其它时候，不生效的说~
+            bindPhone.init({
+                // 获取验证码请求，让后端返回值，跟这两个接口要保持一致，下面这两个参数，是内置的默认值
+                codeUrl: "http://m.guopan.cn/user/api/getCode.php",
+                // 绑定手机请求，让后端返回值，跟这两个接口要保持一致
+                bindUrl: "http://m.guopan.cn/user/api/verifyCode.php"
+            }).show("绑定手机的提醒，造不？");
+        });
+    });
+    $(".bindPhoneNoTip").click(function(){
+        require("./bindPhone/bindPhone.js", function(bindPhone){
+            // @bug: 第1次init设置参数，才会生效，其它时候，不生效的说~
+            bindPhone.init().showBindDialog();
+            bindPhone.on("nologin", function(){
+                alert("请登录后，再绑定手机");
+            });
+            // bindPhone.on("bindSuccess", function(){
+            //     alert("绑定成功");
+            // });
+        });
+    });
+</script>
+</body>
+</html>

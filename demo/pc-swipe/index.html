@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>PC端切换广告</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+
+<div class="container">
+
+    <div class="wrapper">
+        <div class="list">
+            <a class="item" href="javascript:alert('Give me a link');" target="_blank">
+                <div class="titleWrap">
+                    <img class="icon" src="./user_index_tool_default.png" />
+                    <span class="title toh">神1武帝国，无敌脚本</span>
+                    <span class="enter">进入脚本</span>
+                </div>
+                <div class="desc">
+                    1. 自动历练：自动所有普通历练任务，挑战失败停止。<br/>
+                    2. 自动师门：自动完成每日20次任务或无限刷，会自动逛摊购买。<br/>
+                    3. 自动打图：自动完成每日宝图任务。<br/>
+                    4. 自动挖图：自动使用包裹内所有宝图。<br/>
+                    5. 自动抓野卖野：自动去抓野，到宠物店卖。<br/>
+                    6. 自动试练：自动打英雄试练，可选难度模式。<br/>
+                    7. 自动竞技场：自动打竞技场,自动刷新排行,可选择决斗位置。<br/>
+                    8. 自动任务链： 自动寻人,寻物自动交易中购买,传说功<br/>
+                </div>
+            </a>
+            <a class="item" href="javascript:alert('Give me a link');" target="_blank">
+                <div class="titleWrap">
+                    <img class="icon" src="./user_index_tool_default.png" />
+                    <span class="title toh">神2武帝国，无敌脚本</span>
+                    <span class="enter">进入脚本</span>
+                </div>
+                <div class="desc">
+                    1. 自动历练：自动所有普通历练任务，挑战失败停止。<br/>
+                    2. 自动师门：自动完成每日20次任务或无限刷，会自动逛摊购买。<br/>
+                    3. 自动打图：自动完成每日宝图任务。<br/>
+                    4. 自动挖图：自动使用包裹内所有宝图。<br/>
+                    5. 自动抓野卖野：自动去抓野，到宠物店卖。<br/>
+                    6. 自动试练：自动打英雄试练，可选难度模式。<br/>
+                    7. 自动竞技场：自动打竞技场,自动刷新排行,可选择决斗位置。<br/>
+                    8. 自动任务链： 自动寻人,寻物自动交易中购买,传说功<br/>
+                </div>
+            </a>
+            <a class="item" href="javascript:alert('Give me a link');" target="_blank">
+                <div class="titleWrap">
+                    <img class="icon" src="./user_index_tool_default.png" />
+                    <span class="title toh">神3武帝国，无敌脚本</span>
+                    <span class="enter">进入脚本</span>
+                </div>
+                <div class="desc">
+                    1. 自动历练：自动所有普通历练任务，挑战失败停止。<br/>
+                    2. 自动师门：自动完成每日20次任务或无限刷，会自动逛摊购买。<br/>
+                    3. 自动打图：自动完成每日宝图任务。<br/>
+                    4. 自动挖图：自动使用包裹内所有宝图。<br/>
+                    5. 自动抓野卖野：自动去抓野，到宠物店卖。<br/>
+                    6. 自动试练：自动打英雄试练，可选难度模式。<br/>
+                    7. 自动竞技场：自动打竞技场,自动刷新排行,可选择决斗位置。<br/>
+                    8. 自动任务链： 自动寻人,寻物自动交易中购买,传说功<br/>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="operation">
+        <a href="javascript:;" class="disable toLeft" title="←"></a>
+        <a href="javascript:;" class="toRight" title="→"></a>
+    </div>
+    <div class="indicator">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+
+
+</div>
+
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="./jquery.swipe.fp.js"></script>
+<script type="text/javascript">
+var $collection = $(".container");
+var $root = $collection.find(".wrapper .list");
+var $children = $root.children();
+var size = $children.size();
+
+var $dots = $(".indicator", $collection).html(new Array(size + 1).join('<span class="dot"></span>')).find(".dot");
+
+var activeClass = "active";
+var disableClass = "disable";
+
+$dots.eq(0).addClass(activeClass);
+$root.swipe({
+    autoTime: 3000,
+    repeat: false,
+    callback: function(toIndex, fromIndex){
+        if (toIndex <= 0) {
+            $left.addClass(disableClass);
+        } else {
+            $left.removeClass(disableClass);
+        }
+        if (toIndex >= this.size - 1){
+            $right.addClass(disableClass);
+        } else {
+            $right.removeClass(disableClass);
+        }
+        $dots.removeClass(activeClass).eq(toIndex).addClass(activeClass);
+    }
+});
+
+var $left = $collection.find(".toLeft"),
+    $right = $collection.find(".toRight");
+
+$left.click(function(){
+    !$(this).hasClass(disableClass) && $root.swipe("prev");
+});
+$right.click(function(){
+    !$(this).hasClass(disableClass) && $root.swipe("next");
+});
+$dots.click(function(){
+    $root.swipe("slideTo", $(this).index());
+});
+</script>
+</body>
+</html>

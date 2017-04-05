@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>842个emoji表情</title>
+	<style>
+		*{padding:0;margin:0;}
+		@font-face {
+			font-family: 'Symbola';
+			src: url('font/symbola.eot');
+			src: url('font/symbola.eot?#iefix') format('embedded-opentype'),url('font/symbola.woff') format('woff'),url('font/symbola.ttf') format('truetype'),url('font/symbola.svg#FontAwesomeRegular') format('svg');
+			font-weight: normal;
+			font-style: normal
+		}
+		#cnt{
+			/* 也可使用样式修复之.. */
+			font-family: Symbola;
+		}
+        .tips{
+            padding: 20px 0;
+            font-family: arial;
+        }
+        table{
+            width:100%;
+        }
+		td{
+			width:8%;
+			padding:10px 2px;
+			border:1px solid #ddd;
+			text-align:center;
+		}
+	</style>
+</head>
+
+<body>
+    <div id="cnt">
+        <div class="tips">
+            完整版本，可查看: <a href="https://github.com/linfenpan/ToEmoji/" target="_blank">ToEmoji项目</a>
+        </div>
+        <div id="table"></div>
+    </div>
+</body>
+
+<script src="emoji.js" charset="utf-8"></script>
+<script src="emoji.config.js" charset="utf-8"></script>
+<script>
+// 可参考站点: http://apps.timwhitlock.info/emoji/tables/unicode#block-2-dingbats
+
+// 配置转为表格
+;~function(window, map, elem){
+
+	var per		=	5;
+	var html	= 	"<table>";
+
+	var index	=	0;
+	var item;
+	for(var i in map){
+		if(index % per == 0){
+			html += "<tr>"
+		}
+		item = map[i];
+		html += "<td><p>"+ (index + 1) + " " + item.key +"</p><p data-key='"+item.key+"'></p><p>"+ item.unicode +"</p></td>";
+
+		if(index % per == per - 1){
+			html += "</tr>"
+		}
+		index++;
+	}
+
+	html += "</table>";
+	elem.innerHTML = html;
+
+	// 展示文字
+	if(elem.querySelectorAll){
+		window.setTimeout(function(){
+			var list = document.getElementById("table").querySelectorAll("[data-key]");
+			for(var i = 0, max = list.length; i < max; i++){
+				list[i].innerHTML = list[i].getAttribute("data-key");
+			}
+		}, 1);
+	}
+}(window, EMOJI, document.getElementById("table"));
+
+
+// ToEmoji.emoji(document.getElementById("cnt"));
+ToEmoji.init("./images/", EMOJI);
+ToEmoji.emoji(document.getElementById("cnt"));
+
+</script>
+
+
+
+
+
+</html>

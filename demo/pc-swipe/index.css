@@ -1,0 +1,27 @@
+body { background: #fefefe; }
+.container { position: relative; width: 500px; margin: 20px auto; padding: 10px; border: 1px solid #ddd; }
+
+
+.wrapper { overflow: hidden; position: relative; height: 250px; margin: 15px 10px; }
+.wrapper:after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 66px; background: url(./img_s/user_index_collection.png) repeat-x; }
+.wrapper .list { height: 100%; }
+.wrapper .item { display: block; height: 100%; overflow: hidden; color: #000; }
+.wrapper .titleWrap { line-height: 52px; }
+.titleWrap .icon { width: 52px; height: 52px; vertical-align: bottom; }
+.titleWrap .title { display: inline-block; max-width: 190px; margin-left: 10px;  font-size: 16px; vertical-align: bottom; }
+.titleWrap .enter { float: right; color: #0e6ee4; }
+.wrapper .desc { margin-top: 5px; line-height: 24px; }
+
+.operation { position: absolute; top: 0; left: 0; width: 100%; height: 0; }
+.operation .toLeft, .operation .toRight { position: absolute; top: 130px; width: 50px; height: 30px; background: url(./img_d/userIndex.png) no-repeat; cursor: pointer; }
+.operation .toLeft:hover, .operation .toRight:hover { opacity: .8; }
+.operation .toLeft { left: 10px; background-position: 12px -410px; }
+.operation .toRight { right: 10px; background-position: 21px -510px; }
+.operation .disable.toLeft { background-position: 12px -360px; }
+.operation .disable.toRight { background-position: 21px -460px; }
+.operation .disable { cursor: default; }
+.operation .disable:hover { opacity: 1; }
+
+.indicator { margin-top: 5px; line-height: 0; text-align: center; }
+.indicator .dot { display: inline-block; vertical-align: middle; width: 8px; height: 8px; margin: 0 3px; background: #e1e1e1; border-radius: 50%; -webkit-transition: background .2s ease; transition: background .2s ease; }
+.indicator .active.dot, .indicator .dot:hover { background: #0cabff; cursor: pointer; }

@@ -1,0 +1,58 @@
+// out: ./index.css, autoprefixer: true
+body, html {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  color: #333;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#navbar, #main {
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+@widthNavbar: 120px;
+#navbar {
+  width: @widthNavbar;
+  background: #a7ceff;
+  z-index: 1;
+
+  h1 { font-size: 18px; }
+}
+
+#main {
+  width: 100%;
+  padding-left: @widthNavbar + 2px;
+  .tips {
+    padding: 10px 20px;
+    background: #eee;
+  }
+
+  .demo {
+    margin-top: 20px;
+    padding: 2px 2px 10px 2px;
+    border: 1px solid #ddd;
+  }
+  .title {
+    padding: 10px;
+    border-bottom: 4px double #ddd;
+  }
+  .code {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  pre {
+    border: none;
+  }
+}

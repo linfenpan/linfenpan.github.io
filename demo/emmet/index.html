@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Emmet第2版</title>
+    <script src="artTemplate.js" charset="utf-8"></script>
+	<style type="text/css">
+		.tips { padding: 20px 0; }
+		#inner { padding: 40px; }
+	</style>
+</head>
+<body>
+	<div class="tips">项目地址: <a href="https://github.com/linfenpan/simple-emmet.js">github</a></div>
+	<div>配合artTemplate.js，生成内容:</div>
+    <div id="inner"></div>
+</body>
+<script type="text/html" id="emmetTxt">
+    `{{each list}}`>(
+        p.item{`索引{{$index}}:`} > span.txt{`{{$value.name}}`}
+    )^`{{/each}}` + p{一段小尾巴}
+</script>
+<script src="Emmet.js" charset="utf-8"></script>
+<script type="text/javascript">
+var str = emmetTxt.innerHTML.trim();
+var tmp = Emmet.compile(str, {tag: 'div'});
+
+console.log(tmp);
+console.log(Emmet.compile('h${文字$$}*4', {tag:'span', number: true}));
+
+inner.innerHTML = template.render(tmp)({
+    list: [{name: "这是一头熊"}, {name: "猫咪星人驾到"}, {name: "轰轰轰"}]
+});
+</script>
+<script type="text/javascript">
+
+</script>
+</html>

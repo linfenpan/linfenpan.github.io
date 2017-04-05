@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>类9宫格抽奖组件</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+</head>
+<body>
+<div class="prizesList">
+    <div class="item item1">
+        <span class="wrap"></span>
+        <span class="ico ico1"></span>
+        <span class="text">10元红包</span>
+    </div>
+    <div class="item item2">
+        <span class="wrap"></span>
+        <span class="ico ico2"></span>
+        <span class="text">ipad mini4</span>
+    </div>
+    <div class="item item3">
+        <span class="wrap"></span>
+        <span class="ico ico3"></span>
+        <span class="text">3元红包</span>
+    </div>
+    <div class="item item8">
+        <span class="wrap"></span>
+        <span class="ico ico8"></span>
+        <span class="text">移动充值卡</span>
+    </div>
+    <div class="item itemBtn">
+        <a href="javascript:;" class="drawPrizeBtn"></a>
+    </div>
+    <div class="item item4">
+        <span class="wrap"></span>
+        <span class="ico ico4"></span>
+        <span class="text">元宵节快乐</span>
+    </div>
+    <div class="item item7">
+        <span class="wrap"></span>
+        <span class="ico ico7"></span>
+        <span class="text">5元红包</span>
+    </div>
+    <div class="item item6">
+        <span class="wrap"></span>
+        <span class="ico ico6"></span>
+        <span class="text">移动充值卡</span>
+    </div>
+    <div class="item item5">
+        <span class="wrap"></span>
+        <span class="ico ico5"></span>
+        <span class="text">50元红包</span>
+    </div>
+</div>
+
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/project.min.js"></script>
+<script type="text/javascript">
+require("./lottery.js", function(Lottery){
+    var LotteryCount = 8;
+    var $prizes = $(".prizesList")
+
+    var lottery = new Lottery(LotteryCount);
+
+    // 当前动画设置
+    var classNameRegExp = /\b\s*active(\d*)\b/g;
+    lottery.setDrawingCallback(function(index){
+        $prizes.prop("className", function(i, cls){
+            return cls.replace(classNameRegExp, "") + " active" + index;
+        });
+    });
+    // 抽中回调
+    lottery.setWonCallback(function(index){
+        alert("恭喜你抽中了:" + index);
+    });
+
+    // 速度控制，可不设置
+    function lotterySpeedCtrl(state){
+        var speed = 200;
+        switch (state) {
+            case "start":
+                return Math.max(500 - this.startIndex * 50, 100);
+            case "decay":
+                return Math.min(this.decayIndex * 50 + speed, 600);
+        }
+        return speed;
+    };
+
+    $(".drawPrizeBtn").click(function(){
+        if (lottery.isDrawing) {
+            return false;
+        }
+
+        lottery.setDecayDistance(5);
+        lottery.start(lotterySpeedCtrl);
+        
+        // 请求后台数据
+        setTimeout(function(){
+            lottery.setWonIndex(Math.ceil(Math.random() * LotteryCount));
+            lottery.stop();
+        }, 3000);
+    });
+});
+</script>
+</body>
+</html>

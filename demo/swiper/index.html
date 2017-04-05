@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>皇室战争</title>
+    <style>
+        /** swiper 必要样式 */
+        .swiper {
+            overflow: hidden;
+            visibility: hidden;
+            position: relative;
+
+        }
+        .swiper-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+        .swiper-item {
+          float:left;
+          position: relative;
+          -webkit-transition-property: -webkit-transform;
+          transition-property: -webkit-transform;
+          transition-property: transform;
+          transition-property: transform, -webkit-transform;
+          -webkit-transition-timing-function: ease;
+                  transition-timing-function: ease;
+          -webkit-backface-visibility: hidden;
+                  backface-visibility: hidden;
+        }
+
+        /** END swipe 必要样式 */
+    </style>
+    <link rel="stylesheet" href="./css/index.css" />
+</head>
+<body>
+
+    <div class="pictures">
+        <div class="title">游戏图片1</div>
+        <div class="content swiper swiper1">
+            <div class='swiper-wrap'>
+                <div class="swiper-item"><img src="./images/1.jpg" /></div>
+                <div class="swiper-item"><img src="./images/2.jpg" /></div>
+                <div class="swiper-item"><img src="./images/3.jpg" /></div>
+                <div class="swiper-item"><img src="./images/4.jpg" /></div>
+                <div class="swiper-item"><img src="./images/5.jpg" /></div>
+                <div class="swiper-item"><img src="./images/6.jpg" /></div>
+                <div class="swiper-item"><img src="./images/7.jpg" /></div>
+                <div class="swiper-item"><img src="./images/8.jpg" /></div>
+            </div>
+        </div>
+        <div class="indicator indicator1">
+            <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+    </div>
+
+    <div class="pictures" style="margin-top: 3rem;">
+        <div class="title">游戏图片2</div>
+        <div class="content swiper swiper2">
+            <div class='swiper-wrap'>
+                <div class="swiper-item"><img src="./images/1.jpg" /></div>
+                <div class="swiper-item"><img src="./images/2.jpg" /></div>
+                <div class="swiper-item"><img src="./images/3.jpg" /></div>
+                <div class="swiper-item"><img src="./images/4.jpg" /></div>
+                <div class="swiper-item"><img src="./images/5.jpg" /></div>
+                <div class="swiper-item"><img src="./images/6.jpg" /></div>
+                <div class="swiper-item"><img src="./images/7.jpg" /></div>
+                <div class="swiper-item"><img src="./images/8.jpg" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pictures" style="margin-top: 3rem;">
+        <div class="title">游戏图片3</div>
+        <div class="content swiper swiper3">
+            <div class='swiper-wrap'>
+                <div class="swiper-item"><img src="./images/1.jpg" /></div>
+                <div class="swiper-item"><img src="./images/2.jpg" /></div>
+                <div class="swiper-item"><img src="./images/3.jpg" /></div>
+                <div class="swiper-item"><img src="./images/4.jpg" /></div>
+                <div class="swiper-item"><img src="./images/5.jpg" /></div>
+                <div class="swiper-item"><img src="./images/6.jpg" /></div>
+                <div class="swiper-item"><img src="./images/7.jpg" /></div>
+                <div class="swiper-item"><img src="./images/8.jpg" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pictures" style="margin-top: 3rem;">
+        <div class="title">游戏图片4</div>
+        <div class="content swiper swiper4">
+            <div class='swiper-wrap'>
+                <div class="swiper-item"><img src="./images/1.jpg" /></div>
+                <div class="swiper-item"><img src="./images/2.jpg" /></div>
+                <div class="swiper-item"><img src="./images/3.jpg" /></div>
+                <div class="swiper-item"><img src="./images/4.jpg" /></div>
+                <div class="swiper-item"><img src="./images/5.jpg" /></div>
+                <div class="swiper-item"><img src="./images/6.jpg" /></div>
+                <div class="swiper-item"><img src="./images/7.jpg" /></div>
+                <div class="swiper-item"><img src="./images/8.jpg" /></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script src="./swiper.min.js"></script>
+<script>
+var $dots1 = document.querySelectorAll(".indicator1 .dot")
+var $old1;
+var swiper1 = new Swiper(document.querySelector(".swiper1"), {
+    repeat: true,
+    ratio: .6,
+    slideCallback: function(index){
+        $old1 && $old1.classList.remove("active");
+        $dots1[index].classList.add("active");
+        $old1 = $dots1[index];
+    }
+});
+window.addEventListener("resize", function(){
+    swiper1.resize();
+});
+
+
+var swiper2 = new Swiper(document.querySelector(".swiper2"), {
+    repeat: true,
+    ratio: 1,
+    interval: 4000
+});
+window.addEventListener("resize", function(){
+    swiper2.resize();
+});
+
+
+var swiper3 = new Swiper(document.querySelector(".swiper3"), {
+    repeat: false,
+    ratio: .6
+});
+window.addEventListener("resize", function(){
+    swiper3.resize();
+});
+
+
+var swiper4 = new Swiper(document.querySelector(".swiper4"), {
+    repeat: false,
+    ratio: 1
+});
+window.addEventListener("resize", function(){
+    swiper4.resize();
+});
+
+</script>
+</body>
+</html>

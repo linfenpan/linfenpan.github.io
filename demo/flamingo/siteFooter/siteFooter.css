@@ -1,0 +1,9 @@
+.site-footer { margin-top: 1.5rem; background:#000; text-align: center;}
+.site-footer .copyRight { display: block; padding: 1.2rem 0; color: #fff; }
+.site-footer span { display: inline-block; vertical-align: middle; }
+.site-footer .logo {
+    width: 2.4rem; height: 2.4rem;
+    background: url(http://cdn.guopan.cn/uploads/deploy/huodongshuangdanvip/img/logo1.png) no-repeat;
+    background-size: 100% 100%;
+}
+.site-footer .text { margin-left: 2%; font-size: 1.4rem; }

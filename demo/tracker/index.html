@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>统计测试</title>
+  <link href="./index.css" rel="stylesheet" />
+  <script src="./jquery.js"></script>
+  <script src="./tracker.js"></script>
+</head>
+<body>
+  <div id="main" a-statparam="test: should not see this">
+    <div class="tips">引用了 jQuery 2.2 ，所以，别用 Ie8 看了</div>
+
+    <div class="demo demo1">
+      <h2 class="title">初始化</h2>
+      <div class="code">
+        <pre class="prettyprint">
+var tracker1 = new Tracker({
+  url: "统计的图片地址",
+  fingerprint: 是否需要 fingerprint[指纹] 参数，默认 false，
+  data: "全局参数字符串或对象",
+  statAttr: 需要统计元素，附带的属性，默认为'stat',
+  stopAttr: 停止统计冒泡的元素属性标志，默认为'statstop',
+  statParam: 父层元素，参数配置属性，默认为'statparam'
+});
+// 捕捉整个文档
+tracker1.bindClick(document);
+// 捕抓某个区域，必须重置 statAttr, stopAttr, statParam 3 个属性，以防与 document 的统计冲突
+tracker1.bindClick(document.getElementById('areaCapture'), {
+  event: 'click', // 默认是 click 事件，表示 click 的时候，发起统计
+  statAttr: 'a-stat',
+  stopAttr: 'a-statstop',
+  statParam: 'a-statparam'
+});
+        </pre>
+      </div>
+
+      <div style="padding: 10px 0 0 2px;">
+        文档捕捉测试:
+        <a href="javascript:;" stat="tid: 1">
+          <span>尝试点击看看~</span>
+        </a>
+      </div>
+      <div style="padding: 10px 0 0 2px;" id="areaCapture" a-statparam="test: container">
+        局部捕捉测试:
+        <a href="javascript:;" a-stat="tid: 2" a-statparam="param: test">
+          <span>尝试点击看看~</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="demo demo2">
+      <h2 class="title">适配器</h2>
+      <div style="padding: 10px 0 0 2px; font-size: 14px;">
+        为了让脚本在各个浏览器上，都能正常运行，所以设置了 适配器 的概念。<br/>
+        如果想让脚本，在IE系列，也能正常运行，请重写 querySelector 和 queryChild 的方法
+      </div>
+      <div class="code">
+        <pre class="prettyprint">
+// 适配器是全局公用的，默认适配方法有如下:
+Tracker.setAdapter({
+  // 请返回单个dom元素
+  querySelector: function(selector) {
+    return document.querySelector(selector);
+  },
+  // 请返回单个dom元素
+  queryChild: function(root, selector) {
+    return root.querySelector(selector);
+  },
+  // 返回单个元素的属性
+  getAttribute: function(ele, attr) {
+    return ele.getAttribute(attr);
+  },
+  // 返回单个元素的HTML
+  getHtml: function(ele) {
+    return ele.innerHTML;
+  },
+  // 返回单个元素的TEXT
+  getText: function(ele) {
+    return ele.innerText;
+  }
+});
+        </pre>
+      </div>
+    </div>
+
+    <div class="demo demo2">
+      <h2 class="title">统计语法糖</h2>
+      <div style="padding: 10px 0 0 2px; font-size: 14px;">
+        为了让字符串，有更加强大的表现，提供了语法相关的语法糖，以及拓展
+      </div>
+      <div class="code" stat="display: CssDisplay_x,y">
+        <pre class="prettyprint">
+// 拓展字符串：获取当前元素的 css/display 属性，如设置属性: stat="display: CssDisplay_x,y"
+Tracker.addConverter('CssDisplay', function(adapter, options) {
+  // options = { key: 当前统计的key属性, root: 当前拥有该属性的元素, type: 'CssDisplay', value: 'x,y', params: ['x', 'y'] }
+  return options.root.style.display || 'block';
+});
+        </pre>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <script src="prettify.js"></script>
+  <script>
+    $(function() {
+      PR.prettyPrint();
+    });
+    var tracker = new Tracker({
+      url: '/1.gif',
+      fingerprint: true,
+      data: {
+        log: 'share_operation',
+        list: [1, 2, 3]
+      }
+    });
+    // 统计点击
+    tracker.bindClick(document, { isListModeSend: true });
+    // 局部统计
+    tracker.bindClick(document.getElementById('areaCapture'), {
+      statAttr: 'a-stat',
+      stopAttr: 'a-statstop',
+      statParam: 'a-statparam'
+    });
+
+    Tracker.addConverter('CssDisplay', function(adapter, options) {
+      return options.root.style.display || 'block';
+    });
+  </script>
+</body>
+</html>

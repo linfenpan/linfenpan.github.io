@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>简单的手势识别</title>
+    <style>
+        #box{width:300px;height:150px;padding:2px;margin:20px;background:#dedede;}
+        #box .link{display:inline-block;margin:20px;font-size:18px;}
+
+        #ms{height:700px;width:20px;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <a href="#new" target="_blank" class="link">新的链接</a>
+    </div>
+    <div id="ms"></div>
+</body>
+<script src="../project.min.js" charset="utf-8"></script>
+<script>
+    require("touch.js", function(ui){
+        var box = ui.hold("#box"), msElem = document.querySelector("#ms");
+        box.onmove = function(p, e){
+            msElem.innerHTML = JSON.stringify(p);
+        };
+    });
+</script>
+</html>

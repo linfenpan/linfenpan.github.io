@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>jq分页</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <style>
+    .tips, .pagination { margin: 20px 0 0 20px; }
+    .tips { margin-left: 25px; font-size: 14px; }
+    .pagination { margin-top: 15px; }
+
+    .pagination .link, .pagination .jumpInput { text-align: center; color: #625858; background: #ece9e9; border-radius: 3px; }
+    .pagination .link { padding: 5px 8px; margin: 0 3px; }
+    .pagination .link:hover, .pagination a.active { color: #fff; background: #f1b750; text-decoration: none; }
+    .pagination .jump { margin-left: 15px; }
+    .pagination .jumpInput { padding: 5px; width: 32px; margin: 0 5px; border: none; }
+    .pagination .sure { padding: 5px 15px; margin-left: 15px; color: #fff; background: #f76562; border-radius: 3px; }
+
+    .pagination .disable, .pagination .disable:hover { color: #fff; background: #bcbcbc; cursor: default; }
+    </style>
+</head>
+<body>
+    <div class="tips">~看控制台输出~</div>
+
+    <p class="tips">200条数据，每页20天，可见按钮5个，自动选中第1个并触发onSelect回调:</p>
+    <div class="pagination" id="pager1"></div>
+
+    <p class="tips">200条数据，每页20天，可见按钮5个，两侧按钮并不总显示，自动选中第2个，但不触发onSelect回调:</p>
+    <div class="pagination" id="pager2"></div>
+
+    <p class="tips">200条数据，每页20天，可见按钮7个，重写按钮，不触发开始的onSelect回调:</p>
+    <div class="pagination" id="pager3"></div>
+
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="./jquery.paginationfp.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $("#pager1").pagination(200, {
+        pagerSize: 20, visibleBtnCount: 5, autoLoadFirst: true,
+        onSelect: function(index){
+            console.log("pager1 选中:" + index);
+        }
+    });
+
+    $("#pager2").pagination(200, {
+        pagerSize: 20, visibleBtnCount: 5, autoLoadFirst: false, alwaysShowBothEnd: false, index: 2,
+        onSelect: function(index){
+            console.log("pager2 选中:" + index);
+        }
+    });
+
+    $("#pager3").pagination(200, {
+        pagerSize: 20, visibleBtnCount: 7, autoLoadFirst: false,
+        onFormat: function(type, index){
+            // this.index 是当前的索引, this.pageCount是总页数，this.isStart是开始，this.isEnd是结束
+            switch (type) {
+                case "item":
+                    return '<a href="#" class="link">'+ index +'</a>';
+                case "first":
+                    return '<a href="#" class="link first'+ (this.isStart ? " disable" : "") +'">首页</a>';
+                case "last":
+                    return '<a href="#" class="link last'+ (this.isEnd ? " disable" : "") +'">尾页</a>';
+                case "prev":
+                    return '<a href="#" class="link prev'+ (this.isStart ? " disable" : "") +'">上一页</a>';
+                case "next":
+                    return '<a href="#" class="link next'+ (this.isEnd ? " disable" : "") +'">下一页</a>';
+            }
+        },
+        onSelect: function(index){
+            console.log("pager3 选中:" + index);
+        }
+    });
+</script>
+</body>
+</html>

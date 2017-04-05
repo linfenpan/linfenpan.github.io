@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>弹窗测试</title>
+    <link rel="stylesheet" href="/css/base.css" />
+    <style>
+        .header { position: fixed; z-index: 9000; width: 100%; padding: 5px 0 10px 0; border-bottom: 1px solid #ddd; background: #fff; }
+        .header .item { display: inline-block; padding: 10px 15px; margin: 0 10px 5px 10px; color: #fff; background: #00AEE2; border-radius: 4px; transition: all .3s ease; }
+        .header .item:hover { text-decoration: none; background: #35B7DE; }
+
+        .hide { display: none; }
+
+        /** 弹窗样式 */
+        .pop-lock-layer { opacity: 0; -webkit-transition: opacity .2s ease, visibility .2s ease .2s; transition: opacity .2s ease, visibility .2s ease .2s; }
+        .active.pop-lock-layer { opacity: 1; -webkit-transition: opacity .2s ease; transition: opacity .2s ease; }
+
+        /** 在pc端看效果，重写一些样式 */
+        @media only screen and (min-width: 480px) {
+            .pop-dialog.pop-dialog-confirm { min-width: 20rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <span class="tip">rem版本：</span>
+        <a href="javascript:;" class="item autoTip">自动提醒</a>
+        <a href="javascript:;" class="item confirm">confirm弹窗</a>
+        <a href="javascript:;" class="item customizeStr">自定义弹窗1</a>
+        <a href="javascript:;" class="item customizeEle">自定义弹窗2</a>
+    </header>
+
+    <div class="hide">
+        <div class="customizeDialog pop-dialog-confirm pop-dialog-white">
+            <div class="content" style="padding-top: 2.5rem;">
+                预先声明了弹窗元素<br/>
+                相同元素，不允许存在多个弹窗
+            </div>
+            <div class="operation">
+                <!-- 点击拥有 data-role 的元素，在 dialog 中，会发布相关事件 -->
+                <a href="javascript:;" class="pop-dialog-btn pop-dialog-cancel" data-role="close">关闭</a>
+                <a href="javascript:;" class="pop-dialog-btn pop-dialog-sure" data-role="sure">确认</a>
+            </div>
+        </div>
+    </div>
+
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/project.min.js"></script>
+<script type="text/javascript">
+require("./popup.js", function(popup){
+    bindEvent();
+});
+function bindEvent(){
+    var popup = require("./popup.js");
+    var $root = $(".header");
+
+    $root
+        .on("click", ".autoTip", function(){
+            popup.autoTip("提醒会自己消失");
+        })
+        .on("click", ".confirm", function(){
+            popup.confirm("确定选择?<br/>选择确定，1秒后关闭", {
+                btns: [
+                    {},
+                    {callback: function(e, dialog){
+                        setTimeout($.proxy(function(){
+                            dialog.hide();
+                        }, this), 1000);
+                        return false;
+                    }}
+                ]
+            });
+        })
+        .on("click", ".customizeStr", function(){
+            var dialog = popup.dialog.create(
+                    '<div class="pop-dialog-confirm pop-dialog-white tC" style="padding-top: 1.5rem; text-align: center;">点击灰色区域，可关闭</div>',
+                    { closeIfClickBack: true }
+                );
+            dialog.show();
+            dialog.on("close", function(){
+                dialog.destroy();
+            });
+        })
+        .on("click", ".customizeEle", function(){
+            var dialog = popup.dialog.create( $(".customizeDialog"), { closeIfClickBack: true } );
+            dialog.show();
+            dialog.on("close", function(){
+                dialog.destroy();
+            });
+            dialog.on("sure", function(){
+                console.log("点击: 确认");
+                this.hide();
+            })
+        });
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>脚本项目</title>
+    <style media="screen">
+        * { padding: 0; margin: 0; }
+        iframe { display: block; width: 540px; height: 120px; margin-top: 20px; border: 1px solid #ddd; box-sizing: border-box; }
+    </style>
+    <script type="text/javascript" src="http://www.100bt.com/resource/js/lib/jquery-min.js"></script>
+    <script type="text/javascript" src="../project.full.min.js"></script>
+</head>
+<body>
+    project.full.js 相对于 project.js，增加了3个loader板块:<br/>
+    1. ajax loader，可进行ajax请求<br/>
+    2. json loader，可进行ajax请求，并将内容转为 json [基于 ajax loader 开发]<br/>
+    3. css loader，可进行css加载<br/>
+    <br/>
+    同时，拓展了 window.require 两个方法:<br/>
+    1. require.ajax，可用于 ajax 请求<br/>
+    2. require.css，可用于 css 加载<br/>
+
+    <iframe src="./test1.html"></iframe>
+    <iframe src="./test2.html"></iframe>
+    <iframe src="./test3.html"></iframe>
+    <iframe src="./test4.html"></iframe>
+
+    <iframe src="./test5.html"></iframe>
+    <div id="test"><!-- 样式加载测试 --></div>
+</body>
+</html>

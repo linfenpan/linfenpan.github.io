@@ -1,0 +1,31 @@
+.site-header {
+    position: fixed; z-index: 100; top: 0;  left: 0;
+    width: 100%; height: 4rem; line-height: 4rem;
+    padding:0 1rem;
+    font-size: 1.4rem;
+    box-sizing:border-box;
+    background: -webkit-linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.3));
+    background: -o-linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.3));
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.3));
+}
+.site-header:after { content: ""; display: table; clear: both; }
+.site-header-left { float: left; }
+.site-header-left .logo {
+    display: inline-block; padding-left: 3rem;
+    color: #fff;
+    background: url(logo.png) no-repeat 0 45%;
+    background-size: 2.3rem auto;
+}
+.site-header-right { float: right; }
+.site-header-right a { color: #fff  ;}
+.site-header-right .login{ float: left; }
+
+.site-header-right .userIco, .site-header-right .userName, .site-header-right .logout { float: left; }
+.site-header-right .userName { overflow: hidden; max-width: 5rem; color:#fff;  text-overflow: ellipsis;  white-space: nowrap; }
+.site-header-right .userIco { width: 2.6rem; height: 2.6rem; margin: .7rem .5rem 0 0;  border-radius: 50%; }
+.site-header-right .logout { margin-left: .5rem; }
+
+/* 状态 */
+.site-header .show-in-login { display: none; }
+.site-header-status-login .hide-in-login { display: none; }
+.site-header-status-login .show-in-login { display: block; }

@@ -1,0 +1,21 @@
+
+.sideBar .item {
+    display: inline-block;
+    width: 70%;
+    margin: 5px 5%;
+    padding: 8px 10px;
+    color: #fff;
+    background: #333;
+    text-decoration: none;
+    transition: width .3s ease, background .3s ease, padding .3s ease;
+    border-radius: 0 4px 4px 0;
+    box-sizing: border-box;
+}
+.sideBar .active.item, .sideBar .item:hover {
+    background: #0c7dde;
+}
+.sideBar .active.item {
+    width: 90%;
+    padding-left: 20px;
+    transition: width .3s ease, background .3s ease, padding .3s .4s ease;
+}

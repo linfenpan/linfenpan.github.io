@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>滚动吧，文本君</title>
+    <link rel="stylesheet" href="./reset.css">
+    <style>
+        .wrapper { overflow: hidden; width: 200px; height: 24px; margin: 20px; font-size: 14px; white-space: nowrap; }
+        .container { display: inline-block; }
+        .item { margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<!-- wrapper 用于隐藏，container 用于滚动 -->
+<div class="wrapper">
+    <span class="container">
+        <span class="item">中奖者: 很牛少年-迷你恐龙</span>
+        <span class="item">中奖者: 很白少年-不科学的运动鞋</span>
+        <span class="item">中奖者: 不良少年-无良教学光碟</span>
+        <span class="item">中奖者: 无知少年-《无知论》</span>
+        <span class="item">中奖者: 想少女的少年-伪娘的自我修为</span>
+        <span class="item">中奖者: 东方少年-剪刀✄</span>
+        <span class="item">中奖者: 你好，少年-编不下去了</span>
+    </span>
+</div>
+
+<script src="http://cdn.guopan.cn/uploads/deploy/huodongshuangdanvip/js/jquery.js"></script>
+<script src="./project.full.min.js"></script>
+<script>
+    require.config({ alias: { jquery: window.$ } });
+    require("./announcement/announcement.js", function(Announcement){
+        var announcement = new Announcement($(".container"));
+        announcement.startAnimate();
+    });
+</script>
+</body>
+</html>

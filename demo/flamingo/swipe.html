@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-sacle=1.0,maximum-scale=1.0">
+    <title>滚动吧，文本君</title>
+    <link rel="stylesheet" href="./reset.css">
+    <style>
+    .wrapper {
+        width: 100%;
+        max-width: 500px;
+    }
+
+
+    .bannerSwiper {
+        width: 100%;
+        overflow: hidden;
+        visibility: hidden;
+    }
+    .bannerSwiper .swipe-wrap {
+        overflow: hidden;
+        position: relative;
+    }
+    .bannerSwiper .item {
+        float:left;
+        width:100%;
+        position: relative;
+    }
+    .bannerSwiper img {
+        width: 100%;
+    }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- 官方推荐，添加 swipe 和 swipe-wrap 两个class -->
+    <div class="bannerSwiper swipe">
+        <div class="swipe-wrap">
+    		<div class="item"><img src="./swipe/1.jpg"></div>
+    		<div class="item"><img src="./swipe/2.jpg"></div>
+    		<div class="item"><img src="./swipe/3.jpg"></div>
+    		<div class="item"><img src="./swipe/4.jpg"></div>
+    		<div class="item"><img src="./swipe/5.jpg"></div>
+        </div>
+    </div>
+</div>
+<script src="./swipe/swipe.min.js"></script>
+<script>
+var mySwipe = new window.Swipe(document.querySelector(".bannerSwiper"), {
+    startSlide: 0,
+    auto: 3000,
+    draggable: true,
+    autoRestart: true,
+    continuous: true,
+    disableScroll: true,
+    stopPropagation: true,
+    // callback: function(index, element) {},
+    transitionEnd: function(index, element) {
+        console.log("当前索引: " + index);
+    }
+});
+// mySwipe.slide(1); // 滚动到索引 1 ，索引从0开始
+</script>
+</body>
+</html>
