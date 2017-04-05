@@ -29,6 +29,7 @@ body {
 }
 #main {
   width: 100%;
+  padding-left: 122px;
 }
 #main .tips {
   padding: 10px 20px;
