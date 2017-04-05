@@ -1,0 +1,22 @@
+id: 1458271490611
+type: note
+time: 2016-03-18 11:24
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: css3之clip-path
+        keywords: css3,clip-path
+        description: 样式裁剪，初步学习
+        withoutHomeDescription: true
+        # 首页描述 homeDescription:

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>模板引擎测试</title>
+    <script src="../lib/nunjucks.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    nunjucks.configure({
+        autoescape: true, // 自动转义
+    });
+    /*
+    通常用不上 renderString 方法，renderString 只是绑定字符串的
+    console.log(
+        nunjucks.renderString('Hello {{ username }}', { username: 'Jun' })
+    );
+    */
+
+    // 设定模板目录在 ./views 下
+    nunjucks.configure('./views', {
+        autoescape: true,
+        trimBlocks: true,
+        lstripBlocks: true,
+        // 浏览器的参数
+        web : {
+            useCache: false,
+            async: true
+        }
+    });
+    console.log(
+        nunjucks.render("index.html", {
+            name: "da宗熊",
+            list: [1, 2, 3, 4, 5, 6],
+            left: {
+                message: [
+                    {message: "这是一条信息", link: "#"},
+                    {message: "这是一条信息2", link: "#"}
+                ],
+                goods: {
+                    "为敌熊": "$15.99",
+                    "万军杀": "R567"
+                }
+            }
+        }, function(err, res){
+            // 如果允许异步，则在这里，才能得到结果
+            console.log(res)
+        })
+    );
+</script>
+</html>

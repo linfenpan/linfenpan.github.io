@@ -1,0 +1,22 @@
+id: 1459846164133
+type: blog
+time: 2016-04-05 16:49
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: createEvent讲解
+        keywords: javascript,创建事件,createEvent
+        description: 讲解document.createEvent的用法，一些常用事件的配置、使用，以及以往自己理解的误区
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:

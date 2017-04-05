@@ -1,0 +1,22 @@
+id: 1467600220842
+type: blog
+time: 2016-07-04 10:43
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: application/json方式提交
+        keywords:
+        description:
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:

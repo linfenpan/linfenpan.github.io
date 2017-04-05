@@ -1,0 +1,26 @@
+id: discuss-sky-high
+type: blog
+time: 2015-12-30 15:40
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+
+tags:
+    - javascript
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 论证星空的广阔性，以及无人能比的扩张性
+        description: 一遍测试的议论文
+        keywords: 议论,星空
+        resources:
+            - {type: "js", url: "./js/index.js"}
+
+    # 测试页面
+    test.html:
+        template: single
+        title: 测试页面1

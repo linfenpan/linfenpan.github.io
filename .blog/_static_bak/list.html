@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>列表页</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/list.css">
+</head>
+<body>
+    <!-- 导航 -->
+    <div class="navigation">
+        <div class="container menu">
+            <a href="#" class="item active">
+                主页
+            </a>
+            <a href="#" class="item">
+                博客
+            </a>
+            <a href="#" class="item">
+                插件
+            </a>
+            <a href="#" class="item">
+                个人
+            </a>
+        </div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="#" class="home">
+                <img src="../assert/personal.jpeg" alt="头像" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+            <!-- 导航按钮 -->
+            <div class="nav-toggle" data-toggle=".navigation">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- 列表内容 -->
+    <div class="lstContent container">
+        <div class="leftCtn">
+            <h1 class="bread">
+                <span class="br-title">博客</span>
+                <span class="br-sub">写博客是一种冲动，一种不吐不快的feel</span>
+            </h1>
+            <!-- 文章内容 -->
+            <section class="articleList">
+                <article class="item">
+                    <h2 class="title">
+                        <a href="">传说之剑的传说</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            一段文字，表现的，是一段深度。每一段感情，走的，并不是寂寞
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="#" class="more">阅读全文</a>
+                        <div class="info">
+                            <span>12-30,2015</span>
+                            <span class="seq">/</span>
+                            <span>by da宗熊</span>
+                            <span class="seq">/</span>
+                            <span>前端,javascript</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="item">
+                    <h2 class="title">
+                        <a href="">传说之剑的传说</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="poster" style="background-image:url(../assert/personal.jpeg)"></div>
+                        <div class="desc">
+                            一段文字，表现的，是一段深度。每一段感情，走的，并不是寂寞。只有在人群中多看了你一眼，你就叫我起来回答问题<br/>
+                            气温计吉拉德芳姐啊两地分居阿娇反垄断静安寺捡垃圾；氨基酸累计发送垃圾垃圾堆放了；将阿斯顿加拉加斯了将阿斯垃圾大家哀伤 将阿隆索扩大解放了；啊<br/>
+                            偶了姐啊两地分居啦ioui
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="#" class="more">阅读全文</a>
+                        <div class="info">
+                            <span>12-30,2015</span>
+                            <span class="seq">/</span>
+                            <span>by da宗熊</span>
+                            <span class="seq">/</span>
+                            <span>前端,javascript</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- 分页内容 -->
+            <div class="pagination">
+                <a href="#1" class="first">首页</a>
+                <a href="#1">1</a>
+                <a href="#2" class="active">2</a>
+                <a href="#2">3</a>
+                <a href="#2">4</a>
+                <a href="#2">5</a>
+                <a href="#" class="last">尾页</a>
+            </div>
+            <!-- END 分页内容 -->
+        </div>
+
+        <div class="rightCnt">
+            <div class="section">
+                <div class="cnt">
+                    我思想固我在，我再思，我就不再了
+                </div>
+                <p class="hd">
+                    宗熊郁闷时
+                </p>
+            </div>
+            <div class="section">
+                <div class="cnt">
+                    下雨天，巧克力和牛奶更配哦
+                </div>
+                <p class="hd">
+                    45度仰望天空
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- END 列表内容 -->
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            @2016 da宗熊<br>
+            Email: 1071093121@qq.com
+        </div>
+    </div>
+    <!-- END 页脚 -->
+</body>
+<script src="http://code.jquery.com/jquery-2.0.0.min.js" charset="utf-8"></script>
+<script src="../js/common.js" charset="utf-8"></script>
+</html>

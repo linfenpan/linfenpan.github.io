@@ -1,0 +1,23 @@
+id: node-commander
+type: note
+time: 2016-01-14 12:00
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+
+# 海报地址
+poster: ./assert/help.png
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: commander-node.js帮助命令
+        keywords: node.js,commander,帮助命令
+        description: >
+                node.js帮助命令编写npm包--commander，简单的配置，简单生成帮助命令。
+        homeDescription: >
+                处理 process.argv 参数列表，快速把参数转为更容易理解的对象。

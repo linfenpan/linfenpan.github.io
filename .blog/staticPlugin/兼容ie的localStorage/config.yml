@@ -1,0 +1,22 @@
+id: localstorage
+type: plugin
+time: 2016-09-28 11:20
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 兼容ie的localStorage
+        keywords: 兼容,localStorage
+        description: 前方高能！发现IE都能使用的localStorage，迅猛学习啦~
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:

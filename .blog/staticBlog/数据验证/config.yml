@@ -1,0 +1,21 @@
+id: pipevalid-inctroduce
+type: blog
+time: 2015-10-25 19:56
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+
+# 海报地址
+poster: ./assert/poster.png
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 数据验证
+        keywords: 前端,表单数据验证,javascript,PipeValid
+        description: >
+            数据验证最近做后台比较多，路七八糟的数据验证，弄得不厌其烦。SO，弄了个表单验证的玩意出来，达到快速，简介，不烦人的验证。下面看看，几种方式的数据验证，有什么不同。

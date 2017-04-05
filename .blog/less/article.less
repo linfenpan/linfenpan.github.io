@@ -1,0 +1,156 @@
+/**
+* @description: 文章内容
+* @author: da宗熊
+* @update: 2015-11-23 17:16
+*/
+
+@import url(./mixin/var.less);
+@import url(./mixin/func.less);
+
+.article {
+    margin: 25px auto 15px auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+    // module: 面包屑
+    .bread {
+        padding: 15px;
+        font-size: 1.4rem;
+        color: #635E5E;
+
+        @color: #654646;
+        a {
+            margin: 0 5px;
+            color: @color;
+            transition: color .3s ease;
+            &:hover {
+                color: #FF706C;
+                text-decoration: none;
+            }
+        }
+        span {
+            color: @color;
+            margin: 0 5px;
+        }
+        .sep {
+            margin: 0;
+        }
+    }
+}
+@media (max-width: @screen-sm-min){
+    .article {
+
+        .bread {
+            padding: 15px 10px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+    }
+}
+
+
+// module: 文章内容
+.articleCnt {
+    @paddingDistance: 15px;
+    padding: 20px 0;
+    background: #fff;
+    word-break: break-all;
+    word-wrap: break-word;
+
+    .title {
+        padding:0 @paddingDistance;
+        color: #2D3642;
+        font-size: 2.75rem;
+    }
+    .meta {
+        padding: 1rem @paddingDistance 0 @paddingDistance;
+        font-size: 1.2rem;
+        color: #999;
+
+        .sep {
+            margin: 0 5px;
+        }
+        .tag {
+            float: right;
+            max-width: 30%;
+            .textOverflowEllipsis();
+
+            span {
+                margin-left: 5px;
+                color: #FF706C;
+            }
+        }
+        .clearfix();
+    }
+
+    .content {
+        margin: 1rem  @paddingDistance 0  @paddingDistance;
+        padding: 1rem 0;
+        border-top: 3px double #EEE;
+        line-height: 200%;
+        font-size: 1.4rem;
+        color: #555;
+
+		code {
+			padding: 2px 5px;
+            background: #f7f7f9;
+            border-radius: 2px;
+            color: #d14;
+		}
+		img {
+			max-width: 100%;
+			padding: 5px;
+			margin: 5px 0;
+			box-sizing: border-box;
+		}
+    }
+}
+
+
+// module: 文章分页
+.articlePager {
+    padding: 10px 15px;
+    font-size: 1.3rem;
+    background: #2D3642;
+
+    a {
+        position: relative;
+        max-width: 30%;
+        padding: 15px 20px;
+        color: #fff;
+        background: #212831;
+        border-radius: 3px;
+        transition: background-color .3s ease-in-out;
+        .textOverflowEllipsis();
+
+        &:hover {
+            text-decoration: none;
+            background: #FF706C;
+        }
+    }
+    .prev {
+        float: left;
+        &:before {
+            content: "« ";
+        }
+    }
+    .next {
+        float: right;
+        &:after {
+            content: " »";
+        }
+    }
+
+    .clearfix();
+}
+
+// module: 内容样式
+@import url("./markdown.less");
+
+// module: 朋言样式
+#uyan_frame {
+    padding: 20px 15px;
+    background: #fff;
+}

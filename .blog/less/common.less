@@ -1,0 +1,282 @@
+/**
+* @description: 站点公共样式
+* @author: da宗熊
+* @update: 2015-11-20 14:35
+*/
+@import url(./mixin/var.less);
+@import url(./mixin/func.less);
+
+/** module: body外观 */
+html {
+    min-height: 100%;
+}
+body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    padding-bottom: 7.5rem;
+    background: #f2f2f2 url(body.jpg) repeat;
+    box-sizing: border-box;
+}
+
+/** module: 导航菜单 */
+.navigation {
+    @baseColor: #fff;
+    font-size: 1.6rem;
+    color: @baseColor;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: right;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAYCAQAAAB68uRSAAAAKElEQVR4AWNhcGdgYGH4CyL+wVkI4g8W4jcuiT9YDPgHJ/7DiP9AAgBhORhg+gPD+AAAAABJRU5ErkJggg==');
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-size: 1px 12px;
+    z-index: 10;
+
+    ._box {
+        background: #20a9f5;
+    }
+
+    transform: translateZ(0);
+    transition: height .7s ease;
+
+    @itemHoverColor: #1A67C5;
+    .item {
+        display: inline-block;
+        padding: 1.5rem 2rem;
+        color: @baseColor;
+        transition: background-color .2s ease-in-out;
+
+        &:hover, &.active {
+            text-decoration: none;
+            background-color: @itemHoverColor;
+        }
+    }
+}
+// 导航按钮
+.navigation-toggle {
+    @width: 22px;
+    position: fixed;
+    top: 1px;
+    right: 1px;
+    width: @width;
+    height: 15px;
+    padding: 8px;
+    background: #2D3642;
+    z-index: 10;
+    cursor: pointer;
+
+    .bar {
+        width: @width;
+        height: 3px;
+        margin-top: 3px;
+        background: #fff;
+        transition: opacity .3s ease, transform .2s ease;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    // 动画
+    &.active {
+        .bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -2px;
+        }
+        .bar:nth-of-type(1) {
+            transform: rotate(45deg);
+        }
+        .bar:nth-of-type(2) {
+            transform: rotate(45deg);
+        }
+        .bar:nth-of-type(3) {
+            transform: rotate(-45deg);
+        }
+    }
+}
+// 响应时代码
+@media (max-width: @screen-sm-min) {
+    .navigation {
+        visibility: hidden;
+        height: 100%;
+        background: rgba(0,0,0,.4);
+        padding-bottom: 0;
+        text-align: left;
+        opacity: 0;
+        will-change: top;
+        transform: translateY(20px) translateZ(0);
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+            transition: opacity .15s linear, transform .15s linear;
+        }
+
+        ._box {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            padding: 0 20px;
+            background: none;
+            box-sizing: border-box;
+            transform: translateY(-50%);
+        }
+        .container {
+            width: 100%;
+        }
+        @hoverColor: #363F4A;
+        .item {
+            width: 100%;
+            border-bottom: 1px solid #363F4A;
+            background-color: #2D3642;
+            box-sizing: border-box;
+            transition: none;
+
+            &:hover {
+                background-color: #2D3642;
+            }
+            &.active {
+                background-color: @hoverColor;
+            }
+        }
+    }
+}
+// END 响应式代码
+
+
+/** module: header */
+.header {
+    margin-top: 5rem;
+    background: #20a9f5;
+    .container {
+        position: relative;
+        padding: 50px 0;
+    }
+    .home {
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        vertical-align: middle;
+        transition: border-radius .3s ease-in-out;
+
+        &:hover {
+            border-radius: 20%;
+        }
+        &:hover .logo {
+            border-radius: 16.5%;
+        }
+    }
+    .logo {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        vertical-align: bottom;
+        transition: border-radius .3s ease-in-out;
+    }
+    @titleFS: 3.6rem;
+    .title {
+        display: inline-block;
+        margin: 1rem 0 0 2rem;
+        font-size: @titleFS;
+        vertical-align: middle;
+    }
+    .author {
+        color: #fff;
+        transition: color .3s ease;
+
+        &:hover {
+            color: #2D3642;
+            text-decoration: none;
+        }
+    }
+
+    // 背景冒泡
+    .bubbles{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        pointer-events: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    // 响应式代码
+    @media (max-width: @screen-sm-min) {
+        .container {
+            width: 95%;
+            padding: 5.5% 0;
+        }
+        .home {
+            display: block;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            border-width: 3px;
+        }
+        .title {
+            display: block;
+            margin-left: 0;
+            text-align: center;
+            font-size: @titleFS * .5;
+        }
+    }
+    // END 响应式代码
+}
+// 响应时代码
+@media (max-width: @screen-sm-min) {
+    .header {
+        margin-top: 0;
+    }
+}
+// END 响应式代码
+
+/** module: 页脚 */
+.credits {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1.2rem;
+    color: #775544;
+
+    .container {
+        padding: 1rem 0;
+        border-top: 3px double #ddd;
+        text-align: right;
+    }
+    .logo, .text {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .logo {
+        width: 5rem;
+        height: 4.32rem;
+        margin-right: 5px;
+        background: url(credit.png) no-repeat;
+        background-size: 100% auto;
+    }
+    .text {
+        margin-right: 10px;
+    }
+}
+
+/** module: 其它 */
+// PC 设计稿，定在 980px 吧
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+@media (min-width: @main-width){
+    .container {
+        width: @main-width;
+    }
+}

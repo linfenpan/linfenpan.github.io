@@ -1,0 +1,223 @@
+/* By da宗熊 2016-10-19 */
+/**
+* @description: 列表
+* @author: da宗熊
+* @update: 2015-11-26 15:50
+*/
+/** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
+.lstContent {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.lstContent:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.leftCtn {
+  overflow: hidden;
+  float: left;
+  width: 70%;
+  padding: 0 20px;
+  font-size: 1.4rem;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.leftCtn .bread {
+  padding: 15px 0;
+  font-size: 1em;
+  font-weight: normal;
+  border-bottom: 1px solid #ddd;
+}
+.leftCtn .br-title {
+  font-size: 2.75rem;
+  color: #333;
+}
+.leftCtn .br-sub {
+  vertical-align: middle;
+  color: #24A714;
+}
+.articleList .item {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+.articleList .item:last-child {
+  border-bottom: none;
+}
+.articleList .title a {
+  display: inline-block;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 2.2rem;
+  color: #2D3642;
+  -webkit-transition: color .3s ease;
+  transition: color .3s ease;
+}
+.articleList .title a:hover {
+  color: #FF706C;
+  text-decoration: none;
+}
+.articleList .cnt:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.articleList .desc {
+  text-indent: 2em;
+  line-height: 200%;
+  color: #666;
+}
+.articleList .poster {
+  float: left;
+  width: 105px;
+  height: 105px;
+  border: 3px solid #fff;
+  margin: 0 10px 5px 0;
+  -webkit-box-shadow: 1px 1px 2px #888;
+          box-shadow: 1px 1px 2px #888;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+.articleList .msg {
+  margin-top: 10px;
+  line-height: 180%;
+}
+.articleList .msg:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.articleList .info {
+  font-size: 1.2rem;
+  color: #b0b2b8;
+}
+.articleList .info .seq {
+  margin: 0 5px;
+}
+.articleList .more {
+  float: right;
+  font-size: 1.4rem;
+  position: relative;
+  padding-bottom: 2px;
+  color: #FF706C;
+}
+.articleList .more:before {
+  content: " ";
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #FF706C;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+.articleList .more:hover {
+  text-decoration: none;
+}
+.articleList .more:hover:before {
+  width: 100%;
+}
+.rightCnt {
+  float: right;
+  width: 260px;
+  margin-left: 20px;
+  border-radius: 2px;
+  color: #666;
+}
+.rightCnt .section {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  border-radius: 2px 2px 0 0;
+}
+.rightCnt .cnt {
+  padding: 15px;
+  line-height: 170%;
+  font-size: 1.4rem;
+  background: #fff;
+}
+.rightCnt .cnt a {
+  display: inline-block;
+  padding: 5px 0;
+  color: #654646;
+  -webkit-transition: color .3s ease;
+  transition: color .3s ease;
+}
+.rightCnt .cnt a:hover {
+  color: #CC8800;
+  text-decoration: none;
+}
+.rightCnt .cnt li {
+  padding: 0 2px;
+  border-bottom: 1px solid #ddd;
+}
+.rightCnt .cnt li:first-child {
+  margin-top: -5px;
+}
+.rightCnt .hd {
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #434140;
+  background: #f1f1f1;
+}
+@media (max-width: 980px) {
+  .leftCtn {
+    float: none;
+    width: 100%;
+  }
+  .rightCnt {
+    display: none;
+  }
+}
+@media (max-width: 992px) {
+  .leftCtn .poster {
+    width: 70px;
+    height: 70px;
+  }
+  .articleList .info {
+    display: none;
+  }
+}
+.pagination {
+  font-size: 1.3rem;
+  padding: 15px 0;
+  cursor: default;
+}
+.pagination a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 2px;
+  color: #0172B7;
+  background-color: #e8e8e8;
+  vertical-align: middle;
+  -webkit-transition: background-color 0.1s linear;
+  transition: background-color 0.1s linear;
+}
+.pagination a:hover,
+.pagination a.active {
+  text-decoration: none;
+  color: #fff;
+  background-color: #4cace2;
+}
+@media (max-width: 768px) {
+  .pagination .first,
+  .pagination .last {
+    display: none;
+  }
+}

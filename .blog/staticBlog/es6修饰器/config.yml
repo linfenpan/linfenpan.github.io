@@ -1,0 +1,20 @@
+id: 1467272257483
+type: blog
+time: 2016-06-30 15:37
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+poster: ./assert/poster.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: es6修饰器-decorator
+        keywords: es6,decorator,修饰器
+        description: 修饰器（Decorator）是一个函数，用来修改类的行为。这是ES7的一个提案，目前Babel转码器已经支持

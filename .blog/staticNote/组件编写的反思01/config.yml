@@ -1,0 +1,23 @@
+id: 1467699541437
+type: note
+time: 2016-07-05 14:19
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+poster: ./assert/poster.jpg
+
+tags:
+    - 组件
+    - 反思
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 组件编写的反思01
+        keywords: 反思,组件
+        description: 最近在一直编写单页面app站点，积累了写经验总结，记录一下
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:

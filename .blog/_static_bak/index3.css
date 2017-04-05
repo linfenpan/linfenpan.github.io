@@ -1,0 +1,202 @@
+/* By da宗熊 2015-11-27 */
+/** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
+/** module: 主体内容 */
+.content {
+  position: relative;
+  padding: 50px 0 70px 0;
+}
+.content:after {
+  content: " ";
+  position: absolute;
+  left: 50px;
+  bottom: 50px;
+  width: 2px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.05);
+}
+@media (max-width: 980px) {
+  .content:after {
+    display: none;
+  }
+}
+.article {
+  margin-top: 50px;
+}
+.article:first-child {
+  margin-top: 0;
+}
+.article:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.article-type {
+  float: left;
+  width: 100px;
+  padding-top: 22px;
+}
+.article-type .item {
+  position: relative;
+  display: block;
+  height: 50px;
+  margin: 5px 0 0 25px;
+  z-index: 1;
+}
+.article-type .item-ico {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background-color: #ddd;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 50% 50%;
+  -webkit-transition: left .3s linear;
+  transition: left .3s linear;
+}
+.article-type .item-detail {
+  position: absolute;
+  top: 11px;
+  left: 20px;
+  font-size: 2rem;
+  color: #5CA4DE;
+  opacity: 0;
+  -webkit-transition: left .3s linear .2s, opacity .3s linear .2s;
+  transition: left .3s linear .2s, opacity .3s linear .2s;
+}
+.article-type .item:hover .item-ico {
+  left: -30px;
+}
+.article-type .item:hover .item-detail {
+  opacity: 1;
+  left: 30px;
+}
+.article-type .blog .item-ico {
+  background-image: url(../assert/css/1x/post-formats/standard.png);
+}
+.article-type .plugin .item-ico {
+  background-image: url(../assert/css/1x/post-formats/link.png);
+}
+.article-cnt {
+  position: relative;
+  float: right;
+  width: 89%;
+  padding: 3% 4%;
+  background: #fff;
+  word-wrap: break-word;
+  word-break: break-all;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.article-cnt:before {
+  content: "";
+  position: absolute;
+  top: 47px;
+  left: -22px;
+  border: 11px solid transparent;
+  border-right-color: #DDD;
+}
+.article-cnt:after {
+  content: "";
+  display: block;
+  border: 10px solid transparent;
+  border-right-color: #FFF;
+  position: absolute;
+  top: 48px;
+  left: -20px;
+}
+.article-cnt .title .link {
+  font-size: 2.2rem;
+  color: #2D3642;
+  -webkit-transition: color .3s ease;
+  transition: color .3s ease;
+}
+.article-cnt .title .link:hover {
+  color: #FF706C;
+  text-decoration: none;
+}
+.article-cnt .meta {
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  color: #999;
+}
+.article-cnt .meta .sep {
+  margin: 0 5px;
+  color: #ddd;
+}
+.article-cnt .desc {
+  margin-top: 1rem;
+  padding: 1rem 0;
+  border-top: 3px double #EEE;
+  line-height: 200%;
+  font-size: 1.4rem;
+  color: #555;
+}
+.article-cnt .desc img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 3px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 2px 1px #D6D6D6;
+  box-sizing: border-box;
+}
+.article-cnt .desc:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.article-cnt .more {
+  font-size: 1.4rem;
+  position: relative;
+  padding-bottom: 2px;
+  color: #FF706C;
+}
+.article-cnt .more:before {
+  content: " ";
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #FF706C;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+.article-cnt .more:hover {
+  text-decoration: none;
+}
+.article-cnt .more:hover:before {
+  width: 100%;
+}
+@media (max-width: 980px) {
+  .article-cnt:before,
+  .article-cnt:after {
+    display: none;
+  }
+}
+@media (max-width: 980px) {
+  .content {
+    width: 100%;
+    padding: 10px 0 0 0;
+  }
+  .article {
+    margin-top: 5px;
+  }
+  .article-type {
+    display: none;
+  }
+  .article-cnt {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

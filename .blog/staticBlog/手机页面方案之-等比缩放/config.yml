@@ -1,0 +1,24 @@
+id: wap-page
+type: blog
+time: 2016-02-15 14:56
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+poster: ./assert/poster.jpg
+
+tags:
+    - 移动,单页面
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 手机页面方案之-等比缩放
+        keywords: 移动端,单页面,单页面制作,等比缩放
+        description: >
+            介绍移动端页面等比缩放的几种常用方法，包括所有字体和图片
+        homeDescription: >
+            <img src="/20160215/wap-page/assert/home.jpg" />
+            移动端等比缩放页面的几种方式，适用于简单的站点。

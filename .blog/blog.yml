@@ -1,0 +1,71 @@
+# 作者信息
+author: da宗熊
+email: 1071093121@qq.com
+authorHomePage: ~
+authorIcon: /assert/personal.png
+
+# 首页配置
+index:
+    title: da宗熊个人博客
+    description: 个人学习博客站点
+    keywords: 博客,学习
+    count: 20
+
+# 网站链接
+url: /
+# 生成内容，将会放在 url 的哪个目录
+root: ''
+
+# 生成文件，发布到的目录
+publishRoot: ../
+
+# 时间格式
+timeFormate: :month-:date,:year #:month-:date,:year :hour::minute
+
+# 文章路径
+articlePath: :year:month:date/:id
+
+
+# 博客列表
+blogListFormat: list_:index.html
+# blogListObject 是将blogList配置，转为链接对象的对象
+blogList:
+    -
+        type: blog
+        typeName: 博客
+        subTitle: 写博客，是一种积累，一种习惯
+        # 发布目录
+        publishRoot: ./bloglist
+        # 源文件目录
+        sourceRoot: staticBlog
+        # 每页数量
+        count: 10
+        title: 博客列表- by da宗熊
+        keywords: 博客,列表,da宗熊
+        description: 积累的技术经验，内容涉及javascript/css/html等等，甚至超出了一个前端该理解的范畴
+    -
+        type: plugin
+        typeName: 插件
+        subTitle: 好想偷懒，只能多写插件
+        # 发布目录
+        publishRoot: ./pluginlist
+        # 源文件目录
+        sourceRoot: staticPlugin
+        count: 10
+        title: 插件学习研究列表-by da宗熊
+        keywords: 插件,学习,da宗熊
+        description: 学习积累的插件，有网上收录的，有自己写的，五花八门
+    -
+        type: note
+        typeName: 笔记
+        subTitle: 好记性不如烂笔头
+        # 发布目录
+        publishRoot: ./notelist
+        # 源文件目录
+        sourceRoot: staticNote
+        count: 10
+        title: 学习随手录-by da宗熊
+        keywords: 笔记,学习,da宗熊
+        description: 随手记下的一些学习资料、问题、设想等，不做真实性的保证哦~
+
+# column 是相关栏目，对应的模板，自动加载位于 columns 文件夹下的 yml 文件

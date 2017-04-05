@@ -1,0 +1,554 @@
+/* By da宗熊 2016-10-19 */
+/*
+* @description: 站点基础样式
+* @author: da宗熊
+* @update: 2015-11-20 10:45
+*/
+html,
+body,
+p,
+div,
+img,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+form,
+input,
+select,
+textarea,
+label,
+a,
+span {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  font: 1em/1.5 Arial, Tahoma, Helvetica, sans-serif;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+header {
+  display: block;
+}
+li {
+  list-style: none;
+}
+a:focus,
+select:focus,
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+img {
+  border: none;
+}
+/** 遵循PC端优先的原则，默认非媒体查询的内容，全是PC端内容 */
+/** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
+.clearfix:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+/* module: 网格系统*/
+.row:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.row:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.col-12 {
+  float: left;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-11 {
+  float: left;
+  width: 91.66666667%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-10 {
+  float: left;
+  width: 83.33333333%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-9 {
+  float: left;
+  width: 75%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-8 {
+  float: left;
+  width: 66.66666667%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-7 {
+  float: left;
+  width: 58.33333333%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-6 {
+  float: left;
+  width: 50%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-5 {
+  float: left;
+  width: 41.66666667%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-4 {
+  float: left;
+  width: 33.33333333%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-3 {
+  float: left;
+  width: 25%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-2 {
+  float: left;
+  width: 16.66666667%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-1 {
+  float: left;
+  width: 8.33333333%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.col-offset-12 {
+  margin-left: 100%;
+}
+.col-offset-11 {
+  margin-left: 91.66666667%;
+}
+.col-offset-10 {
+  margin-left: 83.33333333%;
+}
+.col-offset-9 {
+  margin-left: 75%;
+}
+.col-offset-8 {
+  margin-left: 66.66666667%;
+}
+.col-offset-7 {
+  margin-left: 58.33333333%;
+}
+.col-offset-6 {
+  margin-left: 50%;
+}
+.col-offset-5 {
+  margin-left: 41.66666667%;
+}
+.col-offset-4 {
+  margin-left: 33.33333333%;
+}
+.col-offset-3 {
+  margin-left: 25%;
+}
+.col-offset-2 {
+  margin-left: 16.66666667%;
+}
+.col-offset-1 {
+  margin-left: 8.33333333%;
+}
+@media (max-width: 1199px) {
+  .col-md-12 {
+    float: left;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-11 {
+    float: left;
+    width: 91.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-10 {
+    float: left;
+    width: 83.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-9 {
+    float: left;
+    width: 75%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-8 {
+    float: left;
+    width: 66.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-7 {
+    float: left;
+    width: 58.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-6 {
+    float: left;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-5 {
+    float: left;
+    width: 41.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-4 {
+    float: left;
+    width: 33.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-3 {
+    float: left;
+    width: 25%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-2 {
+    float: left;
+    width: 16.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-md-1 {
+    float: left;
+    width: 8.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-offset-md-12 {
+    margin-left: 100%;
+  }
+  .col-offset-md-11 {
+    margin-left: 91.66666667%;
+  }
+  .col-offset-md-10 {
+    margin-left: 83.33333333%;
+  }
+  .col-offset-md-9 {
+    margin-left: 75%;
+  }
+  .col-offset-md-8 {
+    margin-left: 66.66666667%;
+  }
+  .col-offset-md-7 {
+    margin-left: 58.33333333%;
+  }
+  .col-offset-md-6 {
+    margin-left: 50%;
+  }
+  .col-offset-md-5 {
+    margin-left: 41.66666667%;
+  }
+  .col-offset-md-4 {
+    margin-left: 33.33333333%;
+  }
+  .col-offset-md-3 {
+    margin-left: 25%;
+  }
+  .col-offset-md-2 {
+    margin-left: 16.66666667%;
+  }
+  .col-offset-md-1 {
+    margin-left: 8.33333333%;
+  }
+}
+@media (max-width: 991px) {
+  .col-sm-12 {
+    float: left;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-11 {
+    float: left;
+    width: 91.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-10 {
+    float: left;
+    width: 83.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-9 {
+    float: left;
+    width: 75%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-8 {
+    float: left;
+    width: 66.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-7 {
+    float: left;
+    width: 58.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-6 {
+    float: left;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-5 {
+    float: left;
+    width: 41.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-4 {
+    float: left;
+    width: 33.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-3 {
+    float: left;
+    width: 25%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-2 {
+    float: left;
+    width: 16.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-sm-1 {
+    float: left;
+    width: 8.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-offset-sm-12 {
+    margin-left: 100%;
+  }
+  .col-offset-sm-11 {
+    margin-left: 91.66666667%;
+  }
+  .col-offset-sm-10 {
+    margin-left: 83.33333333%;
+  }
+  .col-offset-sm-9 {
+    margin-left: 75%;
+  }
+  .col-offset-sm-8 {
+    margin-left: 66.66666667%;
+  }
+  .col-offset-sm-7 {
+    margin-left: 58.33333333%;
+  }
+  .col-offset-sm-6 {
+    margin-left: 50%;
+  }
+  .col-offset-sm-5 {
+    margin-left: 41.66666667%;
+  }
+  .col-offset-sm-4 {
+    margin-left: 33.33333333%;
+  }
+  .col-offset-sm-3 {
+    margin-left: 25%;
+  }
+  .col-offset-sm-2 {
+    margin-left: 16.66666667%;
+  }
+  .col-offset-sm-1 {
+    margin-left: 8.33333333%;
+  }
+}
+@media (max-width: 767px) {
+  .col-xs-12 {
+    float: left;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-11 {
+    float: left;
+    width: 91.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-10 {
+    float: left;
+    width: 83.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-9 {
+    float: left;
+    width: 75%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-8 {
+    float: left;
+    width: 66.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-7 {
+    float: left;
+    width: 58.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-6 {
+    float: left;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-5 {
+    float: left;
+    width: 41.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-4 {
+    float: left;
+    width: 33.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-3 {
+    float: left;
+    width: 25%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-2 {
+    float: left;
+    width: 16.66666667%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-xs-1 {
+    float: left;
+    width: 8.33333333%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .col-offset-xs-12 {
+    margin-left: 100%;
+  }
+  .col-offset-xs-11 {
+    margin-left: 91.66666667%;
+  }
+  .col-offset-xs-10 {
+    margin-left: 83.33333333%;
+  }
+  .col-offset-xs-9 {
+    margin-left: 75%;
+  }
+  .col-offset-xs-8 {
+    margin-left: 66.66666667%;
+  }
+  .col-offset-xs-7 {
+    margin-left: 58.33333333%;
+  }
+  .col-offset-xs-6 {
+    margin-left: 50%;
+  }
+  .col-offset-xs-5 {
+    margin-left: 41.66666667%;
+  }
+  .col-offset-xs-4 {
+    margin-left: 33.33333333%;
+  }
+  .col-offset-xs-3 {
+    margin-left: 25%;
+  }
+  .col-offset-xs-2 {
+    margin-left: 16.66666667%;
+  }
+  .col-offset-xs-1 {
+    margin-left: 8.33333333%;
+  }
+}
+/* module: 自适应工具 */
+.hidden {
+  display: none;
+}
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  .hidden-sm {
+    display: none;
+  }
+}
+@media (max-width: 1199px) {
+  .hidden-md {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .show-xs {
+    display: block;
+  }
+}
+@media (max-width: 991px) {
+  .show-sm {
+    display: block;
+  }
+}
+@media (max-width: 1199px) {
+  .show-md {
+    display: block;
+  }
+}

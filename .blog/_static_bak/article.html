@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>文章页</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="../css/markdown.css">
+</head>
+<body>
+    <!-- 导航 -->
+    <div class="navigation">
+        <div class="container menu">
+            <a href="#" class="item active">
+                主页
+            </a>
+            <a href="#" class="item">
+                博客
+            </a>
+            <a href="#" class="item">
+                插件
+            </a>
+            <a href="#" class="item">
+                个人
+            </a>
+        </div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="#" class="home">
+                <img src="../assert/personal.jpeg" alt="头像" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+            <!-- 导航按钮 -->
+            <div class="nav-toggle" data-toggle=".navigation">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- 文章内容 -->
+    <article class="article container">
+        <!-- 面包屑 -->
+        <div class="bread">
+            <span>当前位置:</span>
+            <a href="/">首页</a>
+            <span class="sep">/</span>
+            <a href="/">博客</a>
+        </div>
+
+        <!-- 内容 -->
+        <div class="articleCnt">
+            <h1 class="title">
+                标题很长，但是，我很喜欢
+            </h1>
+            <div class="meta">
+                25-12,2015 <span class="sep">/</span> da宗熊
+                <p class="tag">
+                    Tags:
+                    <span>前端</span>
+                    <span>javascript</span>
+                </p>
+            </div>
+            <!-- 内容容器 -->
+            <div class="content markdown">
+                
+            </div>
+            <!-- END 内容容器 -->
+        </div>
+        <!-- END 内容 -->
+
+        <!-- 分页 -->
+        <div class="articlePager">
+            <a href="#" class="prev">论学生对世界的重要性</a>
+            <a href="#" class="next">论学生对世界的重要性</a>
+        </div>
+        <!-- END 分页 -->
+    </article>
+    <!-- END 文章内容 -->
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            @2016 da宗熊<br>
+            Email: 1071093121@qq.com
+        </div>
+    </div>
+    <!-- END 页脚 -->
+</body>
+<script src="http://code.jquery.com/jquery-2.0.0.min.js" charset="utf-8"></script>
+<script src="../lib/prettify.js" charset="utf-8"></script>
+<script src="../js/common.js" charset="utf-8"></script>
+</html>

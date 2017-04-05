@@ -1,0 +1,22 @@
+id: 1464831910437
+type: note
+time: 2016-06-02 09:45
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: XDomainRequest-ie8跨域神器
+        keywords: XDomainRequest,ie8/9,跨域
+        description: ie8和9特色对象，XDomainRequest对象，跨域请求
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:

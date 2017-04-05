@@ -1,0 +1,109 @@
+/*
+* @description: 站点基础样式
+* @author: da宗熊
+* @update: 2015-11-20 10:45
+*/
+@import url(./reset.less);
+
+/** 遵循PC端优先的原则，默认非媒体查询的内容，全是PC端内容 */
+@import url(./mixin/var.less);
+@import url(./mixin/func.less);
+
+.clearfix {
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+}
+
+/* module: 网格系统*/
+// 构建 row 的列
+@col-columns: 12;
+.make-col-loop(@index) when (@index > 0) {
+    .col-@{index} {
+        float: left;
+        width: percentage(@index / @col-columns);
+        box-sizing: border-box;
+    }
+    .make-col-loop(@index - 1);
+}
+.make-col-loop(@index, @prefix) when (@index > 0) and not (@prefix = null) {
+    .col-@{prefix}-@{index} {
+        float: left;
+        width: percentage(@index / @col-columns);
+        box-sizing: border-box;
+    }
+    .make-col-loop(@index - 1, @prefix);
+}
+// 构建偏移
+.make-col-offset-loop(@index) when (@index > 0) {
+    .col-offset-@{index} {
+        margin-left: percentage(@index / @col-columns);
+    }
+    .make-col-offset-loop(@index - 1);
+}
+.make-col-offset-loop(@index, @prefix) when (@index > 0) {
+    .col-offset-@{prefix}-@{index} {
+        margin-left: percentage(@index / @col-columns);
+    }
+    .make-col-offset-loop(@index - 1, @prefix);
+}
+// 每一列的所有内容
+.make-col() {
+    .make-col-loop(@col-columns);
+    .make-col-offset-loop(@col-columns);
+}
+.make-col(@max, @prefix) {
+    @media (max-width: @max) {
+        .make-col-loop(@col-columns, @prefix);
+        .make-col-offset-loop(@col-columns, @prefix);
+    }
+}
+// 构建所有列
+.row {
+    .clearfix();
+}
+.make-col();
+.make-col(@screen-lg-min - 1, md);
+.make-col(@screen-md-min - 1, sm);
+.make-col(@screen-sm-min - 1, xs);
+
+/* module: 自适应工具 */
+.hidden {
+    display: none;
+}
+.hidden-xs {
+    @media (max-width: (@screen-sm-min - 1)) {
+        .hidden();
+    }
+}
+.hidden-sm {
+    @media (max-width: (@screen-md-min - 1)) {
+        .hidden();
+    }
+}
+.hidden-md {
+    @media (max-width: (@screen-lg-min - 1)) {
+        .hidden();
+    }
+}
+
+.show() {
+    display: block;
+}
+.show-xs {
+    @media (max-width: (@screen-sm-min - 1)) {
+        .show();
+    }
+}
+.show-sm {
+    @media (max-width: (@screen-md-min - 1)) {
+        .show();
+    }
+}
+.show-md {
+    @media (max-width: (@screen-lg-min - 1)) {
+        .show();
+    }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    {% if description %}
+    <meta name="description" content="{{ description }}" />
+    {% endif %}
+    {% if keywords %}
+    <meta name="keywords" content="{{ keywords }}" />
+    {% endif %}
+    <link rel="stylesheet" href="{{ url + root }}css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="{{ url + root }}css/common.css" charset="utf-8">
+    {% block topResources %}{% endblock %}
+</head>
+<body>
+    {% block navigation %}
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="{{ url + root }}" class="item {{ 'active' if navigation == 'home' }}">
+                    主页
+                </a>{% for item in blogList -%}{% set type = item.type %}<a href="{{ url + root }}{{ blogListObject[type].link | default('#') }}" class="item {{ 'active' if navigation == type }}">
+                    {{ blogListObject[type].name | default('未知') }}
+                </a>{%- endfor %}<a target="_blank" href="/show/" class="item {{ 'active' if navigation == 'show' }}">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+    {% endblock %}
+
+    {% block header %}
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="{{ authorHomePage if authorHomePage else url + root }}" class="home">
+                <img src="{{ authorIcon }}" alt="{{ author }}" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="{{ authorHomePage if authorHomePage else url + root }}" class="author">
+                    {{ author }}
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+    {% endblock %}
+
+    {% block body %}
+        等待填充内容..
+    {% endblock %}
+
+
+    {% block footer %}
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @{{ _time.year }} {{ author }}<br>
+                Email: {{ email }}
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+    {% endblock %}
+
+<script>
+    window.ROOT_PATH = "{{ url + root }}";
+</script>
+<script src="{{ url + root }}js/lib/jquery-2.0.0.min.js"></script>
+<script src="{{ url + root }}js/common.js"></script>
+{% block bottomResources %}{% endblock %}
+
+</body>
+</html>

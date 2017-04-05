@@ -1,0 +1,111 @@
+@import url(./mixin/var.less);
+@import url(./mixin/func.less);
+
+
+/** module: 主体内容 */
+.content {
+    padding: 30px 0 70px 0;
+
+    // 响应式代码
+    @media (max-width: @main-width) {
+        &:after {
+            display: none;
+        }
+    }
+    // END 响应式代码
+}
+.article {
+    margin-top: 30px;
+    &:first-child {
+        margin-top: 0;
+    }
+}
+.article-cnt {
+    padding: 3% 4%;
+    background: #fff;
+    word-wrap: break-word;
+    word-break: break-all;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border-radius: 2px;
+    box-sizing: border-box;
+    .clearfix();
+
+    .title {
+        .link {
+            .tool-titleLink();
+        }
+    }
+    .title-ico {
+        float: left;
+        width: 1rem;
+        height: 1rem;
+        padding: 4px;
+        margin: .55rem .5rem 0 0;
+        background-color: #20a9f5;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 50% auto;
+        border-radius: 50%;
+    }
+    .meta {
+        clear: both;
+        padding-top: 1rem;
+        font-size: 1.2rem;
+        color: #999;
+        .sep {
+            margin: 0 5px;
+            color: #ddd;
+        }
+    }
+    .desc {
+        margin-top: 1rem;
+        padding: 1rem 0;
+        border-top: 3px double #EEE;
+        line-height: 200%;
+        font-size: 1.4rem;
+        color: #555;
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            padding: 3px;
+            margin-bottom: 10px;
+            box-shadow: 1px 1px 2px 1px #D6D6D6;
+            box-sizing: border-box;
+        }
+        .clearfix();
+    }
+    .more {
+        float: right;
+        margin-right: 5px;
+        @color: #FF706C;
+        font-size: 1.4rem;
+        .tool-anm-btmLine(@color);
+    }
+}
+// 文章标签
+.article-type-blog .title-ico{
+    background-image: url(1x/post-formats/blog.png);
+}
+.article-type-plugin .title-ico{
+  background-image: url(1x/post-formats/standard.png);
+ }
+.article-type-note .title-ico{
+    background-image: url(1x/post-formats/note.png);
+}
+// 响应式代码
+@media (max-width: @screen-sm-min){
+    .content {
+        width: 100%;
+        padding: 10px 0 10px 0;
+    }
+    .article {
+        margin-top: 8px;
+    }
+    .article-cnt {
+        width: 100%;
+        border-radius: 0;
+    }
+}
+// END 响应式代码

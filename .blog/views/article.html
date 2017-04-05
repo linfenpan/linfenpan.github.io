@@ -1,0 +1,75 @@
+{% extends "./template/layout.html" %}
+
+{# 文章资源 #}
+{% block topResources %}
+<link rel="stylesheet" href="{{ url + root }}css/article.css" charset="utf-8">
+{% for item in resources %}
+    {% if item.type == "css" %}
+        <link rel="stylesheet" href="{{ item.url }}" charset="utf-8">
+    {% endif %}
+{% endfor %}
+{% endblock %}
+
+{# 文章内容 #}
+{% block body %}
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="{{ url + root }}index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="{{ url + root }}{{ blogListObject[type].link | default('#') }}">{{ blogListObject[type].name | default("未知") }}</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            {{ title }}
+        </h1>
+        <div class="meta">
+            {{ time }} <span class="sep">/</span> {{ author }}
+            <p class="tag">
+                Tags:
+                {% for item in tags %}
+                    <span>{{ item }}</span>
+                {% endfor %}
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            {{ articleContent }}
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+        {% if articlePrev or articleNext -%}
+            {% if articlePrev %}
+                <a href="{{ url + root + articlePrev.link }}" class="prev">{{ articlePrev.title }}</a>
+            {% endif %}
+            {% if articleNext %}
+                <a href="{{ url + root + articleNext.link }}" class="next">{{ articleNext.title }}</a>
+            {% endif %}
+        {%- endif %}
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+{% endblock %}
+
+{# 底部资源 #}
+{% block bottomResources %}
+<script src="{{ url + root }}js/lib/prettify.js"></script>
+<script src="{{ url + root }}js/article.js"></script>
+{% for item in resources %}
+    {% if item.type == "js" %}
+        <script src="{{ item.url }}"></script>
+    {% endif %}
+{% endfor %}
+{% endblock %}

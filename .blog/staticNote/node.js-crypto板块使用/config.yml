@@ -1,0 +1,22 @@
+id: 1464746376683
+type: note
+time: 2016-06-01 09:59
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: node.js-crypto板块使用
+        keywords: crypto,md5
+        description: 加密板块的常规使用
+        withoutHomeDescription: true
+        # 首页描述 homeDescription:

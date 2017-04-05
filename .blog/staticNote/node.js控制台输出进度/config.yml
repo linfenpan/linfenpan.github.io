@@ -1,0 +1,22 @@
+id: 1457333763960
+type: note
+time: 2015-10-29 10:56
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: node.js控制台输出进度
+        keywords: 控制台输出进度
+        description: 在node.js控制台中，输出简单的进度条
+        withoutHomeDescription: true
+        # 首页描述 homeDescription:

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>transform: scale</title>
+    <link rel="stylesheet" href="./demo.css">
+    <script src="/js/lib/jquery-2.0.0.min.js"></script>
+    <script src="/js/lib/project.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">请用手机观看，或用浏览器模拟手机屏幕</h1>
+        <div class="picture"></div>
+    </div>
+
+    <script type="text/javascript">
+    var $body = $("body");
+
+    function resize(){
+        var width = window.innerWidth, maxWidth = 500;
+        var scale = "scale("+ Math.min(1, width / maxWidth) +")";
+        $body.css({
+            "transform": scale,
+            "-webkit-transform": scale,
+            "transform-origin": "0 0 0",
+            "-webkit-transform-origin": "0 0 0"
+        });
+    };
+    $(window).on("resize", resize);
+    resize();
+    </script>
+</body>
+</html>

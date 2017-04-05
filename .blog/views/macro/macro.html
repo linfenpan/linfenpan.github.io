@@ -1,0 +1,21 @@
+{% macro pagination(total, start, end, index, format="list_:index.html") %}
+<!-- 分页内容 -->
+<div class="pagination">
+    <a href="{{ format | replace(':index', 1)}}" class="first">首页</a>
+    {{ createPageItem(start, end, index, format) }}
+    <a href="{{ format | replace(':index', total)}}" class="last">尾页</a>
+</div>
+<!-- END 分页内容 -->
+{% endmacro %}
+
+
+{% macro createPageItem(index, end, current, format)%}
+    {% if index <= end %}
+        {% if index == current %}
+            <a href="{{ format | replace(':index', index) }}" class="active">{{ index }}</a>
+            {% else %}
+            <a href="{{ format | replace(':index', index) }}">{{ index }}</a>
+        {% endif %}
+        {{ createPageItem(index + 1, end, current, format) }}
+    {% endif %}
+{% endmacro %}

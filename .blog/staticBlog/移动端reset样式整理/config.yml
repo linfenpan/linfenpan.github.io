@@ -1,0 +1,24 @@
+id: reset-style
+type: blog
+time: 2016-09-28 10:48
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+    - 移动
+    - 样式
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 移动端reset样式整理
+        keywords: 移动端,样式,reset,重置
+        description: 整理一下移动端，常用的 reset 样式，方便以后使用[随时更新哦~，有疑问的同学，请评论]
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:

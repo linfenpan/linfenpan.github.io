@@ -1,0 +1,206 @@
+/**
+* @description: 列表
+* @author: da宗熊
+* @update: 2015-11-26 15:50
+*/
+@import url(./mixin/var.less);
+@import url(./mixin/func.less);
+
+.lstContent {
+    margin-top: 20px;
+    margin-bottom: 15px;
+
+    .clearfix();
+}
+
+// module: 左侧内容
+.leftCtn{
+    overflow: hidden;
+    float: left;
+    width: 70%;
+    padding: 0 20px;
+    font-size: 1.4rem;
+    background: #fff;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    box-sizing: border-box;
+
+    // module: 面包屑
+    .bread {
+        padding: 15px 0;
+        font-size: 1em;
+        font-weight: normal;
+        border-bottom: 1px solid #ddd;
+    }
+    .br-title {
+        font-size: 2.75rem;
+        color: #333;
+    }
+    .br-sub {
+        vertical-align: middle;
+        color: #24A714;
+    }
+}
+// module: 左侧文章内容
+.articleList {
+
+    .item {
+        padding: 20px 0;
+        border-bottom: 1px solid #ddd;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+    .title {
+        a {
+            display: inline-block;
+            max-width: 70%;
+            .textOverflowEllipsis();
+            .tool-titleLink();
+        }
+    }
+
+    .cnt {
+        .clearfix();
+    }
+    .desc {
+        text-indent: 2em;
+        line-height: 200%;
+        color: #666;
+    }
+    .poster {
+        float: left;
+        width: 105px;
+        height: 105px;
+        border: 3px solid #fff;
+        margin: 0 10px 5px 0;
+        box-shadow: 1px 1px 2px #888;
+        box-sizing: border-box;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+
+    .msg {
+        margin-top: 10px;
+        line-height: 180%;
+        // box-shadow: 1px 1px 1px #ddd;
+        .clearfix();
+    }
+    .info {
+        font-size: 1.2rem;
+        color: #b0b2b8;
+
+        .seq {
+            margin: 0 5px;
+        }
+    }
+    .more {
+        float: right;
+        font-size: 1.4rem;
+        @color: #FF706C;
+        .tool-anm-btmLine(@color);
+    }
+}
+
+
+// module: 右侧内容
+.rightCnt {
+    float: right;
+    width: 260px;
+    margin-left: 20px;
+    border-radius: 2px;
+    color: #666;
+
+    .section {
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        box-shadow: 0 0 2px rgba(0, 0, 0, .15);
+        border-radius: 2px 2px 0 0;
+    }
+    @padding: 15px;
+    .cnt {
+        padding: @padding;
+        line-height: 170%;
+        font-size: 1.4rem;
+        background: #fff;
+
+        a {
+            display: inline-block;
+            padding: 5px 0;
+            color: #654646;
+            transition: color .3s ease;
+
+            &:hover {
+                color: #CC8800;
+                text-decoration: none;
+            }
+        }
+        li {
+            padding: 0 2px;
+            border-bottom: 1px solid #ddd;
+            &:first-child {
+                margin-top: -5px;
+            }
+        }
+    }
+    .hd {
+        padding: @padding;
+        text-align: center;
+        font-size: 1.2rem;
+        color: #434140;
+        background: #f1f1f1;
+    }
+}
+
+// module: 自适应代码
+@media (max-width: @main-width){
+    .leftCtn {
+        float: none;
+        width: 100%;
+    }
+    .rightCnt {
+        display: none;
+    }
+}
+@media (max-width: @screen-md-min){
+    .leftCtn .poster {
+        width: 70px;
+        height: 70px;
+    }
+    .articleList .info {
+        display: none;
+    }
+}
+
+
+// module: 分页样式
+.pagination {
+    font-size: 1.3rem;
+    padding: 15px 0;
+    cursor: default;
+
+    a {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 2px;
+        color: #0172B7;
+        background-color: #e8e8e8;
+        vertical-align: middle;
+        transition: background-color .1s linear;
+
+        &:hover, &.active {
+            text-decoration: none;
+            color: #fff;
+            background-color: #4cace2;
+        }
+    }
+    // 响应式代码
+    @media (max-width: @screen-sm-min){
+        .first, .last {
+            display: none;
+        }
+    }
+    // END 响应式代码
+}

@@ -1,0 +1,28 @@
+# 右侧栏栏目
+-
+    type: link
+    title: 站点相关技术
+    list:
+        -
+            text: 个人github地址
+            url: https://github.com/linfenpan/
+        -
+            text: 脚本模块加载
+            url: https://github.com/linfenpan/projectM/
+        -
+            text: nunjucks-功能强大的模板引擎
+            url: http://mozilla.github.io/nunjucks/
+        -
+            text: markdown编译脚本-remarkable
+            url: https://github.com/jonschlinkert/remarkable
+        -
+            text: prettify-页面语法高亮JS库
+            url: https://github.com/google/code-prettify
+        -
+            text: 搜索引擎接入
+            url: https://swiftype.com/
+-
+    type: text
+    title: 宗熊的感想
+    content: >
+        熊生，充满了难以抉择的事情

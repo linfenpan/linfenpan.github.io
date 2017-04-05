@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>冒水泡</title>
+    <style media="screen">
+        * {padding: 0; margin: 0;}
+        body {
+            background: #009fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="300"></canvas>
+</body>
+<script type="text/javascript">
+window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+var bubble = new Image();
+bubble.onload = loadedFinish;
+bubble.src = "../assert/bubble.png";
+
+function RandomBubble(canvas, ctx, image){
+    this.ctx = ctx;
+    this.image = image;
+    this.width = this.height = Math.random() * (image.width - 11) + 11;
+    // 坐标、速度
+    this.y = canvas.height;
+    this.x = this.width + Math.random() * (canvas.width - 3 * this.width);
+    this.speed = Math.random() + 1;
+
+    // 正弦的角度
+    this.deg = 0;
+    this.degSpeed = 1 + Math.random() * 3;
+}
+RandomBubble.prototype = {
+    next: function(){
+        if(this.y <= -this.height){
+            this.destroy();
+        }else{
+            this.y -= this.speed;
+            this.deg += this.degSpeed;
+            this.ctx.drawImage(this.image, this.x + Math.sin(Math.PI / 180 * this.deg) * this.width, this.y, this.width, this.height);
+        }
+    },
+    destroy: function(){
+        this.destroyCallback && this.destroyCallback();
+        this.ctx = this.image = this.width = this.height = this.x = this.y = this.next = null;
+    },
+    setDestroyCallback: function(cb){
+        this.destroyCallback = cb;
+    }
+};
+
+function loadedFinish(){
+    var ctx = canvas.getContext("2d");
+    var canvasWidth = canvas.width,
+        canvasHeight = canvas.height;
+
+    var bubbles = {}, bubbleId = 1, isWindowBlur;
+    function autoBubble(){
+        if(isWindowBlur){
+            return;
+        }
+        var bl = new RandomBubble(canvas, ctx, bubble);
+        var id = "bubble_" + bubbleId++;
+        bl.setDestroyCallback(function(){
+            delete bubbles[id];
+        });
+        bubbles[id] = bl;
+    }
+    var lastTime = 0;
+    function drawBubble(time){
+        if(!isWindowBlur && time - lastTime >= 20){
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            for(var i in bubbles){
+                bubbles[i].next();
+            }
+            // 帧频控制，以免运行过快
+            lastTime = time;
+        }
+        requestAnimationFrame(drawBubble);
+    }
+    requestAnimationFrame(drawBubble);
+    setInterval(autoBubble, 1000);
+    autoBubble();
+
+    // 窗体离开之后，不应该再执行
+    window.addEventListener("blur", function(){
+        isWindowBlur = true;
+    }, false);
+    window.addEventListener("focus", function(){
+        isWindowBlur = false;
+    }, false);
+}
+
+</script>
+</html>

@@ -1,0 +1,273 @@
+/* By da宗熊 2016-10-19 */
+/**
+* @description: 站点公共样式
+* @author: da宗熊
+* @update: 2015-11-20 14:35
+*/
+/** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
+/** module: body外观 */
+html {
+  min-height: 100%;
+}
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  padding-bottom: 7.5rem;
+  background: #f2f2f2 url(../assert/css/body.jpg) repeat;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/** module: 导航菜单 */
+.navigation {
+  font-size: 1.6rem;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-bottom: 10px;
+  text-align: right;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAYCAQAAAB68uRSAAAAKElEQVR4AWNhcGdgYGH4CyL+wVkI4g8W4jcuiT9YDPgHJ/7DiP9AAgBhORhg+gPD+AAAAABJRU5ErkJggg==');
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  background-size: 1px 12px;
+  z-index: 10;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-transition: height .7s ease;
+  transition: height .7s ease;
+}
+.navigation ._box {
+  background: #20a9f5;
+}
+.navigation .item {
+  display: inline-block;
+  padding: 1.5rem 2rem;
+  color: #fff;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+}
+.navigation .item:hover,
+.navigation .item.active {
+  text-decoration: none;
+  background-color: #1A67C5;
+}
+.navigation-toggle {
+  position: fixed;
+  top: 1px;
+  right: 1px;
+  width: 22px;
+  height: 15px;
+  padding: 8px;
+  background: #2D3642;
+  z-index: 10;
+  cursor: pointer;
+}
+.navigation-toggle .bar {
+  width: 22px;
+  height: 3px;
+  margin-top: 3px;
+  background: #fff;
+  -webkit-transition: opacity .3s ease, -webkit-transform .2s ease;
+  transition: opacity .3s ease, -webkit-transform .2s ease;
+  transition: opacity .3s ease, transform .2s ease;
+  transition: opacity .3s ease, transform .2s ease, -webkit-transform .2s ease;
+}
+.navigation-toggle .bar:first-child {
+  margin-top: 0;
+}
+.navigation-toggle.active .bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12px;
+  margin-top: -2px;
+}
+.navigation-toggle.active .bar:nth-of-type(1) {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.navigation-toggle.active .bar:nth-of-type(2) {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.navigation-toggle.active .bar:nth-of-type(3) {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+@media (max-width: 768px) {
+  .navigation {
+    visibility: hidden;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    padding-bottom: 0;
+    text-align: left;
+    opacity: 0;
+    will-change: top;
+    -webkit-transform: translateY(20px) translateZ(0);
+            transform: translateY(20px) translateZ(0);
+  }
+  .navigation.active {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: translateY(0) translateZ(0);
+            transform: translateY(0) translateZ(0);
+    -webkit-transition: opacity .15s linear, -webkit-transform .15s linear;
+    transition: opacity .15s linear, -webkit-transform .15s linear;
+    transition: opacity .15s linear, transform .15s linear;
+    transition: opacity .15s linear, transform .15s linear, -webkit-transform .15s linear;
+  }
+  .navigation ._box {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    padding: 0 20px;
+    background: none;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+  .navigation .container {
+    width: 100%;
+  }
+  .navigation .item {
+    width: 100%;
+    border-bottom: 1px solid #363F4A;
+    background-color: #2D3642;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-transition: none;
+    transition: none;
+  }
+  .navigation .item:hover {
+    background-color: #2D3642;
+  }
+  .navigation .item.active {
+    background-color: #363F4A;
+  }
+}
+/** module: header */
+.header {
+  margin-top: 5rem;
+  background: #20a9f5;
+}
+.header .container {
+  position: relative;
+  padding: 50px 0;
+}
+.header .home {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  vertical-align: middle;
+  -webkit-transition: border-radius 0.3s ease-in-out;
+  transition: border-radius 0.3s ease-in-out;
+}
+.header .home:hover {
+  border-radius: 20%;
+}
+.header .home:hover .logo {
+  border-radius: 16.5%;
+}
+.header .logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  vertical-align: bottom;
+  -webkit-transition: border-radius 0.3s ease-in-out;
+  transition: border-radius 0.3s ease-in-out;
+}
+.header .title {
+  display: inline-block;
+  margin: 1rem 0 0 2rem;
+  font-size: 3.6rem;
+  vertical-align: middle;
+}
+.header .author {
+  color: #fff;
+  -webkit-transition: color .3s ease;
+  transition: color .3s ease;
+}
+.header .author:hover {
+  color: #2D3642;
+  text-decoration: none;
+}
+.header .bubbles {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+@media (max-width: 768px) {
+  .header .container {
+    width: 95%;
+    padding: 5.5% 0;
+  }
+  .header .home {
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    border-width: 3px;
+  }
+  .header .title {
+    display: block;
+    margin-left: 0;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    margin-top: 0;
+  }
+}
+/** module: 页脚 */
+.credits {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 1.2rem;
+  color: #775544;
+}
+.credits .container {
+  padding: 1rem 0;
+  border-top: 3px double #ddd;
+  text-align: right;
+}
+.credits .logo,
+.credits .text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.credits .logo {
+  width: 5rem;
+  height: 4.32rem;
+  margin-right: 5px;
+  background: url(../assert/css/credit.png) no-repeat;
+  background-size: 100% auto;
+}
+.credits .text {
+  margin-right: 10px;
+}
+/** module: 其它 */
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+@media (min-width: 980px) {
+  .container {
+    width: 980px;
+  }
+}

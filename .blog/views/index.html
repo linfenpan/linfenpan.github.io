@@ -1,0 +1,43 @@
+{% extends "./template/layout.html" %}
+
+{# 顶部资源 #}
+{% block topResources %}
+    <link rel="stylesheet" href="{{ url + root}}css/index.css" charset="utf-8">
+{% endblock %}
+
+{# 主要内容 #}
+{% block body %}
+<div class="content container">
+    {% for item in dataList -%}
+    <div class="article article-type-{{ item.type }}">
+        <div class="article-cnt">
+            <div class="info">
+                <h2 class="title">
+                    <a href="{{ url + root + item.link }}" class="link">
+                        <span class="title-ico"></span> {{ item.title }}
+                    </a>
+                </h2>
+                <div class="meta">
+                    <span>{{ item.time }}</span>
+                    <span class="sep">/</span>
+                    <span>{{ item.author }}</span>
+                </div>
+            </div>
+            {% if item.withoutHomeDescription %}
+                    <!-- do nothing -->
+                {% else %}
+                    <div class="desc">
+                        {% if item.homeDescription %}
+                                {{ item.homeDescription }}
+                            {% else %}
+                                {{ item.description }}
+                        {% endif %}
+                    </div>
+            {% endif %}
+
+            <a href="{{ url + root + item.link }}" class="more">全文阅读 →</a>
+        </div>
+    </div>
+    {%- endfor %}
+</div>
+{% endblock %}

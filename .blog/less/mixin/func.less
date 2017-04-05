@@ -1,0 +1,65 @@
+// 清除浮动
+.clearfix() {
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+}
+
+// 文字生路好
+.textOverflowEllipsis() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// module: 一些工具
+
+    // 标题链接
+.tool-title(){
+    font-size: 2.2rem;
+    color: #2D3642;
+}
+    // 标题链接
+.tool-titleLink(){
+    .tool-title();
+    transition: color .3s ease;
+    &:hover {
+        color: #FF706C;
+        text-decoration: none;
+    }
+}
+
+    // 链接带有下划线动画的
+._tool-anm-btmLine(@color) {
+    padding-bottom: 2px;
+    color: @color;
+
+    &:before {
+        content: " ";
+        overflow: hidden;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background: @color;
+        transform: translateX(-50%);
+        transition: width .3s ease-in-out;
+    }
+    &:hover {
+        text-decoration: none;
+        &:before {
+            width: 100%;
+        }
+    }
+}
+.tool-anm-btmLine(@color) {
+    position: relative;
+    ._tool-anm-btmLine(@color);
+}
+.tool-anm-btmLine(@color, @pos) {
+    position: @pos;
+    ._tool-anm-btmLine(@color);
+}

@@ -1,0 +1,133 @@
+/* By da宗熊 2015-11-23 */
+/**
+* @description: 首页样式
+* @author: da宗熊
+* @update: 2015-11-20 18:40
+*/
+/** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
+/** module: 顶部栏目 */
+#ppHeader {
+  position: relative;
+  height: 6rem;
+  background: url(../assert/css/header-bg.jpg) repeat-x;
+  background-size: auto 100%;
+  color: #fff;
+}
+#ppHeader .container {
+  height: 3rem;
+  line-height: 3rem;
+  padding: 1.5rem 0;
+  font-size: 1.8rem;
+}
+#ppHeader .name {
+  font-size: 2rem;
+  letter-spacing: .1rem;
+}
+#ppHeader .links {
+  text-align: right;
+}
+#ppHeader .link {
+  margin-left: 3rem;
+  color: #fff;
+}
+#ppHeader .link:hover,
+#ppHeader .ative {
+  color: #ff9000;
+  text-decoration: none;
+}
+#ppHeader .menu-btn {
+  position: absolute;
+  right: 1rem;
+  top: 48%;
+  width: 2rem;
+  border-radius: .2rem;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+#ppHeader .menu-btn:focus {
+  background: #676767;
+}
+@media (max-width: 768px) {
+  #ppHeader .author {
+    text-align: center;
+  }
+}
+/** module: 菜单按钮 */
+.menu-btn {
+  float: left;
+  padding: .9rem 1rem;
+  border: none;
+  background: transparent;
+  box-sizing: content-box;
+}
+.menu-btn .icon-bar {
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: #fff;
+}
+.menu-btn .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+/** module: 下拉菜单 */
+.navMenu {
+  overflow: hidden;
+  position: relative;
+  height: 0;
+  font-size: 1.6rem;
+  background: #fff;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-transition: height .3s linear;
+  transition: height .3s linear;
+}
+.navMenu a {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: #563d7c;
+}
+.navMenu a:hover {
+  text-decoration: none;
+}
+.navMenu .active {
+  color: #fff;
+  background: #675F4F;
+}
+/** module: 页脚 */
+#ppFooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+  color: #c9c9c9;
+  background: #262a30;
+}
+@media (max-width: 768px) {
+  #ppFooter .container {
+    margin-left: 1rem;
+  }
+}
+/** module: 主体内容 */
+#content {
+  padding-bottom: 4.8rem;
+}
+/** module: 侧边栏 */
+.sideBar {
+  font-size: 1.4rem;
+  padding-left: 1rem;
+}
+.sideBar .plate-wrap {
+  margin: 3rem 0;
+}
+.sideBar .title {
+  letter-spacing: .1rem;
+  font-size: 1.8rem;
+  border-bottom: 1px solid #333;
+  color: #999;
+}
+.sideBar li {
+  list-style: circle;
+}
