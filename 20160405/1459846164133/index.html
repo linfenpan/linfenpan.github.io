@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>createEvent讲解</title>
+    <meta name="description" content="讲解document.createEvent的用法，一些常用事件的配置、使用，以及以往自己理解的误区" />
+    <meta name="keywords" content="javascript,创建事件,createEvent" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html">博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            createEvent讲解
+        </h1>
+        <div class="meta">
+            04-05,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>document.createEvent 和 element.dispatchEvent，这一对，今天就来揭晓一下他们的神秘面孔。</p>
+<hr>
+<h2>作用</h2>
+<p>document.createEvent 用于创建事件，如点击、鼠标移动、键盘输入等事件。</p>
+<pre><code class="prettyprint linenums lang-javascript">    var clickEvent = document.createEvent(&quot;HTMLEvents&quot;);
+    clickEvent.initEvent(&quot;click&quot;);
+</code></pre>
+<p>事件声明，初始化后，即能发布出去:</p>
+<pre><code class="prettyprint linenums lang-javascript">    document.getElementById(&quot;btn&quot;).dispatchEvent(clickEvent);
+</code></pre>
+<p>上述代码，触发了 <code>btn</code> 元素的点击事件。</p>
+<p>脑筋一转，这不就跟 <code>btn.click()</code> 一样吗？何必大费周章呢。BUT，有见过 <code>btn.keydown()</code> 的吗？</p>
+<p>PS:<br>
+dom元素内置了 click/blur/focus 等常用api，快捷发布事件。</p>
+<hr>
+<h2>使用</h2>
+<p>事件从创建到发布，一共3步。</p>
+<h3>createEvent</h3>
+<p><code>document.createEvent(EventName)</code> 接受1个参数，EventName可用的值，暂时发现有4个: HTMLEvents、UIEvents、MouseEvents、MutationEvents</p>
+<p>前3个用得最为广泛。其中，每个事件，能创建的事件，各不相同:</p>
+<p>HTMLEvents:</p>
+<ul>
+<li>abort</li>
+<li>blur</li>
+<li>focus</li>
+<li>change</li>
+<li>error</li>
+<li>load</li>
+<li>reset</li>
+<li>resize</li>
+<li>scroll</li>
+<li>select</li>
+<li>submit</li>
+<li>unload</li>
+<li>click [也可以用 MouseEvents ]</li>
+</ul>
+<p>UIEvents:</p>
+<ul>
+<li>DOMActive</li>
+<li>DOMFocusIn</li>
+<li>DOMFocusOut</li>
+<li>keydown</li>
+<li>keyup</li>
+<li>keypress</li>
+</ul>
+<p>MouseEvents</p>
+<ul>
+<li>click</li>
+<li>mousedown</li>
+<li>mousemove</li>
+<li>mouseout</li>
+<li>mouseover</li>
+<li>mouseup</li>
+</ul>
+<p>MutationEvents</p>
+<ul>
+<li>DOMAttrModified [没效</li>
+<li>DOMNodeInserted</li>
+<li>DOMNodeRemoved</li>
+<li>DOMCharacterDataModified [文本更变时</li>
+<li>DOMNodeInsertedIntoDocument</li>
+<li>DOMNodeRemovedFromDocument</li>
+<li>DOMSubtreeModified [子元素更变时</li>
+</ul>
+<h3>事件初始</h3>
+<p>创建事件之后，不用的事件，需要不同的初始化:<br>
+HTMLEvents:  event.initEvent(&quot;click&quot;);<br>
+UIEvents:  event.initUIEvent(&quot;keydown&quot;);<br>
+MouseEvents:  event.initMouseEvent(&quot;mousedown&quot;);<br>
+MutationEvents:  event.initMutationEvent(&quot;DOMNodeInserted&quot;);</p>
+<p>所有 initEvent 的方法，可接受的参数，都大同小异。<br>
+参考如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">event.initEvent(EventType, canBubble, canPreventDefault, windowObject, detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget);
+</code></pre>
+<p>常用的，可设置 1 或 3 个参数，其它参数，按需设置，建议如下设置:</p>
+<pre><code class="prettyprint linenums lang-javascript">    var keydownEvent = document.createEvent(&quot;UIEvents&quot;);
+    keydownEvent.initUIEvent(&quot;keydown&quot;, false, false);
+
+    // 在这设置其它参数，更为合理
+    keydownEvent.keyCode = 13;
+
+    element.dispatchEvent(keydownEvent);
+</code></pre>
+<h3>发布事件</h3>
+<p>在需要触发事件的元素上，调用 <code>dispatchEvent</code> 即可，发布的事件，必须先调用相关的initEvent方法。</p>
+<pre><code class="prettyprint linenums lang-javascript">element.dispatchEvent(event);
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20160630/1467272257483/index.html" class="prev">es6修饰器-decorator</a>
+                <a href="/20160215/wap-page/index.html" class="next">手机页面方案之-等比缩放</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

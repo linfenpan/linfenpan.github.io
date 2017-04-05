@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Highcharts第一个用例</title>
+    <script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+</head>
+<body>
+<div id="container" style="min-width: 800px; height: 400px;"></div>
+
+<script type="text/javascript">
+$(function(){
+    $("#container").highcharts({
+        chart: {
+            type: 'column'                         //指定图表的类型，默认是折线图（line）
+        },
+        title: {
+            text: '第一个Highcharts图表'           //指定图表标题
+        },
+        xAxis: {
+            title: {
+                text: '月份'
+            },
+            categories: ['1月', '2月', '3月']   //指定x轴分组
+        },
+        yAxis: {
+            title: {
+                text: '体重(kg)'                  //指定y轴的标题
+            }
+        },
+        series: [{                                 //指定数据列
+            name: 'da宗熊',                        //数据列名
+            data: [50, 55, 60]                        //数据
+        }, {
+            name: 'xiao宗熊',
+            data: [30, 40, 32]
+        }]
+    });
+});
+</script>
+</body>
+</html>

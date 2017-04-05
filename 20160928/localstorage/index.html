@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>兼容ie的localStorage</title>
+    <meta name="description" content="前方高能！发现IE都能使用的localStorage，迅猛学习啦~" />
+    <meta name="keywords" content="兼容,localStorage" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item ">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item active">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/pluginlist/list_1.html">插件</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            兼容ie的localStorage
+        </h1>
+        <div class="meta">
+            09-28,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h2>关于 userData behavior</h2>
+<p>参考资料: <a target="_blank" href="http://www.cnblogs.com/dwfbenben/archive/2012/03/15/2398741.html">资料1</a>, <a target="_blank" href="http://www.cnblogs.com/chyong168/archive/2012/04/24/2467503.html">资料2</a></p>
+<p><strong>浏览器支持:</strong> IE5.0 或 以上<br>
+<strong>基本语法</strong>:</p>
+<pre><code>XML：&lt;Prefix: CustomTag id=sID style=”behavior:url(‘#default#userData’)” /&gt;
+
+HTML：&lt;ELEMENT style=”behavior:url(‘#default#userData’)” id=sID&gt;
+
+Script：
+object.style.behavior = &quot;url('#default#userData')&quot;
+或
+object.addBehavior('#default#userData')
+</code></pre>
+<p><strong>属性：</strong></p>
+<p>expires —— 设置或者获取 userData behavior 保存数据的失效日期。XMLDocument —— 获取 XML 的引用。</p>
+<p><strong>方法：</strong></p>
+<p>getAttribute() —— 获取指定的属性值。<br>
+load(object) —— 从 userData 存储区载入存储的对象数据。<br>
+removeAttribute() —— 移除对象的指定属性。<br>
+save(object) —— 将对象数据存储到一个 userData 存储区。<br>
+setAttribute() —— 设置指定的属性值。</p>
+<p><strong>备注</strong></p>
+<p>1、从安全方面考虑，一个 userData 存储区只能用于同一目录和对同一协议进行存储。</p>
+<p>2、如果使用 userData behavior 不正确可能会对你的应用造成危害，userData 存储区中的数据没有加密因而不安全的。<br>
+任何可以访问 UserData 保存磁盘的应用都可以访问该数据，所以，推荐不要保存敏感的数据，比如信用卡号</p>
+<p>3、userData behavior 会跨 session 存储信息到存储区，这提供了动态的数据结构和比 cookie（一般 4KB） 更大的容量。</p>
+<p>4、如果设置 userData behavior 到 html、head、title 或者 style 对象上，当 save 和 load 方法被调用时会出错。如果必须设置到 style 中，可以设置内联或者文档头，例如：</p>
+<pre><code>&lt;style&gt;
+ .storeuserData {behavior:url(#default#userData);}
+&lt;/style&gt;
+</code></pre>
+<p>5、对于 userData behavior 来说 ID 是可选的，但是如果有，则会改善执行性能。</p>
+<p>6、userData 可以将数据以 XML 格式保存在客户端计算机上，一般保存在 C（WIN 系统盘）:\Documents and Settings\XXX\UserData\ 文件夹下。</p>
+<p>7、userData 数据一直存在，除非人为删除或者用脚本设置该数据的失效日期（expires）。</p>
+<h2>封装插件</h2>
+<p>核心代码如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">// 将 name 设置为 localStorage，则可以在ie6、7下，使用 localStorage 了
+// storageName，需要载入存储区的数据的名称
+// days，数据保存的天数
+(function(name, storageName, days){
+  if (window[name]) {
+    return;
+  }
+
+  var input = document.createElement('input');
+  input.type = 'hidden';
+  input.style.display = 'none';
+  input.addBehavior (&quot;#default#userData&quot;);
+
+  // 设置数据过期日期
+  var expires = new Date();
+  expires.setDate(expires.getDate() + days);
+  input.expires = expires.toUTCString();
+
+  (document.body || document.getElementsByTagName('body')[0]).appendChild(input);
+
+  window[name] = {
+    setItem: function(key, val) {
+      input.load(storageName);
+      input.setAttribute(key, val);
+      input.save(storageName);
+    },
+    getItem: function(key) {
+      input.load(storageName);
+      return input.getAttribute(key);
+    },
+    remove: function(key) {
+      input.load(storageName);
+      input.removeAttribute(key);
+      input.save(storageName);
+    }
+  };
+
+})('localStorage1', 'testStorage', 100);
+
+
+/*== 测试 ==*/
+var storage = window.localStorage1;
+storage.setItem('xxxx', '123'); // 注释掉这行，刷新页面试试
+alert(storage.getItem('xxxx'));
+
+// storage.remove('xxxx');
+// alert(storage.getItem('xxxx'));
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20151111/emmet2html/index.html" class="next">emmet语法生成html</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

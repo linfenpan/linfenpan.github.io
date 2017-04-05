@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>数据验证</title>
+    <meta name="description" content="数据验证最近做后台比较多，路七八糟的数据验证，弄得不厌其烦。SO，弄了个表单验证的玩意出来，达到快速，简介，不烦人的验证。下面看看，几种方式的数据验证，有什么不同。
+" />
+    <meta name="keywords" content="前端,表单数据验证,javascript,PipeValid" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html">博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            数据验证
+        </h1>
+        <div class="meta">
+            10-25,2015 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>最近做后台比较多，路七八糟的数据验证，弄得不厌其烦。SO，弄了个表单验证的玩意出来，达到快速，简介，不烦人的验证。</p>
+<p>下面看看，几种方式的数据验证，有什么不同。先有需要验证的数据:</p>
+<pre><code class="prettyprint linenums lang-html">&lt;form&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;
+    &lt;input type=&quot;text&quot; name=&quot;password&quot; /&gt;
+    &lt;input type=&quot;number&quot; name=&quot;age&quot; /&gt;
+
+    &lt;input type=&quot;checkbox&quot; name=&quot;sex&quot; value=&quot;0&quot; /&gt; 男
+    &lt;input type=&quot;checkbox&quot; name=&quot;sex&quot; value=&quot;1&quot; /&gt; 女
+
+    &lt;input type=&quot;text&quot; name=&quot;address&quot; /&gt;
+    &lt;input type=&quot;text&quot; name=&quot;phone&quot; /&gt;
+    &lt;input type=&quot;text&quot; name=&quot;qq&quot; /&gt;
+    &lt;input type=&quot;text&quot; name=&quot;email&quot; /&gt;
+    &lt;input type=&quot;text&quot; name=&quot;homePage&quot; /&gt;
+&lt;/form&gt;
+</code></pre>
+<p>咋眼一看，林林统统，需要验证的数据，有9个:</p>
+<ol>
+<li>name: 非空，最小3位，最大10位</li>
+<li>password: 非空，最小6为，最大20位</li>
+<li>age: 非空，整数</li>
+<li>sex: 非空</li>
+<li>address: 非空，最长50位</li>
+<li>phone: 可空，电话号码</li>
+<li>qq: 可空</li>
+<li>email: 可空，邮箱</li>
+<li>homePage: 可空，链接</li>
+</ol>
+<hr>
+<h1>传统</h1>
+<p>拿到这堆数据，那没啥好说的，逐个if/else判断吧:</p>
+<pre><code class="prettyprint linenums lang-javascript">if( name == &quot;&quot; ){
+    return &quot;name不能空&quot;;
+}else if( name.length &lt; 3){
+    return &quot;name不小于3&quot;;
+}else if( name.length &gt; 10 ){
+    return &quot;name不大于10&quot;;
+}
+....
+....
+每个条件一端判定
+
+</code></pre>
+<p>可以看出，如果再增加一个判定，则需要新的一个if，新一个return。如果只是一两个数据还好，但是，数据一多，简直就无法看下去了。</p>
+<p>而且，表单的数据，一般会有新增和修改两部分，而它们的数据验证，往往是大部分一致，少部分不一样。OMG，又得把密密麻麻的判断拷一份，差不多一式两份......</p>
+<p>简直就是灭绝人性的灾难啊...........................</p>
+<hr>
+<h1>策略模式</h1>
+<p>因为同一个属性，它的验证是一致的，所以，我们可以弄一份策略配置:</p>
+<pre><code class="prettyprint linenums lang-javascript">var obj = {
+    name: function(val){
+        if( val == &quot;&quot; ){
+            return &quot;name不能空&quot;;
+        }else if( val.length &lt; 3){
+            return &quot;name不小于3&quot;;
+        }else if( val.length &gt; 10 ){
+            return &quot;name不大于10&quot;;
+        }
+    },
+    password: function(val){
+        if( val == &quot;&quot; ){
+            return &quot;password不能空&quot;;
+        }else if(val.length &lt; 6){
+            return &quot;password不小于6位&quot;;
+        }else if(val.length &gt; 20){
+            return &quot;password不大于20位&quot;;
+        }
+    }
+    ...
+    ...
+}
+</code></pre>
+<p>辛辛苦苦，写好一份配置，然后，验证的时候，只需要提供下需要验证的数据，循环执行，则OK:</p>
+<pre><code class="prettyprint linenums lang-javascript">function valid(data){
+    for(var i in data){
+        var item = data[i], fn = obj[i]; // 获取 obj 中配置的策略
+        if( fn ){
+            // 执行策略中的函数
+            var res = fn[item];
+            // 如果有返回，就是产生了错误
+            if( res ){
+                return res;
+            }
+        }
+    }
+    // 平安的执行到这里
+    return true;
+}
+</code></pre>
+<p>策略好了，调用的工具方法也好了，剩下就是使用:</p>
+<pre><code class="prettyprint linenums lang-javascript">var res = valid({
+    name: &quot;名字&quot;,
+    password: &quot;密码...&quot;,
+    ...
+    ...
+});
+
+if( res === true ){
+    alert(&quot;验证通过&quot;);
+}else{
+    alert(&quot;验证错误:&quot; + res);
+}
+
+</code></pre>
+<p>做到了一次定义验证方法，重复利用。乍一看，也没啥问题。感觉验证代码，走到了代码界的巅峰，无可挑剔了，有木有？</p>
+<p>但再细看，某些地方，还是不尽人意的。如果，现在新增一个字段，博客首页:  blogPage，链接。<br>
+很简单的，在 obj 中，新增一个策略，验证链接。</p>
+<p>但是，我们之前不是已经有 homePage 策略，也有链接的验证吗？两块不是就重复了吗？<br>
+有强迫症的孩子，肯定就已经把 链接 验证代码，抽取成独立函数，供两边调用了。</p>
+<p>但随着 有着 公共验证代码 的 接口，越来越多呢？OMG，密密麻麻的公共验证代码，又是一个灾难......</p>
+<p>又或者，有一个新的表单，有着不同的数据呢？再定义一个策略对象？</p>
+<hr>
+<h1>配置策略</h1>
+<p>如果我们将策略模式，反其道而行，把验证的代码，变成策略对象，给需验证的数据，配置验证的策略。</p>
+<p>代码我懒，就不洗写了:</p>
+<pre><code class="prettyprint linenums lang-javascript">var obj = {
+    notEmpty: function(){...},
+    max: function(){...},
+    min: function(){...},
+    url: function(){...},
+    email: function(){...},
+    qq: function(){...},
+    number: function(){...},
+    ...
+    ...
+}
+</code></pre>
+<p>定义一个验证数据需要的函数的对象，然后，给每个数据，指定要验证的接口:</p>
+<pre><code class="prettyprint linenums lang-javascript">var checkObj = {
+    name: [&quot;notEmpty|不能空&quot;, &quot;max|10|最大10&quot;, &quot;min|3|最小3&quot;],
+    password: [&quot;notEmpty|不能空&quot;, &quot;max|20|最大10&quot;, &quot;min|6|最小6&quot;],
+    ...
+    ...
+}
+</code></pre>
+<p>使用上，也很简单，从 checkObj 中，找到验证的接口KEY，然后通过 obj[KEY] 找到真正的 验证 函数，进行验证。<br>
+至于如何实现，这里就呵呵了......</p>
+<p>将一个简单的验证，分为了3层，简直堪比 MVC 啊，有木有啊？<br>
+但是，挺欣赏这一种方式的，完全为了那种不能忍受重复代码的强迫症患者，量身订造的，有没有？</p>
+<hr>
+<h1>PipeValid.js</h1>
+<p>PipeValid.js，是根据配置策略的模式，编写了一个数据验证的工具库。其中，有这很强大的链式表达式语法，内置了常用的 数字、整数、非空、url、email、最小、最大的验证，支持拓展底层验证接口，或非接口验证。</p>
+<p>看两个小例子，感受一下PipeValid的魅力</p>
+<p>普通的验证：</p>
+<pre><code class="prettyprint linenums lang-javascript">var name = &quot;da宗熊&quot;;
+
+if( name == &quot;&quot;){
+    return &quot;名字不能为空&quot;;
+}else if(name.length &gt; 20){
+    return &quot;名字长度不能超过20&quot;;
+}else if(name.length &lt; 2){
+    return &quot;名字不能小于2位&quot;;
+}
+</code></pre>
+<p>而使用了 PipeValid 后，你只需</p>
+<pre><code class="prettyprint linenums lang-javascript">var valid = new PipeValid();
+valid.check(&quot;name&quot;)
+     .notEmpty(&quot;名字不能为空&quot;)
+     .max(20, &quot;名字长度不能超过20&quot;)
+     .min(2, &quot;名字不能小于2位&quot;);
+
+var res = valid.start({name: &quot;da宗熊&quot;});
+if(res.error){
+    alert(res.error);
+}
+</code></pre>
+<h2>优势</h2>
+<ol>
+<li>链式配置</li>
+</ol>
+<p>抛弃反锁的if、else的操作，使用链式定义，验证错误</p>
+<pre><code class="prettyprint linenums lang-javascript">valid.check(&quot;name&quot;).max(10, &quot;xx...&quot;);
+</code></pre>
+<ol start="2">
+<li>复用</li>
+</ol>
+<p>一次定义，重复使用，抛弃重复代码的烦恼</p>
+<pre><code class="prettyprint linenums lang-javascript">// 多个start，使用相同配置，进行多个验证
+var res1 = valid.start({name: &quot;da宗熊&quot;});
+var res2 = valid.start({name: &quot;da宗熊2&quot;});
+</code></pre>
+<ol start="3">
+<li>支持全数据验证</li>
+</ol>
+<p>遇到错误可立刻停止验证并抛出，也可以把所有数据全部验证后，把所有错误一次行抛出</p>
+<pre><code class="prettyprint linenums lang-javascript">// 验证传入的所有数据
+// 返回错误列表
+var resList = valid.start(true, {name: &quot;da棕熊&quot;, age: 20});
+</code></pre>
+<ol start="4">
+<li>内置常用验证器</li>
+</ol>
+<p>notEmpty: 非空<br>
+min: 最小值，接受两个参数 valid.min(int, string);<br>
+max: 最大值，接受两个参数 valid.max(int, string);<br>
+url: 链接<br>
+int: 整数<br>
+number: 数字<br>
+email: 邮件</p>
+<ol start="5">
+<li>良好的拓展</li>
+</ol>
+<p>可添加更多的链式验证函数，也可以自定义验证函数</p>
+<p>自定义链式函数：</p>
+<pre><code class="prettyprint linenums lang-javascript">// 定义新的验证函数
+valid.add(&quot;isBear&quot;, function(val){
+    return val === &quot;bear&quot;;
+});
+// 使用新的链式函数
+valid.check(&quot;bear&quot;).notEmpty(&quot;bear字段不能为空&quot;).isBear(&quot;bear必须是bear!&quot;);
+
+valid.start({bear:&quot;xx&quot;}); // ⇒ {attr: &quot;bear&quot;, error: &quot;bear必须是bear!&quot;}
+</code></pre>
+<p>新的isBear链式函数，被只能的添加了一个参数，用于处理错误信息</p>
+<p>自定义验证函数:</p>
+<pre><code class="prettyprint linenums lang-javascript">valid.check(&quot;min&quot;).define(function(val){
+   // this 对象，是 {min: 1}
+   return +val &gt;= 3;
+}, &quot;min最小是3&quot;);
+
+valid.start({min: 1}); // ==&gt; {attr: &quot;min&quot;, error: &quot;min最小是3&quot;}
+</code></pre>
+<ol start="6">
+<li>条件验证</li>
+</ol>
+<p>只有满足某种需求(判断)，才执行的验证</p>
+<pre><code class="prettyprint linenums lang-javascript">valid.check(&quot;url&quot;).notEmpty().then().url(&quot;输入必须是链接&quot;).end();
+
+valid.start({url: &quot;&quot;}); // ⇒ {attr: null, error: false}
+valid.start({url: &quot;xxyy&quot;}); // ⇒ {attr: &quot;url&quot;, error: &quot;输入必须是链接&quot;}
+</code></pre>
+<p>使用了then之后，之前添加的函数，则会转化为验证前的条件，而end则是then函数的结束。</p>
+<p>上面第一条语句，语意就变为这样子：<br>
+&quot;如果url的值不为空，则验证它是否链接；为空，则什么都不干。&quot;</p>
+<h1>最后</h1>
+<p>嗯，总结一下，使用 PipeValid.js，真心非常装逼。感觉整个人的逼格都高了，有木有啊？v 1.1.0 版本，就2.47K啊？</p>
+<p>补上链接:</p>
+<blockquote>
+<p>github: https://github.com/linfenpan/PipeValid</p>
+</blockquote>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20151118/fliter-grayscale/index.html" class="prev">Css3 grayscale 滤镜</a>
+                <a href="/20151025/yml-simple-introduce/index.html" class="next">YAML简单介绍</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

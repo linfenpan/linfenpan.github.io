@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>application/json方式提交</title>
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html">博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            application/json方式提交
+        </h1>
+        <div class="meta">
+            07-04,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>在请求中，常用的一个字段，叫做 Content-Type</p>
+<pre><code class="prettyprint linenums lang-javascript">$.ajax({
+  method: 'POST',
+  url: 'xxxx.action',
+  data: {},
+  contentType: 'application/x-www-form-urlencoded', // 默认form表单的key-value形式提交
+}).then(...);
+</code></pre>
+<p>其格式如下:</p>
+<pre><code class="prettyprint linenums lang-html">类型格式：type/subtype(;parameter)?
+type: 主类型，任意的字符串，如text，如果是*号代表所有；   
+subtype: 子类型，任意的字符串，如html，如果是*号代表所有；   
+parameter: 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。
+</code></pre>
+<p>例如:</p>
+<pre><code class="prettyprint linenums lang-html">Content-Type: text/html;charset:utf-8;
+</code></pre>
+<p>常见的媒体格式类型如下:</p>
+<ol>
+<li>text/html ： HTML格式</li>
+<li>text/plain ：纯文本格式</li>
+<li>text/xml ：  XML格式</li>
+<li>image/gif ：gif图片格式</li>
+<li>image/jpeg ：jpg图片格式</li>
+<li>image/png：png图片格式</li>
+</ol>
+<p>以 application 开头的媒体格式，有:</p>
+<ol>
+<li>application/xhtml+xml: XHTML格式</li>
+<li>application/xml: XML数据格式</li>
+<li>application/atom+xml: Atom XML聚合格式</li>
+<li>application/json: JSON数据格式</li>
+<li>application/pdf: pdf格式</li>
+<li>application/msword: Word文档格式</li>
+<li>application/octet-stream: 二进制流数据（如常见的文件下载）</li>
+<li>application/x-www-form-urlencoded ： <form encType=””>中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）</li>
+<li>multipart/form-data: 上传文件使用</li>
+</ol>
+<p>在jquery中，如果不设置 contentType 字段，默认为 application/x-www-form-urlencoded，<br>
+所有在 <code>data</code> 中的字段，将转为 key/value 的形式，所有 value，无论是什么类型，都会转为字符串。</p>
+<pre><code class="prettyprint linenums lang-javascript">$.ajax({
+  method: 'POST',
+  url: 'xxx.action',
+  data: { x: 1 },
+  contentType: 'application/x-www-form-urlencoded'
+}).then(...);
+</code></pre>
+<p>内容，将会在 <code>Form Data</code>中<br>
+<img src="./assert/form.png" alt="表单方式"></p>
+<p>如果 content-type 为 application/json，则会在 <code>Request Payload</code> 中</p>
+<pre><code class="prettyprint linenums lang-javascript">$.ajax({
+  method: 'POST',
+  url: 'xxx.action',
+  data: { x: 1 },
+  contentType: 'application/json'
+}).then(...);
+</code></pre>
+<p><img src="./assert/json.png" alt="json方式"></p>
+<p>之所以看到<code>x=1</code> 完全是因为jquery对json数据，做了一层转为，改改</p>
+<pre><code class="prettyprint linenums lang-javascript">$.ajax({
+  method: 'POST',
+  url: 'xxx.action',
+  data: JSON.stringify({ x: 1 }),
+  contentType: 'application/json'
+}).then(...);
+</code></pre>
+<p><img src="./assert/json2.png" alt="json方式"><br>
+以此方式提交，到后端时，能完整获取到json数据，包含正确的格式</p>
+<hr>
+<p>补充一点，<br>
+如何在后端，获取到正确的application/json数据呢？<br>
+可以使用 raw-body 这个包:</p>
+<pre><code class="prettyprint linenums lang-javascript">var getRawBody = require('raw-body')
+var http = require('http')
+
+var server = http.createServer(function (req, res) {
+  getRawBody(req)
+  .then(function (buf) {
+    res.statusCode = 200
+    res.end(buf.length + ' bytes submitted')
+  })
+  .catch(function (err) {
+    res.statusCode = 500
+    res.end(err.message)
+  })
+})
+
+server.listen(3000)
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20160928/reset-style/index.html" class="prev">移动端reset样式整理</a>
+                <a href="/20160630/1467272257483/index.html" class="next">es6修饰器-decorator</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

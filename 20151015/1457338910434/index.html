@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>FormData、XMLHttpRequest带进度的上传</title>
+    <meta name="description" content="前端文件上传的基本原理" />
+    <meta name="keywords" content="文件上传,进度" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item ">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item active">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/notelist/list_1.html">笔记</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            FormData、XMLHttpRequest带进度的上传
+        </h1>
+        <div class="meta">
+            10-15,2015 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>FormData 是 h5 的新对象，可以自由组装为一个新的表单对象，用于XMLHttpRequest的提交。</p>
+<p>此对象非常简单，只有一个 append 方法:</p>
+<pre><code class="prettyprint linenums lang-javascript">var fd = new FormData();
+fd.append(&quot;name&quot;, &quot;da宗熊&quot;);
+// 或
+fd.append(&quot;file&quot;, file对象);
+</code></pre>
+<p>而在 XMLHttpRequest对象中，也新增了 upload 对象:</p>
+<pre><code class="prettyprint linenums lang-javascript">var xhr = new XMLHttpRequest();
+var upload = xhr.uplad;
+</code></pre>
+<p>其中 upload 对象，有着好几个 onXXX 的方法:<br>
+<img src="./images/upload-obj.png" alt="upload对象"></p>
+<p>也可以通过 addEventListener，添加相关的监听。<br>
+而需要添加 进度 的监听，则是这样子:</p>
+<pre><code class="prettyprint linenums lang-javascript">xhr.upload.addEventListener(&quot;progress&quot;, function(event){
+    // event 中，包含了 total 总字节，loaded 已经上传的字节
+}, false);
+</code></pre>
+<hr>
+<p>对于 XMLHttpRequest 对象，有几个 方法，也是平时没怎么留意的:<br>
+<img src="./images/xhr.png" alt="xhr方法"></p>
+<p>其中:</p>
+<p>1、abort 取消请求</p>
+<pre><code class="prettyprint linenums lang-javascript">xhr.onabort = function(){
+   // 取消的回调
+};
+// 取消当前请求
+xhr.abort();
+</code></pre>
+<p>2、error 请求发生错误</p>
+<p>3、load 请求完成</p>
+<p>4、loadend 请求完毕，无论成功还是失败</p>
+<p>5、progress 请求的进度，但是没法获取 total，只有loaded的数据，要完整进度，还是需要 xhr.upload.onprogress</p>
+<p>6、readyState  请求的状态</p>
+<pre><code class="prettyprint linenums lang-text">0 --&gt; 还没调用send
+1 --&gt; 已经调用send，正在开始发送
+2 --&gt; send方法执行完毕，已经收到了全部需要发送的内容
+3 --&gt; 收到响应，并且在解析响应的内容
+4 --&gt; 响应解析完毕，客户端可以使用了
+</code></pre>
+<p>7、status 请求的返回码</p>
+<pre><code class="prettyprint linenums lang-text">200 --&gt; 成功
+302 --&gt; 没有修改
+500 --&gt; 服务器错误
+301 --&gt; 重定向
+404 --&gt; 找不到
+</code></pre>
+<p>一般而言，判定请求是否完成，需要这样子：</p>
+<pre><code class="prettyprint linenums lang-javascript">xhr.onreadystatechange = function(){
+   if(xhr.readyState == 4 &amp;&amp; xhr.status == 200){
+       console.log(&quot;请求完成&quot;, xhr.responseText);
+   }
+};
+</code></pre>
+<p>8、withCredentials 如果是跨域请求，是否带上cookie信息，默认是不带上</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20151015/1457338275156/index.html" class="prev">监听文件[夹]更变</a>
+                <a href="/20150920/1457341771228/index.html" class="next">样式裁剪</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

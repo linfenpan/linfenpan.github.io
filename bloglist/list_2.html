@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>博客列表- by da宗熊</title>
+    <meta name="description" content="积累的技术经验，内容涉及javascript/css/html等等，甚至超出了一个前端该理解的范畴" />
+    <meta name="keywords" content="博客,列表,da宗熊" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/list.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<div class="lstContent container">
+        <div class="leftCtn">
+            <h1 class="bread">
+                <span class="br-title">博客</span>
+                <span class="br-sub">写博客，是一种积累，一种习惯</span>
+            </h1>
+            <!-- 文章内容 -->
+            <section class="articleList">
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20151025/yml-simple-introduce/index.html">YAML简单介绍</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            简介YAML[ Yet Another Markup Language ]英译过来，就是“另一门标志语言”。它是一种直观的，容易被人类阅读，以及被机器识别的数据格式。 它类似于XML和，但语法上，要比前者简洁很多。
+
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20151025/yml-simple-introduce/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>10-25,2015</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20151025/javascript-regexp-learn/index.html">[入门]javascript正则表达式</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            正则表达式，又称正规表示法。它使用单个字符串来描述、匹配一系列符合某个规律的字符串。在很多文本编辑器中，正则表达式用于检索、替换某些符合某种规则的文本。<br/> 本文主要讲述 javascript 中，所有设计正则的方法，以及正则的一些语法，和注意事项。
+
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20151025/javascript-regexp-learn/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>10-25,2015</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+                <!-- 分页内容 -->
+<div class="pagination">
+    <a href="/bloglist/list_1.html" class="first">首页</a>
+                <a href="/bloglist/list_1.html">1</a>
+                    <a href="/bloglist/list_2.html" class="active">2</a>
+        
+
+
+    <a href="/bloglist/list_2.html" class="last">尾页</a>
+</div>
+<!-- END 分页内容 -->
+
+        </div>
+
+        <div class="rightCnt">
+            <div class="section">
+                <p class="hd">
+                    站点相关技术
+                </p>
+                        <ul class="cnt">
+                            <li>
+                                <a href="https://github.com/linfenpan/" target="_blank">个人github地址</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/linfenpan/projectM/" target="_blank">脚本模块加载</a>
+                            </li>
+                            <li>
+                                <a href="http://mozilla.github.io/nunjucks/" target="_blank">nunjucks-功能强大的模板引擎</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/jonschlinkert/remarkable" target="_blank">markdown编译脚本-remarkable</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/google/code-prettify" target="_blank">prettify-页面语法高亮JS库</a>
+                            </li>
+                            <li>
+                                <a href="https://swiftype.com/" target="_blank">搜索引擎接入</a>
+                            </li>
+                        </ul>
+            </div>
+            <div class="section">
+                <p class="hd">
+                    宗熊的感想
+                </p>
+                        <div class="cnt">熊生，充满了难以抉择的事情
+</div>
+            </div>
+        </div>
+</div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+
+</body>
+</html>

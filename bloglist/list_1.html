@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>博客列表- by da宗熊</title>
+    <meta name="description" content="积累的技术经验，内容涉及javascript/css/html等等，甚至超出了一个前端该理解的范畴" />
+    <meta name="keywords" content="博客,列表,da宗熊" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/list.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<div class="lstContent container">
+        <div class="leftCtn">
+            <h1 class="bread">
+                <span class="br-title">博客</span>
+                <span class="br-sub">写博客，是一种积累，一种习惯</span>
+            </h1>
+            <!-- 文章内容 -->
+            <section class="articleList">
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20161209/1481251257718/index.html">元素自动进入屏幕可是区域</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            介绍dom的scrollIntoView方法
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20161209/1481251257718/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>12-09,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20161027/full-screen-switch/index.html">全屏切换笔记</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            移动端经常有全屏切换的需求，推荐一个小巧的插件 slip.js
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20161027/full-screen-switch/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>10-27,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20160928/reset-style/index.html">移动端reset样式整理</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            整理一下移动端，常用的 reset 样式，方便以后使用[随时更新哦~，有疑问的同学，请评论]
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20160928/reset-style/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>09-28,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20160704/1467600220842/index.html">application/json方式提交</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20160704/1467600220842/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>07-04,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20160630/1467272257483/index.html">es6修饰器-decorator</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="poster" style="background-image:url(/20160630/1467272257483/assert/poster.png)"></div>
+                        <div class="desc">
+                            修饰器（Decorator）是一个函数，用来修改类的行为。这是ES7的一个提案，目前Babel转码器已经支持
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20160630/1467272257483/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>06-30,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20160405/1459846164133/index.html">createEvent讲解</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            讲解document.createEvent的用法，一些常用事件的配置、使用，以及以往自己理解的误区
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20160405/1459846164133/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>04-05,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20160215/wap-page/index.html">手机页面方案之-等比缩放</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="poster" style="background-image:url(/20160215/wap-page/assert/poster.jpg)"></div>
+                        <div class="desc">
+                            介绍移动端页面等比缩放的几种常用方法，包括所有字体和图片
+
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20160215/wap-page/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>02-15,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20160114/higthcharts/index.html">highcharts使用学习</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            Highcharts是一个非常流行，界面美观的javascript图标库。<br/> 目前支持直线图、曲线图、面积图、柱状图、饼图、散点图等多达18种不同类型的图表[4.2.1版本]。<br/> Highcharts支持目前的所有现代浏览器，包括IE6+、iPhone/iPad、Android等。<br/> 它在标准浏览器中，使用SVG技术渲染图片，在遗留的IE浏览器中，使用VML技术来绘图。
+
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20160114/higthcharts/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>01-14,2016</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20151118/fliter-grayscale/index.html">Css3 grayscale 滤镜</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="desc">
+                            兼容全浏览器的图片变灰操作，通过css3 filter、ie 滤镜、svg背景等方法，达到全浏览图片变灰操作。 使用脚本，对不支持IE滤镜，也不支持css3滤镜的情况，进行处理。
+
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20151118/fliter-grayscale/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>11-18,2015</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="item">
+                    <h2 class="title">
+                        <a href="/20151025/pipevalid-inctroduce/index.html">数据验证</a>
+                    </h2>
+                    <div class="cnt">
+                        <div class="poster" style="background-image:url(/20151025/pipevalid-inctroduce/assert/poster.png)"></div>
+                        <div class="desc">
+                            数据验证最近做后台比较多，路七八糟的数据验证，弄得不厌其烦。SO，弄了个表单验证的玩意出来，达到快速，简介，不烦人的验证。下面看看，几种方式的数据验证，有什么不同。
+
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <a href="/20151025/pipevalid-inctroduce/index.html" class="more">阅读全文 →</a>
+                        <div class="info">
+                            <span>10-25,2015</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+                <!-- 分页内容 -->
+<div class="pagination">
+    <a href="/bloglist/list_1.html" class="first">首页</a>
+                <a href="/bloglist/list_1.html" class="active">1</a>
+                    <a href="/bloglist/list_2.html">2</a>
+        
+
+
+    <a href="/bloglist/list_2.html" class="last">尾页</a>
+</div>
+<!-- END 分页内容 -->
+
+        </div>
+
+        <div class="rightCnt">
+            <div class="section">
+                <p class="hd">
+                    站点相关技术
+                </p>
+                        <ul class="cnt">
+                            <li>
+                                <a href="https://github.com/linfenpan/" target="_blank">个人github地址</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/linfenpan/projectM/" target="_blank">脚本模块加载</a>
+                            </li>
+                            <li>
+                                <a href="http://mozilla.github.io/nunjucks/" target="_blank">nunjucks-功能强大的模板引擎</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/jonschlinkert/remarkable" target="_blank">markdown编译脚本-remarkable</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/google/code-prettify" target="_blank">prettify-页面语法高亮JS库</a>
+                            </li>
+                            <li>
+                                <a href="https://swiftype.com/" target="_blank">搜索引擎接入</a>
+                            </li>
+                        </ul>
+            </div>
+            <div class="section">
+                <p class="hd">
+                    宗熊的感想
+                </p>
+                        <div class="cnt">熊生，充满了难以抉择的事情
+</div>
+            </div>
+        </div>
+</div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+
+</body>
+</html>

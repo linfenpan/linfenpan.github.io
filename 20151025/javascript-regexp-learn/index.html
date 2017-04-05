@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>[入门]javascript正则表达式</title>
+    <meta name="description" content="正则表达式，又称正规表示法。它使用单个字符串来描述、匹配一系列符合某个规律的字符串。在很多文本编辑器中，正则表达式用于检索、替换某些符合某种规则的文本。<br/> 本文主要讲述 javascript 中，所有设计正则的方法，以及正则的一些语法，和注意事项。
+" />
+    <meta name="keywords" content="javascript,正则,入门" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html">博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            [入门]javascript正则表达式
+        </h1>
+        <div class="meta">
+            10-25,2015 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>正则表达式，又称正规表示法。它使用单个字符串来描述、匹配一系列符合某个规律的字符串。<br>
+在很多文本编辑器中，正则表达式用于检索、替换某些符合某种规则的文本。</p>
+<hr>
+<h2>声明正则</h2>
+<p>在 js 中，声明正则，有两种方式:</p>
+<ol>
+<li>new 方式</li>
+</ol>
+<pre><code class="prettyprint linenums lang-javascript">var reg = new RegExp(&quot;\\d&quot;, &quot;g&quot;);   // ===&gt; /\d/g
+</code></pre>
+<ol start="2">
+<li>字面量定义</li>
+</ol>
+<pre><code class="prettyprint linenums lang-javascript">var reg = /\d/g;
+</code></pre>
+<hr>
+<h2>正则 at 字符串</h2>
+<p>在 js 中，字符串有两个与正则相关的方法，分别是 replace 和 match</p>
+<p>1、replace</p>
+<p>用于替换字符串的特定字符，经常用法有:</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;我是:name&quot;;
+str.replace(&quot;name&quot;, &quot;da宗熊&quot;); // ⇒ 我是:da宗熊
+</code></pre>
+<p>然而，replace的第1个参数，是可以为正则表达式的，同样的替换，可以写为:</p>
+<pre><code class="prettyprint linenums lang-javascript">str.replace(/name/, &quot;da宗熊&quot;); // ⇒ 我是:da宗熊
+</code></pre>
+<p>乍一看，好像没啥区别，但是如果遇上这种替换，有怎办呢?</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;name喜欢吃雪糕，name也很喜欢看漫画&quot;;
+</code></pre>
+<p>需要把 name 替换为 &quot;da宗熊&quot;，那不实用正则，我们需要这样写:</p>
+<pre><code class="prettyprint linenums lang-javascript">str.replace(&quot;name&quot;, &quot;da宗熊&quot;).replace(&quot;name&quot;, &quot;da宗熊&quot;); // ⇒ 需要执行两次 replace 才能得到结果
+</code></pre>
+<p>而使用正则，之后:</p>
+<pre><code class="prettyprint linenums lang-javascript">str.replace(/name/g, &quot;da宗熊&quot;); // ⇒ 只需执行1次，就能把两个 name 替换掉
+</code></pre>
+<p>PS: 关于replace的更高级用法，后面会继续讲到</p>
+<hr>
+<p>2、match</p>
+<p>这个函数，只接受1个正则作为参数:</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;123 abc 456 你好&quot;;
+str.match(/\d+/);  // ⇒ [&quot;123&quot;]
+str.match(/\d+/g); // ⇒ [&quot;123&quot;, &quot;456&quot;]
+str.match(/x+/); // ⇒ null
+</code></pre>
+<p>match能在字符串中，找出所有符合正则描述的匹配字符串数组，如果找不到匹配的，则返回 null。</p>
+<p>PS：这个方法，用不到正则的捕获组</p>
+<hr>
+<h2>字符串 at 正则</h2>
+<p>正则中，跟字符串打交道的，有两个方法，分别是 test 和 exec</p>
+<p>1、test</p>
+<p>只有 1 个作用，检测字符串，是否符合正则所描述的规则</p>
+<pre><code class="prettyprint linenums lang-javascript">var reg = /\d/;
+reg.test(&quot;123&quot;);  // ⇒ true
+reg.test(&quot;abc123def&quot;); // ⇒ true
+reg.test(&quot;abc&quot;); // ⇒ false
+</code></pre>
+<p>PS：捕获组对于此方法，也是无用</p>
+<hr>
+<p>2、exec</p>
+<p>该方法每次执行，都返回当前正则匹配到的子字符串，直到返回 null，则匹配完成，再也找不到下一个满足该正则的 子字符串。</p>
+<pre><code class="prettyprint linenums lang-javacript">var reg = /\d+/g;    // 如果不带上 g[全局标志]，则每次执行，都会重头开始匹配
+var str = &quot;123 456 789&quot;;
+reg.exec(str);  // ⇒ [&quot;123&quot;]
+reg.exec(str);  // ⇒ [&quot;456&quot;]
+reg.exec(str);  // ⇒ [&quot;789&quot;]
+reg.exec(str);  // ⇒ null
+</code></pre>
+<p>在这里，捕获组，会跟随每次exec返回:</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;123 456 789&quot;;
+var reg = /(\d+)\s+(\d+)/g;
+reg.exec(str);  // ⇒ [&quot;123 456&quot;, &quot;123&quot;, &quot;456&quot;]
+reg.exec(str);  // ⇒ null
+</code></pre>
+<hr>
+<h2>正则入门</h2>
+<p>介绍几个常用术语及相关的使用</p>
+<p>1、元字符<br>
+用于构建正则表达式的符号，常用的有:</p>
+<table>
+<thead>
+<tr><th style="text-align:center">元字符</th><th style="text-align:left"> </th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">.</td><td style="text-align:left">匹配任何字符，换行除外</td></tr>
+<tr><td style="text-align:center">\d</td><td style="text-align:left">0-9任何数字</td></tr>
+<tr><td style="text-align:center">\w</td><td style="text-align:left">[0-9A-Za-z_]</td></tr>
+<tr><td style="text-align:center">\s</td><td style="text-align:left">匹配空格、制表符、换页符等，[\f\n\r\t\v]</td></tr>
+<tr><td style="text-align:center">\b</td><td style="text-align:left">匹配单词的边界，边界=空格、换行、开始、结束位置</td></tr>
+<tr><td style="text-align:center">^</td><td style="text-align:left">字符串的开头</td></tr>
+<tr><td style="text-align:center">$</td><td style="text-align:left">字符串的结尾</td></tr>
+<tr><td style="text-align:center">\</td><td style="text-align:left"></td><td>提供可选择的子匹配模式</td></tr>
+</tbody>
+</table>
+<hr>
+<p>2、限定符<br>
+限制子模式出现在正则表但是的次数。</p>
+<table>
+<thead>
+<tr><th style="text-align:center">限定符</th><th style="text-align:left"> </th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">*</td><td style="text-align:left">0次或多次,e.g.  /\d*/</td></tr>
+<tr><td style="text-align:center">+</td><td style="text-align:left">1次或多次,e.g.  /\d+/</td></tr>
+<tr><td style="text-align:center">?</td><td style="text-align:left">1次或0次,e.g.   /\d?/</td></tr>
+<tr><td style="text-align:center">{n}</td><td style="text-align:left">出现n次</td></tr>
+<tr><td style="text-align:center">{,n}</td><td style="text-align:left">最多出现n次</td></tr>
+<tr><td style="text-align:center">{n,}</td><td style="text-align:left">最少出现n次</td></tr>
+<tr><td style="text-align:center">{n,m}</td><td style="text-align:left">至少出现n次，最多出现m次</td></tr>
+</tbody>
+</table>
+<hr>
+<p>3、字符类<br>
+以方括号括在一起的表达式:</p>
+<pre><code class="prettyprint linenums lang-javascript">/[0-9]/ 匹配 0 到 9 间的字符
+/[a-zA-Z]/ 匹配任意字母
+/[^0-9]/ 不等于0到9的其它字符
+</code></pre>
+<hr>
+<p>4、修饰符<br>
+修饰符，用于表示正则该如何去匹配</p>
+<table>
+<thead>
+<tr><th style="text-align:center">修饰符</th><th style="text-align:left"> </th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">g</td><td style="text-align:left">e.g. /\d+/g，全局匹配，此正则从整个字符串中寻找</td></tr>
+<tr><td style="text-align:center">i</td><td style="text-align:left">忽略字母大小写</td></tr>
+<tr><td style="text-align:center">m</td><td style="text-align:left">多行匹配</td></tr>
+</tbody>
+</table>
+<hr>
+<p>5、捕获组<br>
+在正则中，一般情况下，每出现一对括号，就是一对捕获组。如:</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;abc 123 hij&quot;;
+var reg = /\s(\d+)\s/;
+</code></pre>
+<p>其中，reg中，有1个捕获组，在javascript中，可通过 RegExp.$1，RegExp.$2 .... RegExp.$9，最多可捕获9个组。</p>
+<p>如:</p>
+<pre><code class="prettyprint linenums lang-javascript">reg.exec(str);
+// 或 reg.test(str);
+// 得到的结果，都为
+RegExp.$1 === '123'
+</code></pre>
+<p>其中，捕获数组，也可以用在 string.replace 上。</p>
+<pre><code class="prettyprint linenums lang-javascript">str.replace(/(\s)(\d+)(\s)/, &quot;-$2-&quot;); // ⇒ abc-123-hij
+
+// 或者
+// 有多少个匹配组，后面就有多少个参数
+str.replace(/(\s)(\d+)(\s)/, function(str, s1, num, s2){
+    // str 是这次匹配的字符串 ⇒ &quot; 123 &quot;
+    return &quot;-&quot; + num + &quot;-&quot;;
+}); // ⇒ abc-123-hij
+</code></pre>
+<p>如果只想做匹配，不想捕获，可以这样定义模式:</p>
+<pre><code class="prettyprint linenums lang-javascript">var reg = /(?:\s)(\d+)(\s)/;
+reg.test(str);
+// ⇒ RegExp.$1 === &quot;123&quot;
+</code></pre>
+<p>(?:某种模式定义)，代表着非捕获组，上面正则中，第1个捕获到的 \s，不放入捕获组中。</p>
+<hr>
+<p>6、[非]贪婪模式</p>
+<p>正则表达式，默认是贪婪模式进行匹配。何为贪婪模式？其实，就是每个模式，尽量多的去匹配字符。</p>
+<p>如:</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;aabaabaab&quot;;
+/\w*b/.exec(str); // 匹配的是 ⇒ [&quot;aabaabaab&quot;]
+</code></pre>
+<p>其中，\w* 尽量去匹配更多的字符，但是如果我们想遇到第1个b的时候，就匹配成功呢？这时候，就需要使用正则的非贪婪模式:</p>
+<pre><code class="prettyprint linenums lang-javascript">/\w*?b/.exec(str); // 匹配的是 ⇒ [&quot;aab&quot;]
+</code></pre>
+<p>非贪婪模式，就是在相应的限定符后，添加 “?” 号，告诉正则，尽可能的少匹配。</p>
+<hr>
+<p>7、正向肯定[否定]预查</p>
+<p>在javascript中，声明反向肯定[否定]预查，是会报错的，不知道是不是我玩弄的方式不正确。</p>
+<table>
+<thead>
+<tr><th style="text-align:center"> </th><th style="text-align:left">模式</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">正向肯定预查</td><td style="text-align:left">(?=pattern)</td></tr>
+<tr><td style="text-align:center">正向否定查询</td><td style="text-align:left">(?!pattern)</td></tr>
+</tbody>
+</table>
+<p>举个例子:</p>
+<pre><code class="prettyprint linenums lang-javascript">// 代表 abc 后，有 d|e|f 的
+/abc(?=d|e|f)/.test(&quot;abcd&quot;); // true
+/abc(?=d|e|f)/.test(&quot;abck&quot;); // false
+
+// 代表 abc 后，不能有 d|e|f 的
+/abc(?!d|e|f)/.test(&quot;abcd&quot;); // false
+/abc(?!d|e|f)/.test(&quot;abck&quot;); // true
+</code></pre>
+<hr>
+<p>END</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20151025/yml-simple-introduce/index.html" class="prev">YAML简单介绍</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

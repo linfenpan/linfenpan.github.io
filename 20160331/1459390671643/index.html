@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>mongodb学习-01</title>
+    <meta name="description" content="mongodb简单学习 01" />
+    <meta name="keywords" content="mongodb,增删查该" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item ">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item active">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/notelist/list_1.html">笔记</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            mongodb学习-01
+        </h1>
+        <div class="meta">
+            03-31,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>mongodb 是以文件，进行数据存储的数据库。<br>
+安装完成后，需要在C盘，亲自建立data/db文件夹【这个略坑】，才能正常使用。</p>
+<p>之后，在安装 Robomongo【一款mongodb的图形化软件】，进行图形化的处理。<br>
+在控制台运行 mongod，正式启动db。</p>
+<p><img src="./assert/robomongo.png" alt="robomongo登录"></p>
+<p>填好信息，connect进入。</p>
+<hr>
+<h2>插入操作</h2>
+<p>插入单条数据</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.insert({
+        name: &quot;da宗熊&quot;,
+        age: 11,
+        detail: [&quot;strong&quot;, &quot;smart&quot;]
+    });
+</code></pre>
+<p>其中 <code>db.users</code> 是使用当前库的 users 集合</p>
+<p>插入多条数据</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.insert([
+        { name: &quot;小亮&quot;, age: 18, status: 0 },
+        { name: &quot;宗熊&quot;, age: 19, status: 1 }
+    ]);
+</code></pre>
+<p>集合对插入的数据，是没有限制的，就是前后插入的两条数据，格式都不一致，也是没问题的。<br>
+不知这种难题，有木有破解方案呢？</p>
+<hr>
+<h2>查询操作</h2>
+<p>查找所有数据</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find();
+</code></pre>
+<p>查找特定数据</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find(
+        { age: {$gt: 16} },
+        { name: 1, status: 1 }
+    );
+</code></pre>
+<p>查询 age 大于 16 的所有数据，并且只返回其中的 <code>name/status/_id</code> 字段。<br>
+木有错，所有新增的数据，都会自带一个 <code>_id</code> 的字段，用于标志数据的唯一性。<br>
+<img src="./assert/find.png" alt="搜索结果"></p>
+<p>搜索接受两个参数，第1个，为条件【类似where】，第2个为限制【类似返回数据列，1为返回，0不返回】。<br>
+“限制”中，除了 <code>_id</code> 其它的数据，禁止 0 和 1 混合使用。<br>
+下面的查询，报错:</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find(
+        { age: {$gt: 10} },
+        { name: 1, status: 0 }
+    );
+</code></pre>
+<p>实际也很好理解，有“限制”时，不写的，都没有返回，即默认是0，但是<code>_id</code> 默认则是 1<br>
+但上面也说了 <code>_id</code> 是个例外，下面例子则没问题:</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find(
+        { age: {$gt: 10} },
+        { name: 1, _id: 0 }
+    );
+</code></pre>
+<p>注:<br>
+搜索，设置可以查找对象的某个属性: <code>{ &quot;data.key&quot;: {$gt: 1} }</code></p>
+<hr>
+<h2>查询限制</h2>
+<p>查询操作，可跟很多后续的操作一起使用</p>
+<p>1、返回条数</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find({ age: {$gt: 10} }).limit(2);
+</code></pre>
+<p>limit 去最前面的两条数据</p>
+<p>2、排序</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find().sort({ age: 1 });
+</code></pre>
+<p>sort 排序操作，<code>age: 1</code> 以年龄从小到大进行排序，-1则是从大到小进行排序</p>
+<p>3、游标</p>
+<pre><code class="prettyprint linenums lang-sql">    var cursor = db.users.find();
+    var first = cursor.hasNext() ? cursor.next() : null;
+    first;
+    cursor.objsLeftInBatch();
+</code></pre>
+<p>将会打印出第1条找到的数据，以及在游标中，剩下的数据量。<br>
+<img src="./assert/cursor.png" alt="游标"></p>
+<p>4、查询优化</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.createIndex({ status: 1 });
+</code></pre>
+<p>上述语句，创建了一个以 type 升序的索引。<br>
+如果数据有某种可用于分块的数据，创建索引后，可提高搜索效率。<br>
+注意，索引创建一次即可，不用每次查询都创建。</p>
+<p>有两种情况，创建索引，是毫无用处的:</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.createIndex({ list: 1 });
+    db.users.createIndex({ &quot;users.login&quot;: 1 });
+</code></pre>
+<p>其中，如果 list 是数组，users 是个对象，则创建索引，毫无意义。</p>
+<hr>
+<h2>更新数据</h2>
+<pre><code class="prettyprint linenums lang-sql">    db.users.update(
+        { age: {$gt: 10} },
+        { $set: {status: 2} }
+    );
+</code></pre>
+<p>年龄大于10的1条数据，把 status 更新为2，没错，仅1条数据:<br>
+<img src="./assert/update.png" alt="更新"></p>
+<p>如果要更新多条数据，可设置第3个参数为 <code>{multi: true}</code></p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.update(
+        { age: {$gt: 10} },
+        { $set: {status: 2} },
+        { multi: true }
+    );
+</code></pre>
+<p>如果要更新某一条特定数据，可如此操作:</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.update(
+        { name: &quot;宗熊&quot; },
+        { name: &quot;da宗熊&quot;, age: 20, status: 3, weight: 85 }
+    );
+</code></pre>
+<p><img src="./assert/update-data.png" alt="更新数据列"></p>
+<p>可以看到，旧的数据中，甚至连 <code>weight</code> 也插入了。<br>
+感觉，就更 javascript 一样，保存的，其实就是个对象吧？</p>
+<hr>
+<h2>删除数据</h2>
+<p>删除和更新的策略，恰好相反。<br>
+删除默认是把全部选中的数据删除，而更新的默认，却只处理选中的第1条数据。</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.remove(
+        { age: {$gt: 10} }
+    );
+</code></pre>
+<p>如果只想删除1条数据，可设置第2个参数，为 <code>{justOne: true}</code></p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.remove(
+        { age: {$gt: 10} },
+        { justOne: true }
+    );
+</code></pre>
+<hr>
+<h2>分页</h2>
+<p>分页操作，需要 limit 和 skip 进行配合。<br>
+简单的分页:</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find().sort({ age: 1 }).skip(0).limit(2);
+</code></pre>
+<p>查找第1页数据，而第二页，也以此类推</p>
+<pre><code class="prettyprint linenums lang-sql">    db.users.find().sort({ age: 1 }).skip(2).limit(2);
+</code></pre>
+<p>对于数据量少的网站，skip 可满足，但是 skip 效率并不高的说。<br>
+更优的方式，应该是记住上一次查询的末尾数据，下次查询以上一次末尾数据作为条件，进行查询。</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20160601/1464746376683/index.html" class="prev">node.js-crypto板块使用</a>
+                <a href="/20160318/1458271490611/index.html" class="next">css3之clip-path</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+/* By da宗熊 2016-10-19 */
+/**
+* @description: 文章内容
+* @author: da宗熊
+* @update: 2015-11-23 17:16
+*/
+/** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
+.article {
+  margin: 25px auto 15px auto;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.article .bread {
+  padding: 15px;
+  font-size: 1.4rem;
+  color: #635E5E;
+}
+.article .bread a {
+  margin: 0 5px;
+  color: #654646;
+  -webkit-transition: color .3s ease;
+  transition: color .3s ease;
+}
+.article .bread a:hover {
+  color: #FF706C;
+  text-decoration: none;
+}
+.article .bread span {
+  color: #654646;
+  margin: 0 5px;
+}
+.article .bread .sep {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .article .bread {
+    padding: 15px 10px;
+  }
+  .article pre {
+    white-space: pre-wrap;
+  }
+}
+.articleCnt {
+  padding: 20px 0;
+  background: #fff;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.articleCnt .title {
+  padding: 0 15px;
+  color: #2D3642;
+  font-size: 2.75rem;
+}
+.articleCnt .meta {
+  padding: 1rem 15px 0 15px;
+  font-size: 1.2rem;
+  color: #999;
+}
+.articleCnt .meta .sep {
+  margin: 0 5px;
+}
+.articleCnt .meta .tag {
+  float: right;
+  max-width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.articleCnt .meta .tag span {
+  margin-left: 5px;
+  color: #FF706C;
+}
+.articleCnt .meta:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.articleCnt .content {
+  margin: 1rem 15px 0 15px;
+  padding: 1rem 0;
+  border-top: 3px double #EEE;
+  line-height: 200%;
+  font-size: 1.4rem;
+  color: #555;
+}
+.articleCnt .content code {
+  padding: 2px 5px;
+  background: #f7f7f9;
+  border-radius: 2px;
+  color: #d14;
+}
+.articleCnt .content img {
+  max-width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.articlePager {
+  padding: 10px 15px;
+  font-size: 1.3rem;
+  background: #2D3642;
+}
+.articlePager a {
+  position: relative;
+  max-width: 30%;
+  padding: 15px 20px;
+  color: #fff;
+  background: #212831;
+  border-radius: 3px;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.articlePager a:hover {
+  text-decoration: none;
+  background: #FF706C;
+}
+.articlePager .prev {
+  float: left;
+}
+.articlePager .prev:before {
+  content: "« ";
+}
+.articlePager .next {
+  float: right;
+}
+.articlePager .next:after {
+  content: " »";
+}
+.articlePager:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+.markdown {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  /* Put a border around prettyprinted code snippets. */
+  /* Specify class=linenums on a pre to get line numbering */
+}
+.markdown h1 {
+  margin: 1em 0;
+  font-size: 2.52rem;
+}
+.markdown h2 {
+  margin: 1em 0;
+  font-size: 2.17rem;
+}
+.markdown h3 {
+  margin: 1em 0;
+  font-size: 1.82rem;
+}
+.markdown h4 {
+  margin: 1em 0;
+  font-size: 1.47rem;
+}
+.markdown h5 {
+  margin: 1em 0;
+  font-size: 1.12rem;
+}
+.markdown h6 {
+  margin: 1em 0;
+  font-size: 0.77rem;
+}
+.markdown hr {
+  margin: 2rem 0;
+  border: none;
+  height: 1px;
+  background: #ddd;
+}
+.markdown p {
+  margin: 1rem 0;
+}
+.markdown a {
+  color: #4fa1db;
+  -webkit-transition: color .3s ease;
+  transition: color .3s ease;
+}
+.markdown a:hover {
+  color: #216da3;
+  text-decoration: underline;
+}
+.markdown table {
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #eee;
+}
+.markdown th,
+.markdown td {
+  padding: 8px 16px;
+  line-height: 22px;
+  vertical-align: top;
+  border: 1px solid #eee;
+}
+.markdown ol {
+  margin-left: 30px;
+}
+.markdown ol li {
+  list-style: decimal;
+}
+.markdown ul {
+  margin-left: 30px;
+}
+.markdown ul li {
+  list-style: disc;
+}
+.markdown pre {
+  display: block;
+  overflow: auto;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+}
+.markdown .pln {
+  color: #48484C;
+}
+.markdown .str {
+  color: #DD1144;
+}
+.markdown .kwd {
+  color: #C18E57;
+}
+.markdown .com {
+  color: #208E12;
+}
+.markdown .typ {
+  color: teal;
+}
+.markdown .lit {
+  color: #195F91;
+}
+.markdown .pun {
+  color: #93A1A1;
+}
+.markdown .opn {
+  color: #93A1A1;
+}
+.markdown .clo {
+  color: #93A1A1;
+}
+.markdown .tag {
+  color: #008;
+}
+.markdown .atn {
+  color: teal;
+}
+.markdown .atv {
+  color: #DD1144;
+}
+.markdown .dec {
+  color: teal;
+}
+.markdown .var {
+  color: teal;
+}
+.markdown .fun {
+  color: #DC322F;
+}
+.markdown .prettyprint {
+  display: block;
+  padding: 10px 0;
+  font-size: 1.4rem;
+}
+.markdown .prettyprint.linenums {
+  background: #f7f7f7;
+  -webkit-box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset;
+          box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset;
+}
+.markdown ol.linenums {
+  color: #1E347B;
+  margin: 0 0 0 40px;
+}
+.markdown ol.linenums li {
+  color: #BEBEC5;
+  line-height: 160%;
+  padding-left: 12px;
+  text-shadow: 0 1px 0 #FFFFFF;
+  list-style: decimal;
+}
+#uyan_frame {
+  padding: 20px 15px;
+  background: #fff;
+}

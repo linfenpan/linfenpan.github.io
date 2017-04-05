@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>移动端reset样式整理</title>
+    <meta name="description" content="整理一下移动端，常用的 reset 样式，方便以后使用[随时更新哦~，有疑问的同学，请评论]" />
+    <meta name="keywords" content="移动端,样式,reset,重置" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html">博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            移动端reset样式整理
+        </h1>
+        <div class="meta">
+            09-28,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+                    <span>移动</span>
+                    <span>样式</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h3>二话不说，上样式~</h3>
+<pre><code class="prettyprint linenums lang-css">/*== reset start ==*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,tr,td,section,a,input,span {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,body {
+  padding: 0;
+  margin: 0;
+  /*
+  -webkit-user-select: none;
+  user-select: none;
+  */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+html,body,form,fieldset,p,div,h1,h2,h3,h4,h5,h6,section,article {
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  font-family: &quot;Helvetica Neue&quot;, Helvetica, STHeiTi, sans-serif,&quot;microsoft yahei&quot;;
+  word-break: break-all;
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,iframe {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset,img {
+  border: 0;
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+  font-style: normal;
+  font-weight: normal;
+}
+
+ol,ul {
+  list-style: none;
+}
+
+caption,th,td {
+  text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+q:before,q:after {
+  content: '';
+}
+
+input[type=button],button {
+  -webkit-appearance: none;
+  -webkit-user-select: none;
+}
+
+a,img,input,select,li {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+a,img {
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+}
+
+a,input,img,select {
+  outline: none;
+}
+
+input::-webkit-clear-button,input::-webkit-inner-spin-button,input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input::-webkit-search-cancel-button {
+  display: none;
+}
+
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+/*
+::-webkit-scrollbar {
+  display: none;
+}
+*/
+
+img {
+  -webkit-touch-callou: none;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+/*== reset-end ==*/
+
+/*== rem start ==*/
+html {
+  font-size: 20px;
+}
+
+@media screen and (max-width:320px) {
+  html {
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (min-width:320px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width:340px) {
+  html {
+    font-size: 21.25px;
+  }
+}
+
+@media screen and (min-width:360px) {
+  html {
+    font-size: 22.5px;
+  }
+}
+
+@media screen and (min-width:380px) {
+  html {
+    font-size: 23.75px;
+  }
+}
+
+@media screen and (min-width:400px) {
+  html {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width:440px) {
+  html {
+    font-size: 27.5px;
+  }
+}
+
+@media screen and (min-width:480px) {
+  html {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width:520px) {
+  html {
+    font-size: 32.5px;
+  }
+}
+
+@media screen and (min-width:560px) {
+  html {
+    font-size: 35px;
+  }
+}
+
+@media screen and (min-width:600px) {
+  html {
+    font-size: 37.5px;
+  }
+}
+
+@media screen and (min-width:640px) {
+  html {
+    font-size: 40px;
+  }
+}
+
+html {
+  font-size: 100vw/16;
+}
+/*== rem end ==*/
+
+/*== normal cls ==*/
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.clearfix:after {
+  content: '';
+  overflow: hidden;
+  display: table;
+  height: 0;
+  clear: both;
+}
+/*== normal cls end ==*/
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20161027/full-screen-switch/index.html" class="prev">全屏切换笔记</a>
+                <a href="/20160704/1467600220842/index.html" class="next">application/json方式提交</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

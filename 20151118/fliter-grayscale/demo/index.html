@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>灰色滤镜</title>
+		<style>
+			/** ie 10 ~ 11 灰度滤镜不支持，需要脚本进行修正 */
+			.grayFilter {
+				filter: url("gray.svg#grayscale");	/** #grayscale 是svg 中的id*/
+				-webkit-filter: grayscale(100%);
+				-moz-filter: grayscale(100%);
+				-ms-filter: grayscale(100%);
+				-o-filter: grayscale(100%);
+				filter: grayscale(100%);
+				filter: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<a id="button" href="javascript:;">变灰</a>
+		<br/>
+		<img id="image" src="test.jpg" />
+	</body>
+	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	<script src="fixGrayFilter.js"></script>
+	<script>
+		var $btn = $("#button"), $img = $("#image");
+		// 拓展 jquery 原本的 browser 方法，某些jquery，可能没有这个方法哦~
+		;(function($){
+			var userAgent = navigator.userAgent.toLowerCase();
+			// Figure out what browser is being used
+			$.browser = {
+				version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1],
+				safari: /webkit/.test( userAgent ),
+				opera: /opera/.test( userAgent ),
+				msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ) || /trident/.test( userAgent ),
+				mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
+			};
+		})($);
+
+		// 在 ie10 ~ 11 下，修正灰度
+		if($.browser.msie && $.browser.version >= 10 && $.browser.version <= 11){
+			$btn.click(function(){
+				fixGrayFilter("#image");
+			});
+		}else{
+			$btn.click(function(){
+				$img.addClass("grayFilter");
+			});
+		}
+	</script>
+</html>
