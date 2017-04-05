@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0" />
+	<meta name="renderer" content="webkit" />
+    <title>da宗熊的作品展</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <header class="header">
+        <div class="main clearfix">
+            <a class="logo" href="/"
+                data-an-init="x:100px; s:1.5; o:0; r:500deg;"
+                data-an-enter="x:0; s:1; o:1; r:0deg; time:.3s; tf:ease;"
+            >
+                <span class="shadow" data-an-init="animation:none;" data-an-enter="animation:shadow 1s .4s ease infinite;"></span>
+            </a>
+            <a class="author" href="/">
+                <span
+                    data-an-init="x:-50px; o:0; time:; wait:;"
+                    data-an-enter="x:0; o:1; time:.2s; wait:.4s;">
+                    da
+                </span><span
+                    data-an-init="x:100px; o:0; time:; wait:;"
+                    data-an-enter="x:0; o:1; time:.2s; wait:.7s;">
+                    宗熊
+                </span>
+            </a>
+            <div class="ornaments">
+                <img class="person" src="./images/person.png" alt="人"
+                    data-an-init="y:-100px; wait:; animation: none;"
+                    data-an-enter="y:0; time:.3s; wait:1s; animation: person-jump 2s 2s ease infinite;"
+                />
+                <img class="dragon" src="./images/dragon.png" alt="龙"
+                    data-an-init="r:15deg; x:50px; y:50px; o: 0; wait:0;"
+                    data-an-enter="x:0; y:0; o:1; wait: 1.4s;"
+                />
+            </div>
+        </div>
+    </header>
+
+    <section class="demos main">
+        <h1 class="tips" data-an-init="o:0; x: -50px; time:;"  data-an-enter="o:1; x: 0; time: .3s;">近期"da宗熊"的作品展:</h1>
+        <div class="waterfall">
+          <div class="item">
+              <a class="link" href="/demo/tracker/" target="_blank">
+                  <img class="image" src="./images/tracker.png" />
+              </a>
+              <a href="/demo/tracker/" class="title" target="_blank">tracker.js 快捷的统计</a>
+              <div class="desc">
+                  劫持document，便捷设置统计参数。<br/>
+                  支持多区域独立统计，多环境适配
+              </div>
+          </div>
+            <div class="item">
+                <a class="link" href="/demo/project/" target="_blank">
+                    <img class="image" src="./images/project.js.png" />
+                </a>
+                <a href="/demo/project/" class="title" target="_blank">project.js 仿sea的模块加载器</a>
+                <div class="desc">
+                    抱着学习的目的，仿编的模块加载器。<br/>
+                    小的体积，容易的拓展，以及更符合项目的使用习惯。
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/waterfall/" target="_blank">
+                    <img class="image" src="./images/waterfall.jpg" />
+                </a>
+                <a href="/demo/waterfall/" class="title" target="_blank">瀑布流 v2，串行处理版</a>
+                <div class="desc">
+                    简单瀑布流，jquery插件。 <br/>可进行固定位置替换、插入、删除等操作，更添加了等待处理，如删除之后，才执行新增。<br/>
+                    PS: 就是此处用的瀑布流插件
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/css-parser/" target="_blank">
+                    <img class="image" src="./images/css-parser.png" />
+                </a>
+                <a href="/demo/css-parser/" class="title" target="_blank">CssParser 字符串转样式</a>
+                <div class="desc">
+                    "x: 10px; y: 10px;" 华丽转换为:<br/>
+                    "transform: translateX(10px) translateY(10px)"<br/>
+                    CssParser你值得拥有~<br/>
+                    PS: 屏幕进入效果，基于此脚本
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="https://github.com/linfenpan/PipeValid" target="_blank">
+                    <img class="image" src="./images/pipe-valid.png" />
+                </a>
+                <a href="https://github.com/linfenpan/PipeValid" class="title" target="_blank">PipeValid 链式的数据验证</a>
+                <div class="desc">
+                    已经厌倦大篇幅的if/else数据验证的同学，可以试试这小玩意。<br/>
+                    链式的配置，帮你完美验证数据
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/emoji/" target="_blank">
+                    <img class="image" src="./images/to-emoji.png" />
+                </a>
+                <a href="/demo/emoji/" class="title" target="_blank">显示emoji字符</a>
+                <div class="desc">
+                    把emoji字符，更替为漂亮的表情<br/>
+                    解决PC无法正常显示emoji字符的问题
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="https://github.com/linfenpan/simple-emmet.js" target="_blank">
+                    <img class="image" src="./images/emmet.jpg" />
+                </a>
+                <a href="https://github.com/linfenpan/simple-emmet.js" class="title" target="_blank">emmit语法编译器</a>
+                <div class="desc">
+                    #parent -> &lt;div id="parent"&gt;&lt;/div&gt;<br/>
+                    个人学习项目，支持多种占位符<br/>
+                    通过emmet语法，快速生成html结构<br/>
+                    <a href="/demo/emmet/" target="_blank">一个不算例子的例子~</a>
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/popup/index.html" target="_blank">
+                    <img class="image" src="./images/popup.png" />
+                </a>
+                <a href="/demo/popup/index.html" class="title" target="_blank">基于rem布局的弹窗控件</a>
+                <div class="desc">
+                    自动提醒、confirm弹窗、自定义弹窗<br/>
+                    一个弹窗的基础框架，满足层次叠加、弹窗自动居中、超出屏幕高度出现滚动轴等基础功能
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/pagination/index.html" target="_blank">
+                    <img class="image" src="./images/pagination.png" />
+                </a>
+                <a href="/demo/pagination/index.html" class="title" target="_blank">jquery分页</a>
+                <div class="desc">
+                    简单分页控件<br/>
+                    结合以往经验，重用度更高、更符合无节操使用的分页
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/lottery/index.html" target="_blank">
+                    <img class="image" src="./images/lottery.png" />
+                </a>
+                <a href="/demo/lottery/index.html" class="title" target="_blank">类9宫格的抽奖控件</a>
+                <div class="desc">
+                    活动用的抽奖控件<br/>
+                    提供指定抽中索引，抽奖速度衰变控制函数等设置<br/>
+                    请自行实现UI效果
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/swiper/index.html" target="_blank">
+                    <img class="image" src="./images/swiper.jpg" />
+                </a>
+                <a href="/demo/swiper/index.html" class="title" target="_blank">手机端的广告切换</a>
+                <div class="desc">
+                    页面重新进入时，timer会有点小问题<br/>
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/flamingo/index.html" target="_blank">
+                    <img class="image" src="./images/flamingo.jpg" />
+                </a>
+                <a href="/demo/flamingo/index.html" class="title" target="_blank">火烈鸟活动组件整理</a>
+                <div class="desc">
+                    火烈鸟的同学，瞄过来啦!<br/>
+                    这里，整理了一下火烈鸟活动常用组件的用法<br/>
+                    样式什么的，自己按需要调整啦~
+                </div>
+            </div>
+			<div class="item">
+                <a class="link" href="/demo/pc-swipe/index.html" target="_blank">
+                    <img class="image" src="./images/pc-swipe.png" />
+                </a>
+                <a href="/demo/pc-swipe/index.html" class="title" target="_blank">pc端切换组件</a>
+                <div class="desc">
+                    看到同事们用swipe.js这么hi，<br/>
+					一时兴奋，也写了个swipe来玩玩<br/>
+					支持自动切换，无限循环等常用操作
+                </div>
+            </div>
+
+
+            <div class="item">
+                <a class="link" href="/demo/slide/index.html" target="_blank">
+                    <img class="image" src="./images/slide.png" />
+                </a>
+                <a href="/demo/slide/index.html" class="title" target="_blank">手机端滑动广告</a>
+                <div class="desc">
+                    检查手机和PC滑动，做了个小demo<br/>
+                    [用于参考]
+                </div>
+            </div>
+            <div class="item">
+                <a class="link" href="/demo/filterSelect/index.html" target="_blank">
+                    <img class="image" src="./images/filterSelect.png" />
+                </a>
+                <a href="/demo/filterSelect/index.html" class="title" target="_blank">可筛选的下拉</a>
+                <div class="desc">
+                    无损式的筛选下拉<br/>
+                    把 select 标签，替换为可输入的控件<br/>
+                    [用于参考]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        last update: 2016/03/04
+    </footer>
+
+    <script src="/js/lib/jquery-2.0.0.min.js"></script>
+    <script src="./lib/enterScreen.js"></script>
+    <script src="./lib/cssParser.js"></script>
+    <script src="/demo/waterfall/jquery.waterfall.serialize.js"></script>
+    <script src="./js/index.js"></script>
+
+</body>
+</html>

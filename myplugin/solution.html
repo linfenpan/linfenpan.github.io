@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>学习研究室</title>
+    <script src="http://www.100bt.com/resource/js/lib/jquery-min.js"></script>
+    <script src="project.min.js"></script>
+    <style>
+        html,body{width:100%;}
+        * {padding:0;margin:0;}
+    </style>
+</head>
+<body>
+    <style>
+        .announcement { position: relative; overflow: hidden; font-size: 24px; width: 500px; }
+        .announcement .container { width: 9999px; white-space: nowrap; }
+        .announcement .container:after { content: ""; display: table; clear: both; }
+        .announcement .content { float: left; }
+        .announcement .content .item { padding: 0 5px; }
+    </style>
+    <div class="announcement" data-role="announcement">
+        <div class="container">
+            <div class="content">
+                <span class="item">"神奇宝贝小智"获得了"ipad min4"</span>
+                <span class="item">"末日丧尸"获得了"红包5元"</span>
+                <span class="item">"猛男999x"获得了"灯泡一只"</span>
+                <span class="item">"增y高"获得了"迷你hallo kitty"</span>
+                <span class="item">"无知的少年哟"获得了"究极比卡暴龙丘"</span>
+                <span class="item">"神奇女侠"获得了"情趣曲奇饼"</span>
+                <span class="item">"喝茶如和可乐"获得了"不知火套餐"</span>
+                <span class="item">"王尼玛"获得了"哆啦a梦口袋"</span>
+                <span class="item">"k博士"获得了"圆珠笔z956型号"</span>
+                <span class="item">"奇怪的人类"获得了"外星人电池"</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require.config({
+            alias: {
+                "jquery": window.$
+            }
+        });
+        var ann;
+        require("./announcement/announcement.js", function(Ann){
+            ann = new Ann($(".announcement .content"));
+            ann.startAnimate();
+        });
+    </script>
+
+
+    <style>
+        .page-main { width: 500px; }
+
+        .banner { position: relative; height: 0; padding-bottom: 161.3%; background: url(back.png) no-repeat; background-size: 100% 100%; }
+        .banner .lights { position: absolute; }
+    </style>
+    <div class="page-main">
+        <div class="banner">
+            <span class="lights"></span>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    window.onerror = function(e){alert(e);}
+    // zoom
+    // require("./solution/zoom.js", "./pop/pop.js", function(solution, POP){
+    //     solution.init({
+    //         width: 500
+    //     });
+    //     POP.confirm("请问，要去看哈士奇大夫吗?");
+    // });
+
+    // meta 重置的方案
+    // require("./solution/meta.js", "./pop/pop.js", function(solution, POP){
+    //     solution.init({
+    //         width: 500
+    //     });
+    //     POP.confirm("请问，要去看哈士奇大夫吗?");
+    // });
+
+    // rem 的方案
+    require("./solution/fontSize.js", function(solution){
+        solution.init();
+    });
+
+    // 常用的抽奖
+    // require("tool/lottery.js", function(Lottery){
+    //     var lottery = new Lottery(9);
+    //     lottery.setDrawingCallback(function(index){
+    //       console.log(index);
+    //     });
+    //     lottery.setWonCallback(function(wonIndex){
+    //       console.log("奖品:" + wonIndex);
+    //     });
+    //
+    //     lottery.setWonIndex(5);
+    //     lottery.start();    // 开始抽奖
+    //     setTimeout(function(){
+    //         lottery.stop();     // 结束本次抽奖，并调用 wonCallback
+    //     }, 1200);
+    // });
+</script>
+</body>
+</html>

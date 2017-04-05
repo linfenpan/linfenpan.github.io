@@ -1,0 +1,48 @@
+/** module 锁定层样式 */
+.active.pop-lock-layer { visibility: visible; }
+.pop-lock-layer { visibility: hidden; position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
+.pop-lock-layer-back, .pop-lock-layer-body { width: 100%; height: 100%;  }
+.pop-lock-layer-back { position: absolute; top: 0; left: 0; background: #000; opacity: .2733; filter:alpha(opacity=27); }
+.pop-lock-layer-body { position: relative; overflow: auto; }
+
+/** module 弹窗样式 */
+.pop-dialog-open { overflow: hidden; } /* 给 body 的样式属性 */
+.pop-dialog { position: absolute; top: 0; left: 50%;  -webkit-transform: translateX(-50%); -ms-transform: translateX(-50%); transform: translateX(-50%); }
+.pop-dialog-close { position:absolute; top:5px; right:8px; width:25px; height:25px; }
+.pop-dialog-close:before, .pop-dialog-close:after { content:""; position:absolute; top:50%; left:0; width:100%; height:3px; background:#999; }
+.pop-dialog-close:before { -webkit-transform:rotate(-45deg); -ms-transform:rotate(-45deg); transform:rotate(-45deg); }
+.pop-dialog-close:after { -webkit-transform:rotate(45deg); -ms-transform:rotate(45deg); transform:rotate(45deg); }
+
+/** 白色弹窗 */
+/** module 白色弹窗样式 */
+.pop-dialog-white { background: #fff; border-radius: 5px; font-size: 14px; }
+.pop-dialog-title { height: 30px; line-height: 29px; padding-top: 20px; text-align: center; color: #fd6f60; font-size: 16px; }
+.pop-dialog-btn { padding: 7px 0; height: 24px; line-height: 23px; text-align: center; color: #fff; border-radius: 2px; -webkit-transition: opacity .2s ease; transition: opacity .2s ease; }
+.pop-dialog-btn:hover { text-decoration: none; opacity: .8; }
+.pop-dialog-cancel { background-color: #999; }
+.pop-dialog-sure { background-color: #02b4fe; }
+
+/** module 确认弹窗 */
+.pop-dialog-confirm { min-width: 220px; padding: 0 30px 20px 30px; }
+.pop-dialog-confirm .content { padding-top: 10px; text-align: center; }
+.pop-dialog-confirm .operation { padding-top: 20px; text-align: center; }
+.pop-dialog-confirm .pop-dialog-btn { display: inline-block; padding-left: 25px; padding-right: 25px; margin: 0 6px; }
+
+
+/** module 自动提醒 */
+.pop-auto { position: fixed; bottom: 10%; }
+.pop-auto-tip {
+    min-height: 30px; line-height: 28px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 14px; color: #fff;
+    background-color:rgba(0,0,0,.8);
+    border-radius: 4px;
+    opacity: 0;
+    -webkit-transform: scale(.5);
+        -ms-transform: scale(.5);
+            transform: scale(.5);
+    -webkit-transition: opacity .3s ease, -webkit-transform .3s ease;
+            transition: opacity .3s ease, transform .3s ease;
+}
+.active.pop-auto-tip { opacity: 1; -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1); }
