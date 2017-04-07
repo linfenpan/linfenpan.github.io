@@ -1,0 +1,23 @@
+id: 1491534899074
+type: blog
+time: 2017-04-07 11:14
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+    - node.js
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: node.js多任务执行，任务运行环境配置
+        keywords: node.js,多任务
+        description: 遇到 fis3 和 webpack 同时使用的场景，当两者同时启动监听线程时，必然会阻塞另一个。<br/>文本介绍多监听现成的解决方案，以及期间遇到环境配置相关的问题
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:
