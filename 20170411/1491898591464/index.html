@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>Script标签加载成功了吗？</title>
+    <meta name="description" content="script标签，往往让人又爱又恨，它赋予了js与页面分离的能力，给与前端极大的便利。<br/>但随之而来的，给前端带来了一个额外的困惑，如果script标签加载失败了，我们该何去何从呢？<br/>" />
+    <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8">
+<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a href="/" class="item ">
+                    主页
+                </a><a href="/bloglist/list_1.html" class="item active">
+                    博客
+                </a><a href="/pluginlist/list_1.html" class="item ">
+                    插件
+                </a><a href="/notelist/list_1.html" class="item ">
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home">
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author">
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+<article class="article container">
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html">首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html">博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            Script标签加载成功了吗？
+        </h1>
+        <div class="meta">
+            04-11,2017 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+                    <span>script标签</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h2>Chrome And Firefox</h2>
+<p>针对功能强大的浏览器，可以通过 script 标签的 <code>onload</code> 和 <code>onerror</code> 来获得脚本的状态。</p>
+<pre><code class="prettyprint linenums lang-html">&lt;script src=&quot;./jquery.js&quot; onload=&quot;alert('success')&quot; onerror=&quot;alert('failure')&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>如果针对单一脚本，或者动态添加的脚本，这个方式，确实不错。<br>
+但是，如果我们站点，有数十个，甚至更多的脚本呢？逐个添加，效率并不高。</p>
+<p>对此，我们可以使用 <code>html.addEventListener('error')</code>，进行整体监控</p>
+<pre><code class="prettyprint linenums lang-html">&lt;script&gt;
+  // 代码须在 script 加载前运行
+  var target = document.documentElement;
+  if (target.addEventListener) {
+    target.addEventListener('load', function(e) {
+      if (e.target.tagName.toLowerCase() === 'script') {
+        console.log(e.target.src, 'script load success');
+      }
+    }, true);
+    target.addEventListener('error', function(e) {
+      if (e.target.tagName.toLowerCase() === 'script') {
+        console.log(e.target.src, 'script load failure');
+      }
+    }, true);
+  }
+&lt;/script&gt;
+</code></pre>
+<p>上述方法，在 IE9&amp;+ 的 ie 浏览器，都能运行得很溜哦~</p>
+<hr>
+<h2>IE7~IE8</h2>
+<p>针对此顽强的份子，真的没啥好的办法。<br>
+首先，IE7~IE8不支持事件捕获，SO，上面的 <code>addEventListener('error')</code> 的方式，不适用。<br>
+也不要考虑 <code>attachEvent()</code> 支持捕获啦，并不现实。</p>
+<p>对于他们俩，唯一的方法，就是 <code>onreadystatechange</code></p>
+<pre><code class="prettyprint linenums lang-html">&lt;script&gt;
+  function statechange(node) {
+    if (/loaded|complete/.test(node.readyState)) {
+      if (node.readyState == 'complete') {
+        return alert('success');
+      }
+
+      var firstState = node.readyState;
+      // hack: 如果脚本通过动态的方式加载，访问 'children' 属性，会把 loaded 状态，变更为 'complete'[如果加载成功] 或者 'loading'[如果加载失败]
+      node.children;
+      // 错误检测
+      if (firstState == 'loaded' &amp;&amp; node.readyState == 'loading') {
+        return alert('error');
+      }
+    } // end if
+  }
+
+  var node = document.createElement('script');
+  node.src = './jquery.x.js';
+  node.type = 'text/javascript';
+  node.onreadystatechange = function() {
+    statechange(node);
+  };
+&lt;/script&gt;
+</code></pre>
+<p>如果我们企图，通过给 script标签 添加 onreadystatechange 方法，来达到效果，那估计要失望了:</p>
+<pre><code class="prettyprint linenums lang-html">&lt;script&gt;
+  function statechange(node) {
+    // 无论脚本加载是否成功，都会进入 success
+  }
+&lt;/script&gt;
+&lt;script src=&quot;jquery.x.js&quot; onreadystatechange=&quot;statechange(this)&quot;&gt;&lt;/script&gt;
+</code></pre>
+<hr>
+<h2>最笨的方法</h2>
+<p>最笨，但兼容所有浏览器的方法，肯定就是给脚本添加 &quot;约定的全局变量&quot;。<br>
+如:</p>
+<pre><code class="prettyprint linenums lang-javascript">// index.js
+window.FILE_NAMES.push('/index.js');
+</code></pre>
+<p>我们只需要在 domready 之后，判断是否存在该文件的名字，即可知道脚本是否加载完成了。<br>
+好囧.......</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/20170407/1491534899074/index.html" class="next">node.js多任务执行，任务运行环境配置</a>
+    </div>
+    <!-- END 分页 -->
+
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!-- UY END -->
+</article>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2017 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/lib/prettify.js"></script>
+<script src="/js/article.js"></script>
+
+</body>
+</html>

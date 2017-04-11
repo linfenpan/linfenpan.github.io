@@ -1,0 +1,23 @@
+id: 1491898591464
+type: blog
+time: 2017-04-11 16:16
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+    - script标签
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: Script标签加载成功了吗？
+        keywords:
+        description: script标签，往往让人又爱又恨，它赋予了js与页面分离的能力，给与前端极大的便利。<br/>但随之而来的，给前端带来了一个额外的困惑，如果script标签加载失败了，我们该何去何从呢？<br/>
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:
