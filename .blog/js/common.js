@@ -180,7 +180,7 @@ $(function(){
 
   $('body').on('click', 'a[data-pjax]', function() {
     if (!$.pjax.support) { return true; }
-    pjax.replace(this);
+    pjax.push(this);
     return false;
   });
 
