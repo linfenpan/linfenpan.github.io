@@ -22,9 +22,9 @@
     <div class="navigation">
         <div class="_box">
             <div class="container menu">
-                <a href="{{ url + root }}" class="item {{ 'active' if navigation == 'home' }}">
+                <a data-type="index" href="{{ url + root }}" class="item {{ 'active' if navigation == 'home' }}" data-pjax>
                     主页
-                </a>{% for item in blogList -%}{% set type = item.type %}<a href="{{ url + root }}{{ blogListObject[type].link | default('#') }}" class="item {{ 'active' if navigation == type }}">
+                </a>{% for item in blogList -%}{% set type = item.type %}<a data-type="{{type}}" href="{{ url + root }}{{ blogListObject[type].link | default('#') }}" class="item {{ 'active' if navigation == type }}" data-pjax>
                     {{ blogListObject[type].name | default('未知') }}
                 </a>{%- endfor %}<a target="_blank" href="/show/" class="item {{ 'active' if navigation == 'show' }}">
                     作品展
@@ -48,11 +48,11 @@
             <!-- 冒泡背景 -->
             <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
 
-            <a href="{{ authorHomePage if authorHomePage else url + root }}" class="home">
+            <a href="{{ authorHomePage if authorHomePage else url + root }}" class="home" data-pjax>
                 <img src="{{ authorIcon }}" alt="{{ author }}" class="logo">
             </a>
             <h1 class="title">
-                <a href="{{ authorHomePage if authorHomePage else url + root }}" class="author">
+                <a href="{{ authorHomePage if authorHomePage else url + root }}" class="author" data-pjax>
                     {{ author }}
                 </a>
             </h1>
@@ -62,9 +62,14 @@
     <!-- END 顶部 -->
     {% endblock %}
 
-    {% block body %}
-        等待填充内容..
-    {% endblock %}
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+      {% block body %}
+          等待填充内容..
+      {% endblock %}
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
 
 
     {% block footer %}
@@ -85,6 +90,7 @@
     window.ROOT_PATH = "{{ url + root }}";
 </script>
 <script src="{{ url + root }}js/lib/jquery-2.0.0.min.js"></script>
+<script src="{{ url + root }}js/lib/jquery-pjax.min.js" charset="utf-8"></script>
 <script src="{{ url + root }}js/common.js"></script>
 {% block bottomResources %}{% endblock %}
 

@@ -10,7 +10,20 @@ var $Body = $("body");
         $btn.toggleClass("active");
         $nav.toggleClass("active");
     });
+    $nav.on('click', 'a', function() {
+      $nav.removeClass('active');
+      $btn.removeClass('active');
+    });
 })(window.$, $Body);
+
+
+// module: 设置导航索引
+function setNavbar(type) {
+  var $a = $('.navigation [data-type='+ type +']');
+  if ($a.length > 0) {
+    $a.addClass('active').siblings('.active').removeClass('active');
+  }
+}
 
 
 // module: 背景冒泡
@@ -144,11 +157,6 @@ var $Body = $("body");
 })(window, $("#canvas")[0]);
 
 
-// module: 代码格式化
-$(function(){
-    window.prettyPrint && window.prettyPrint();
-});
-
 // module: 安装搜索引擎
 $(function(){
     (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -157,3 +165,50 @@ $(function(){
     })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
     _st('install','dyv38Q-_GT65RvxVc81g','2.0.0');
 });
+
+
+// module: 单页面测试
+;(function() {
+  if (!$.pjax) { return; }
+
+  var $root = $('#pjax-container');
+  if ($root.length <= 0) { return; }
+
+  if ($root.find('[data-pjax-container]').length <= 0) { return; }
+
+  var pjax = $.pjax($root, { animateTime: 0 });
+
+  $('body').on('click', 'a[data-pjax]', function() {
+    if (!$.pjax.support) { return true; }
+    pjax.replace(this);
+    return false;
+  });
+
+  // 请求完成时，滚动到页面顶部
+  pjax.on('pjax:success', function() {
+    $('body,html').animate({ scrollTop: 0 }, 200);
+  });
+
+  // loading 效果
+  var $loading = $('.pjax-preloader');
+  if ($loading.length > 0) {
+    pjax.on('pjax:request', function() {
+      $loading.addClass('on');
+    }).on('pjax:parseerror', function() {
+      $loading.removeClass('on');
+    }).on('pjax:render', function() {
+      $loading.removeClass('on');
+    });
+  }
+
+  // 设置导航、代码格式化
+  pjax.on('dom:ready', function($dom) {
+    // 应该做文章页面的严格判定，才比较合理的说..
+    var type = $dom.attr('data-type');
+    if (type) {
+      window.setNavbar && setNavbar(type);
+      // module: 代码格式化
+      window.prettyPrint && window.prettyPrint();
+    }
+  });
+})();

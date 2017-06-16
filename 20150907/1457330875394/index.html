@@ -8,20 +8,20 @@
     <meta name="keywords" content="meta" />
     <link rel="stylesheet" href="/css/base.css" charset="utf-8">
     <link rel="stylesheet" href="/css/common.css" charset="utf-8">
-<link rel="stylesheet" href="/css/article.css" charset="utf-8">
+  <link rel="stylesheet" href="/css/article.css" charset="utf-8">
 </head>
 <body>
     <!-- 导航 by 小亮 -->
     <div class="navigation">
         <div class="_box">
             <div class="container menu">
-                <a href="/" class="item ">
+                <a data-type="index" href="/" class="item " data-pjax>
                     主页
-                </a><a href="/bloglist/list_1.html" class="item ">
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item " data-pjax>
                     博客
-                </a><a href="/pluginlist/list_1.html" class="item ">
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
                     插件
-                </a><a href="/notelist/list_1.html" class="item active">
+                </a><a data-type="note" href="/notelist/list_1.html" class="item active" data-pjax>
                     笔记
                 </a><a target="_blank" href="/show/" class="item ">
                     作品展
@@ -43,11 +43,11 @@
             <!-- 冒泡背景 -->
             <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
 
-            <a href="/" class="home">
+            <a href="/" class="home" data-pjax>
                 <img src="/assert/personal.png" alt="da宗熊" class="logo">
             </a>
             <h1 class="title">
-                <a href="/" class="author">
+                <a href="/" class="author" data-pjax>
                     da宗熊
                 </a>
             </h1>
@@ -56,13 +56,15 @@
     </header>
     <!-- END 顶部 -->
 
-<article class="article container">
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="note" data-pjax-container>
     <!-- 面包屑 -->
     <div class="bread">
         <span>当前位置:</span>
-        <a href="/index.html">首页</a>
+        <a href="/index.html" data-pjax>首页</a>
         <span class="sep">/</span>
-        <a href="/notelist/list_1.html">笔记</a>
+        <a href="/notelist/list_1.html" data-pjax>笔记</a>
     </div>
 
     <!-- 内容 -->
@@ -171,15 +173,14 @@ url=&quot;url&quot; 后者代表当前PC页所对应的手机页URL，两者必�
     <!-- 分页 -->
 
     <div class="articlePager">
-                <a href="/20150920/1457341771228/index.html" class="prev">样式裁剪</a>
-                <a href="/20150815/1457341918957/index.html" class="next">css3渐变</a>
+                <a href="/20150920/1457341771228/index.html" class="prev" data-pjax>样式裁剪</a>
+                <a href="/20150815/1457341918957/index.html" class="next" data-pjax>css3渐变</a>
     </div>
     <!-- END 分页 -->
-
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <!-- UY END -->
 </article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
 
 
     <!-- 页脚 -->
@@ -198,9 +199,10 @@ url=&quot;url&quot; 后者代表当前PC页所对应的手机页URL，两者必�
     window.ROOT_PATH = "/";
 </script>
 <script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
 <script src="/js/common.js"></script>
-<script src="/js/lib/prettify.js"></script>
-<script src="/js/article.js"></script>
+  <script src="/js/lib/prettify.js" data-pjax-res="0"></script>
+  <script src="/js/article.js" data-pjax-res="0"></script>
 
 </body>
 </html>

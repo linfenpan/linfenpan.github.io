@@ -1,1 +1,2 @@
-// 评论板块移除了，等找到更好的替代品再说
+// module: 代码格式化
+window.prettyPrint && window.prettyPrint();

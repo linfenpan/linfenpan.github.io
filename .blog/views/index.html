@@ -7,13 +7,13 @@
 
 {# 主要内容 #}
 {% block body %}
-<div class="content container">
+<div class="indexContainer content container" data-type="index" data-pjax-container>
     {% for item in dataList -%}
     <div class="article article-type-{{ item.type }}">
         <div class="article-cnt">
             <div class="info">
                 <h2 class="title">
-                    <a href="{{ url + root + item.link }}" class="link">
+                    <a href="{{ url + root + item.link }}" class="link" data-pjax>
                         <span class="title-ico"></span> {{ item.title }}
                     </a>
                 </h2>
@@ -35,7 +35,7 @@
                     </div>
             {% endif %}
 
-            <a href="{{ url + root + item.link }}" class="more">全文阅读 →</a>
+            <a href="{{ url + root + item.link }}" class="more" data-pjax>全文阅读 →</a>
         </div>
     </div>
     {%- endfor %}

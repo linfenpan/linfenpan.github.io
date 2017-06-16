@@ -9,7 +9,7 @@
 
 {# 列表内容 #}
 {% block body %}
-<div class="lstContent container">
+<div class="lstContent container" data-type="{{type}}" data-pjax-container>
     {% block left %}
         <div class="leftCtn">
             <h1 class="bread">
@@ -21,7 +21,7 @@
                 {% for item in dataList %}
                 <article class="item">
                     <h2 class="title">
-                        <a href="{{ url + root + item.link }}">{{ item.title }}</a>
+                        <a href="{{ url + root + item.link }}" data-pjax>{{ item.title }}</a>
                     </h2>
                     <div class="cnt">
                         {% if item.poster %}
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="{{ url + root + item.link }}" class="more">阅读全文 →</a>
+                        <a href="{{ url + root + item.link }}" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>{{ item.time }}</span>
                         </div>

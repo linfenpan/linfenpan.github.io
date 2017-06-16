@@ -2,23 +2,23 @@
 
 {# 文章资源 #}
 {% block topResources %}
-<link rel="stylesheet" href="{{ url + root }}css/article.css" charset="utf-8">
-{% for item in resources %}
-    {% if item.type == "css" %}
-        <link rel="stylesheet" href="{{ item.url }}" charset="utf-8">
-    {% endif %}
-{% endfor %}
+  <link rel="stylesheet" href="{{ url + root }}css/article.css" charset="utf-8">
+  {% for item in resources %}
+      {% if item.type == "css" %}
+          <link rel="stylesheet" href="{{ item.url }}" charset="utf-8">
+      {% endif %}
+  {% endfor %}
 {% endblock %}
 
 {# 文章内容 #}
 {% block body %}
-<article class="article container">
+<article class="article container" data-type="{{type}}" data-pjax-container>
     <!-- 面包屑 -->
     <div class="bread">
         <span>当前位置:</span>
-        <a href="{{ url + root }}index.html">首页</a>
+        <a href="{{ url + root }}index.html" data-pjax>首页</a>
         <span class="sep">/</span>
-        <a href="{{ url + root }}{{ blogListObject[type].link | default('#') }}">{{ blogListObject[type].name | default("未知") }}</a>
+        <a href="{{ url + root }}{{ blogListObject[type].link | default('#') }}" data-pjax>{{ blogListObject[type].name | default("未知") }}</a>
     </div>
 
     <!-- 内容 -->
@@ -48,28 +48,24 @@
     <div class="articlePager">
         {% if articlePrev or articleNext -%}
             {% if articlePrev %}
-                <a href="{{ url + root + articlePrev.link }}" class="prev">{{ articlePrev.title }}</a>
+                <a href="{{ url + root + articlePrev.link }}" class="prev" data-pjax>{{ articlePrev.title }}</a>
             {% endif %}
             {% if articleNext %}
-                <a href="{{ url + root + articleNext.link }}" class="next">{{ articleNext.title }}</a>
+                <a href="{{ url + root + articleNext.link }}" class="next" data-pjax>{{ articleNext.title }}</a>
             {% endif %}
         {%- endif %}
     </div>
     <!-- END 分页 -->
-
-    <!-- UY BEGIN -->
-    <div id="uyan_frame"></div>
-    <!-- UY END -->
 </article>
 {% endblock %}
 
 {# 底部资源 #}
 {% block bottomResources %}
-<script src="{{ url + root }}js/lib/prettify.js"></script>
-<script src="{{ url + root }}js/article.js"></script>
-{% for item in resources %}
-    {% if item.type == "js" %}
-        <script src="{{ item.url }}"></script>
-    {% endif %}
-{% endfor %}
+  <script src="{{ url + root }}js/lib/prettify.js" data-pjax-res="0"></script>
+  <script src="{{ url + root }}js/article.js" data-pjax-res="0"></script>
+  {% for item in resources %}
+      {% if item.type == "js" %}
+          <script src="{{ item.url }}" data-pjax-res="1"></script>
+      {% endif %}
+  {% endfor %}
 {% endblock %}

@@ -15,13 +15,13 @@
     <div class="navigation">
         <div class="_box">
             <div class="container menu">
-                <a href="/" class="item ">
+                <a data-type="index" href="/" class="item " data-pjax>
                     主页
-                </a><a href="/bloglist/list_1.html" class="item active">
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item active" data-pjax>
                     博客
-                </a><a href="/pluginlist/list_1.html" class="item ">
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
                     插件
-                </a><a href="/notelist/list_1.html" class="item ">
+                </a><a data-type="note" href="/notelist/list_1.html" class="item " data-pjax>
                     笔记
                 </a><a target="_blank" href="/show/" class="item ">
                     作品展
@@ -43,11 +43,11 @@
             <!-- 冒泡背景 -->
             <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
 
-            <a href="/" class="home">
+            <a href="/" class="home" data-pjax>
                 <img src="/assert/personal.png" alt="da宗熊" class="logo">
             </a>
             <h1 class="title">
-                <a href="/" class="author">
+                <a href="/" class="author" data-pjax>
                     da宗熊
                 </a>
             </h1>
@@ -56,7 +56,9 @@
     </header>
     <!-- END 顶部 -->
 
-<div class="lstContent container">
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<div class="lstContent container" data-type="blog" data-pjax-container>
         <div class="leftCtn">
             <h1 class="bread">
                 <span class="br-title">博客</span>
@@ -66,7 +68,7 @@
             <section class="articleList">
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20170411/1491898591464/index.html">Script标签加载成功了吗？</a>
+                        <a href="/20170411/1491898591464/index.html" data-pjax>Script标签加载成功了吗？</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -74,7 +76,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20170411/1491898591464/index.html" class="more">阅读全文 →</a>
+                        <a href="/20170411/1491898591464/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>04-11,2017</span>
                         </div>
@@ -82,7 +84,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20170407/1491534899074/index.html">node.js多任务执行，任务运行环境配置</a>
+                        <a href="/20170407/1491534899074/index.html" data-pjax>node.js多任务执行，任务运行环境配置</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -90,7 +92,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20170407/1491534899074/index.html" class="more">阅读全文 →</a>
+                        <a href="/20170407/1491534899074/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>04-07,2017</span>
                         </div>
@@ -98,7 +100,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20161209/1481251257718/index.html">元素自动进入屏幕可是区域</a>
+                        <a href="/20161209/1481251257718/index.html" data-pjax>元素自动进入屏幕可是区域</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -106,7 +108,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20161209/1481251257718/index.html" class="more">阅读全文 →</a>
+                        <a href="/20161209/1481251257718/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>12-09,2016</span>
                         </div>
@@ -114,7 +116,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20161027/full-screen-switch/index.html">全屏切换笔记</a>
+                        <a href="/20161027/full-screen-switch/index.html" data-pjax>全屏切换笔记</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -122,7 +124,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20161027/full-screen-switch/index.html" class="more">阅读全文 →</a>
+                        <a href="/20161027/full-screen-switch/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>10-27,2016</span>
                         </div>
@@ -130,7 +132,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20160928/reset-style/index.html">移动端reset样式整理</a>
+                        <a href="/20160928/reset-style/index.html" data-pjax>移动端reset样式整理</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -138,7 +140,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20160928/reset-style/index.html" class="more">阅读全文 →</a>
+                        <a href="/20160928/reset-style/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>09-28,2016</span>
                         </div>
@@ -146,7 +148,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20160704/1467600220842/index.html">application/json方式提交</a>
+                        <a href="/20160704/1467600220842/index.html" data-pjax>application/json方式提交</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -154,7 +156,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20160704/1467600220842/index.html" class="more">阅读全文 →</a>
+                        <a href="/20160704/1467600220842/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>07-04,2016</span>
                         </div>
@@ -162,7 +164,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20160630/1467272257483/index.html">es6修饰器-decorator</a>
+                        <a href="/20160630/1467272257483/index.html" data-pjax>es6修饰器-decorator</a>
                     </h2>
                     <div class="cnt">
                         <div class="poster" style="background-image:url(/20160630/1467272257483/assert/poster.png)"></div>
@@ -171,7 +173,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20160630/1467272257483/index.html" class="more">阅读全文 →</a>
+                        <a href="/20160630/1467272257483/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>06-30,2016</span>
                         </div>
@@ -179,7 +181,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20160405/1459846164133/index.html">createEvent讲解</a>
+                        <a href="/20160405/1459846164133/index.html" data-pjax>createEvent讲解</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -187,7 +189,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20160405/1459846164133/index.html" class="more">阅读全文 →</a>
+                        <a href="/20160405/1459846164133/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>04-05,2016</span>
                         </div>
@@ -195,7 +197,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20160215/wap-page/index.html">手机页面方案之-等比缩放</a>
+                        <a href="/20160215/wap-page/index.html" data-pjax>手机页面方案之-等比缩放</a>
                     </h2>
                     <div class="cnt">
                         <div class="poster" style="background-image:url(/20160215/wap-page/assert/poster.jpg)"></div>
@@ -205,7 +207,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20160215/wap-page/index.html" class="more">阅读全文 →</a>
+                        <a href="/20160215/wap-page/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>02-15,2016</span>
                         </div>
@@ -213,7 +215,7 @@
                 </article>
                 <article class="item">
                     <h2 class="title">
-                        <a href="/20160114/higthcharts/index.html">highcharts使用学习</a>
+                        <a href="/20160114/higthcharts/index.html" data-pjax>highcharts使用学习</a>
                     </h2>
                     <div class="cnt">
                         <div class="desc">
@@ -222,7 +224,7 @@
                         </div>
                     </div>
                     <div class="msg">
-                        <a href="/20160114/higthcharts/index.html" class="more">阅读全文 →</a>
+                        <a href="/20160114/higthcharts/index.html" class="more" data-pjax>阅读全文 →</a>
                         <div class="info">
                             <span>01-14,2016</span>
                         </div>
@@ -231,13 +233,13 @@
             </section>
                 <!-- 分页内容 -->
 <div class="pagination">
-    <a href="/bloglist/list_1.html" class="first">首页</a>
-                <a href="/bloglist/list_1.html" class="active">1</a>
-                    <a href="/bloglist/list_2.html">2</a>
+    <a href="/bloglist/list_1.html" class="first" data-pjax>首页</a>
+                <a href="/bloglist/list_1.html" class="active" data-pjax>1</a>
+                    <a href="/bloglist/list_2.html" data-pjax>2</a>
         
 
 
-    <a href="/bloglist/list_2.html" class="last">尾页</a>
+    <a href="/bloglist/list_2.html" class="last" data-pjax>尾页</a>
 </div>
 <!-- END 分页内容 -->
 
@@ -278,6 +280,9 @@
             </div>
         </div>
 </div>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
 
 
     <!-- 页脚 -->
@@ -296,6 +301,7 @@
     window.ROOT_PATH = "/";
 </script>
 <script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
 <script src="/js/common.js"></script>
 
 </body>

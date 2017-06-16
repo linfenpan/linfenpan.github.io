@@ -1,4 +1,4 @@
-/* By da宗熊 2016-10-19 */
+/* By da宗熊 2017-06-16 */
 /**
 * @description: 文章内容
 * @author: da宗熊
@@ -84,6 +84,9 @@
   color: #555;
 }
 .articleCnt .content code {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
   padding: 2px 5px;
   background: #f7f7f9;
   border-radius: 2px;
@@ -209,6 +212,7 @@
   list-style: disc;
 }
 .markdown pre {
+  width: 100%;
   display: block;
   overflow: auto;
   background-color: #f7f7f7;
