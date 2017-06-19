@@ -2,7 +2,7 @@
 
 {# 文章资源 #}
 {% block topResources %}
-  <link rel="stylesheet" href="{{ url + root }}css/article.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="{{ url + root }}css/article.css" charset="utf-8"> -->
   {% for item in resources %}
       {% if item.type == "css" %}
           <link rel="stylesheet" href="{{ item.url }}" charset="utf-8">

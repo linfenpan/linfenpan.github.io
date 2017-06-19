@@ -21,7 +21,8 @@ module.exports = function(grunt) {
                     "css/common.css": "less/common.less",
                     "css/index.css": "less/index.less",
                     "css/article.css": "less/article.less",
-                    "css/list.css": "less/list.less"
+                    "css/list.css": "less/list.less",
+                    "css/all.css": "less/all.less"
                 }
             }
         },
