@@ -1,2 +1,6 @@
 // module: 代码格式化
-window.prettyPrint && window.prettyPrint();
+(function() {
+  // 不支持单页面时，进行代码格式化
+  if ($.pjax && $.pjax.support) { return; }
+  window.prettyPrint && window.prettyPrint();
+})();

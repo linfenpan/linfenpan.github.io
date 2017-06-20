@@ -176,7 +176,7 @@ $(function(){
 
   if ($root.find('[data-pjax-container]').length <= 0) { return; }
 
-  var pjax = $.pjax($root, { animateTime: 0 });
+  var pjax = $.pjax($root, { cache: true, animateTime: 0 });
 
   $('body').on('click', 'a[data-pjax]', function() {
     if (!$.pjax.support) { return true; }
