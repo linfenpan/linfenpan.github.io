@@ -25,6 +25,9 @@ body {
 .orange {
   color: #ff5722; }
 
+.light {
+  color: #666; }
+
 #site-container {
   height: 100%;
   display: flex;
@@ -283,23 +286,27 @@ body {
     .product-list .info .data td {
       padding-right: 0.4rem; }
   .product-list .info .highlight {
-    margin-top: 0.2rem;
-    font-size: 0; }
-    .product-list .info .highlight span {
-      display: inline-block;
-      padding: 0 0.4rem;
-      margin-right: 0.25rem;
-      border: 1px solid #ddd;
-      font-size: 0.6rem;
-      color: #FF5722;
-      background: #eaeff4;
-      border-radius: 0.5rem; }
-      .product-list .info .highlight span:last-child {
-        margin-right: 0; }
+    margin-top: 0.2rem; }
+
+.highlight {
+  font-size: 0; }
+  .highlight span {
+    display: inline-block;
+    padding: 0 0.4rem;
+    margin-right: 0.25rem;
+    border: 1px solid #ddd;
+    font-size: 0.6rem;
+    color: #FF5722;
+    background: #eaeff4;
+    border-radius: 0.5rem; }
+    .highlight span:last-child {
+      margin-right: 0; }
 
 .title-tabs {
   position: relative;
+  z-index: 10;
   display: flex;
+  min-height: 2rem;
   background: #fff;
   box-shadow: 0 2px 2px #ddd; }
   .title-tabs .item {

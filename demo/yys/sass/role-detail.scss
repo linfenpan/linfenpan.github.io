@@ -1,0 +1,106 @@
+@import "var";
+
+.pageRole {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+
+  .introduce {
+    padding: $paddingNormal $paddingSmall;
+    background: $backgroundNormal;
+    @include bottomShadow();
+
+    .hd {
+      padding: $paddingNormal $paddingSmall;
+      padding-top: 0;
+      border-bottom: 1px solid $colorBorder;
+      color: $colorLight;
+      @include clearfix();
+    }
+
+    .cnt {
+      padding: $paddingNormal $paddingSmall;
+      line-height: 1.7;
+
+      .level { font-size: $fzBigger; }
+      .state { margin-top: rem(3); font-size: $fzSmall; }
+
+      .special, .highlight {
+        line-height: rem(18);
+        font-size: 0;
+        span {
+          display: inline-block;
+          font-size: $fzSmall;
+        }
+      }
+
+      .special span {
+        margin-right: $marginNormal;
+        padding-right: $marginNormal;
+        border-right: 1px solid $colorBorder;
+        color: $colorLight;
+        &:last-child { border-right: none; }
+      } // end .special
+
+    } // end .cnt
+
+    .ft {
+      border-top: 1px solid $colorBorder;
+      padding: $paddingNormal $paddingSmall;
+      padding-bottom: 0;
+      font-size: $fzSmall;
+      color: $colorLight;
+      a { color: $colorLight; }
+    }
+
+  } // end .introduce
+} // end .pageRole
+
+
+.roleTabs {
+  margin-top: $marginNormal;
+  border-bottom: 1px solid $colorBorder;
+  background: $backgroundNormal;
+
+  .swiper-slide { width: auto; padding: $paddingSmall $paddingNormal; transition: color .3s ease; }
+  .on { color: $colorActive; }
+}
+
+
+.roleContents {
+  padding: $paddingSmall 0;
+  background: $backgroundNormal;
+  @include bottomShadow();
+  .swiper-container { height: 100%; }
+  .swiper-slide {
+    padding: 0 $paddingSmall;
+  }
+  &.active .swiper-slide {
+    overflow: auto;
+  }
+}
+
+
+.roleFooter {
+  display: flex;
+  height: $heightFooter;
+  line-height: $heightFooter;
+
+  .state {
+    flex: 1;
+    font-size: $fzSmall;
+    a {
+      display: inline-block;
+      height: 100%;
+      padding: $paddingSmall $paddingNormal;
+      line-height: $heightFooter * .4;
+      text-align: center;
+      color: $colorLight;
+    }
+  }
+
+  .buyBtn {
+    padding: 0 $paddingBigger * 2;
+    color: #fff;
+    background: lighten($colorImportant, 7%);
+  }
+
+} // end .roleFooter

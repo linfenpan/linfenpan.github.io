@@ -63,3 +63,18 @@ function formatByDefault(str) {
   $siteSidebar.on('click', '[data-close]', hide)
     .on('click', '.back', hide);
 })();
+
+
+// module: 全局 a 标签修复
+;(function() {
+  $('body').on('click', 'a', function() {
+    var $link = $(this);
+    var href = $link.attr('href');
+    if (/^javascript/.test(href) || /^http\:/.test(href)) {
+      // nothing
+    } else if (/^\//.test(href)) {
+      $link.attr('href', urlRoot + href);
+    }
+    return true;
+  });
+})();

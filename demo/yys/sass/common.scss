@@ -10,6 +10,7 @@ body { max-width: $maxWidth; margin: 0 auto; }
 .green { color: #30b930; }
 .blue { color: #2ea3e4; }
 .orange { color: $colorActive; }
+.light { color: $colorLight; }
 
 #site-container { height: 100%; display: flex; flex-direction: column; }
 #site-header { position: relative; z-index: 10; background: #3197d0; box-shadow: 0 2px 2px #fff; }
@@ -33,9 +34,9 @@ body { max-width: $maxWidth; margin: 0 auto; }
 } // end #site-header
 
 #site-footer {
-  $h: 40;
-  height: rem($h);
-  line-height: rem($h * 0.4);
+  $h: $heightFooter;
+  height: $h;
+  line-height: $h * 0.4;
 
   .tabs {
     display: flex; height: 100%;
@@ -122,7 +123,7 @@ body { max-width: $maxWidth; margin: 0 auto; }
     display: flex;
     border-top: rem(1) solid $colorBorder;
     font-size: $fzSmall;
-    
+
     .btn { flex: 1; display: block; padding: $paddingNormal 0; text-align: center; color: $colorNormal; }
   }
 
@@ -227,27 +228,34 @@ body { max-width: $maxWidth; margin: 0 auto; }
     }
 
     .highlight {
-      margin-top: $marginSmall; font-size: 0;
-      span {
-        display: inline-block;
-        padding: 0 rem(8);
-        margin-right: rem(5);
-        border: 1px solid $colorBorder;
-        font-size: $fzSmall;
-        color: #FF5722;
-        background: #eaeff4;
-        border-radius: rem(10);
+      margin-top: $marginSmall;
+    }
 
-        &:last-child { margin-right: 0; }
-      }
-    } // end ./highlight
   } // end ./info
 }
+
+.highlight {
+  font-size: 0;
+  span {
+    display: inline-block;
+    padding: 0 rem(8);
+    margin-right: rem(5);
+    border: 1px solid $colorBorder;
+    font-size: $fzSmall;
+    color: #FF5722;
+    background: $colorHighlight;
+    border-radius: rem(10);
+
+    &:last-child { margin-right: 0; }
+  }
+} // end ./highlight
 
 // 顶栏切换
 .title-tabs {
   position: relative;
+  z-index: 10;
   display: flex;
+  min-height: rem(40);
   background: $backgroundNormal;
   @include bottomShadow;
 
