@@ -1,0 +1,94 @@
+body {
+  background: #eee;
+  font-size: 0.7rem;
+  color: #333; }
+
+#indexBanner {
+  width: 100%;
+  height: 0;
+  padding-bottom: 50%;
+  position: relative;
+  overflow: hidden; }
+  #indexBanner .swiper-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+  #indexBanner .swiper-pagination-bullets {
+    bottom: 2px; }
+  #indexBanner .swiper-pagination-bullet {
+    background: #fff;
+    opacity: .5; }
+  #indexBanner .swiper-pagination-bullet-active {
+    opacity: 1; }
+  #indexBanner .link {
+    position: relative; }
+  #indexBanner .link, #indexBanner .img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom; }
+  #indexBanner .desc {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.6rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: .5;
+    transition: opacity .5s ease .2s; }
+  #indexBanner .swiper-slide-active .desc {
+    opacity: 1; }
+
+#indexQuickList {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.4rem;
+  line-height: 1.6;
+  background: #fff;
+  box-shadow: 0 2px 2px #ddd; }
+  #indexQuickList td {
+    border: 1px solid #ddd;
+    text-align: left; }
+  #indexQuickList a {
+    display: block;
+    padding: 0.5rem;
+    color: #333; }
+  #indexQuickList .desc {
+    overflow: hidden;
+    display: block;
+    font-size: 0.6rem;
+    color: #666; }
+  #indexQuickList .icon {
+    float: right;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.4rem;
+    margin-top: 0.1rem;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    box-shadow: 0 0 3px #7bc4ff; }
+
+#recentList {
+  padding-top: 0.5rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ddd;
+  border-left: none;
+  border-left: none;
+  background: #fff;
+  box-shadow: 0 2px 2px #ddd; }
+  #recentList .header {
+    padding-left: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.8rem; }
+  #recentList .productList li {
+    border-bottom: 1px solid #ddd; }
+  #recentList .productList li:last-child {
+    border-bottom: none; }

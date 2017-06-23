@@ -1,0 +1,47 @@
+// 函数用于 属性值 中
+@function rem($size) {
+  @return $size / 20 * 1rem;
+}
+
+$maxWidth: 640px;
+
+$backgroundBody: #eee;
+$backgroundNormal: #fff;
+
+$paddingSmall: rem(5);
+$paddingNormal: rem(10);
+$paddingBigger: rem(15);
+
+$marginSmall: rem(4);
+$marginNormal: rem(8);
+
+$fzSmall: rem(12);
+$fzNormal: rem(14);
+$fzBigger: rem(16);
+
+$colorLight: #666;
+$colorNormal: #333;
+$colorBorder: #ddd;
+$colorActive: #ff5722;
+$colorImportant: #f00;
+
+
+@mixin textOverflowHidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin bottomShadow {
+  box-shadow: 0 2px 2px $colorBorder;
+}
+
+@mixin clearfix {
+  &:after {
+    content: '';
+    overflow: hidden;
+    display: table;
+    height: 0;
+    clear: both;
+  }
+}

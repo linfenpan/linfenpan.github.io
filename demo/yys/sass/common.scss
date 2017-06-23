@@ -1,0 +1,271 @@
+@import "var";
+
+html,body { width: 100%; height: 100%; overflow: hidden; }
+body { max-width: $maxWidth; margin: 0 auto; }
+
+.pull-right { float: right; }
+.pull-left { float: left; }
+
+.red { color: #f00; }
+.green { color: #30b930; }
+.blue { color: #2ea3e4; }
+.orange { color: $colorActive; }
+
+#site-container { height: 100%; display: flex; flex-direction: column; }
+#site-header { position: relative; z-index: 10; background: #3197d0; box-shadow: 0 2px 2px #fff; }
+#site-content { flex: 1; overflow: auto; position: relative; padding-bottom: $paddingSmall; }
+#site-footer { border-top: 1px solid $colorBorder; background: $backgroundNormal; }
+
+#site-header {
+  $h: 40;
+  $p: 5;
+  height: rem($h);
+  line-height: rem($h - 2 * $p);
+  padding: rem($p) rem(1.5 * $p);
+  text-align: center;
+  font-size: $fzBigger;
+  color: #fff;
+  a { color: #fff; }
+
+  .title { @include textOverflowHidden; position: absolute; top: rem($p); left: 50%; width: rem(120); margin-left: -1 * rem(60); }
+  .right { float: right; }
+  .left { float: left; }
+} // end #site-header
+
+#site-footer {
+  $h: 40;
+  height: rem($h);
+  line-height: rem($h * 0.4);
+
+  .tabs {
+    display: flex; height: 100%;
+    li { display: block; flex: 1; border-left: 1px solid $colorBorder; }
+    li:first-child { border-left: none; }
+    a { display: block; padding-top: rem(5); text-align: center; color: lighten($colorNormal, 10%); transition: color .3s ease; }
+    a.on { color: $colorActive; }
+    .text { display: block; font-size: $fzSmall; }
+  }
+} // end #site-footer
+
+#site-sidebar {
+  visibility: hidden;
+  position: fixed;
+  z-index: 100;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  transition: visibility .3s ease .3s;
+
+  @at-root {
+    @media only screen and (min-width:$maxWidth) {
+      & {
+        overflow: hidden;
+        left: 50%;
+        width: $maxWidth;
+        margin-left: -$maxWidth / 2;
+      }
+    }
+  }
+
+  .back {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #000;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    position: absolute;
+    top: 0; left: 0;
+    $w: rem(150);
+    width: $w; height: 100%;
+    padding: 0 $paddingSmall;
+    background: $backgroundNormal;
+    background-image: linear-gradient(270deg, #f5fbff 20%, #fff 80%, #fff);
+    transform: translateX(-$w);
+    transition: transform .3s ease;
+  }
+
+  .cnt {
+    flex: 1;
+    overflow: auto;
+
+    .operList {
+      padding-top: $paddingSmall;
+      padding-bottom: $paddingNormal;
+      border-bottom: rem(1) solid $colorBorder;
+      &:last-child { border-bottom: none; }
+
+      li { font-size: $fzSmall; }
+      a { display: block; padding: $paddingNormal 0; color: $colorLight; }
+    }
+  }
+
+  .hd {
+    padding: $paddingSmall 0;
+    font-size: 0;
+    border-bottom: rem(1) solid $colorBorder;
+    @include textOverflowHidden;
+
+    $s: rem(30);
+    .userLink { display: block; color: $colorNormal; }
+    .icon, .name { vertical-align: middle; }
+    .icon { width: $s; height: $s; border: 2px solid $colorBorder; border-radius: 50%; }
+    .name { margin-left: $marginNormal; font-size: $fzNormal; }
+  }
+
+  .ft {
+    display: flex;
+    border-top: rem(1) solid $colorBorder;
+    font-size: $fzSmall;
+    
+    .btn { flex: 1; display: block; padding: $paddingNormal 0; text-align: center; color: $colorNormal; }
+  }
+
+  // 动画部分
+  &.on {
+    visibility: visible;
+    transition: none;
+
+    .back {
+      opacity: .5;
+    }
+    .content {
+      transform: translateX(0);
+    }
+  }
+
+  @at-root {
+    .active-sidebar { overflow: hidden; }
+    #site-container { transition: transform .3s ease; transform-origin: 100% 50%; }
+    .active-sidebar #site-container { transform: translateX(rem(100)) scale(.92); }
+  }
+} // end #site-sidebar
+
+// 阴阳师头像列表
+.masters {
+  font-size: 0;
+  width: rem(55);
+  height: rem(55);
+
+  .m {
+    display: inline-block;
+    width: rem(20);
+    height: rem(20);
+    margin: rem(5) 0 0 rem(5);
+    font-size: $fzNormal;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50%;
+    opacity: 0.3;
+    @include bottomShadow;
+    &.on { opacity: 1; }
+  }
+
+  @for $i from 1 through 4 {
+    .m#{$i} {
+      background-image: url('../../image/master/#{$i}.png');
+    }
+  }
+}
+
+// 产品列表
+.product-list {
+  .link {
+    display: block;
+    padding: $paddingNormal 0;
+    padding-left: 0;
+    color: $colorNormal;
+    background: $backgroundNormal;
+  }
+
+  .hd-cnt {
+    line-height: rem(24);
+    padding: $paddingSmall;
+    padding-top: 0;
+    margin-bottom: $marginNormal;
+    border-bottom: 1px solid $colorBorder;
+    font-size: $fzSmall;
+    @include clearfix;
+
+    .time { float: left; }
+    .state { float: right; color: $colorActive; }
+  }
+
+  .ft-cnt {
+    line-height: rem(24);
+    padding: $paddingSmall;
+    padding-bottom: 0;
+    margin-top: $marginNormal;
+    border-top: 1px solid $colorBorder;
+    font-size: $fzSmall;
+    @include clearfix;
+
+    .pay {
+      float: right;
+      span { color: $colorImportant; }
+    }
+  }
+
+  .cnt { display: flex; padding-right: $paddingSmall; }
+    .info { flex: 1; }
+    .masters { margin: rem(5) rem(8) 0 0; }
+
+  .info {
+    line-height: 1.6;
+    .name { float: right; }
+
+    .data {
+      font-size: $fzSmall;
+      color: $colorLight;
+      th { text-align: right; }
+      td { padding-right: rem(8); }
+    }
+
+    .highlight {
+      margin-top: $marginSmall; font-size: 0;
+      span {
+        display: inline-block;
+        padding: 0 rem(8);
+        margin-right: rem(5);
+        border: 1px solid $colorBorder;
+        font-size: $fzSmall;
+        color: #FF5722;
+        background: #eaeff4;
+        border-radius: rem(10);
+
+        &:last-child { margin-right: 0; }
+      }
+    } // end ./highlight
+  } // end ./info
+}
+
+// 顶栏切换
+.title-tabs {
+  position: relative;
+  display: flex;
+  background: $backgroundNormal;
+  @include bottomShadow;
+
+  .item {
+    flex: 1;
+    padding: $paddingNormal 0;
+    text-align: center;
+    color: $colorNormal;
+    transition: color .3s ease;
+  }
+  .on {
+    color: $colorActive;
+  }
+  .line {
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 2px; width: 0;
+    background: $colorActive;
+    transition: left .3s ease, width .3s ease;
+  }
+}

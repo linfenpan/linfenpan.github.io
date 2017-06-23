@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+  <title>sass学习</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/swiper.min.css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css">
+  <link rel="stylesheet" href="./css/dist/output.css">
+</head>
+<body>
+  <div id="site-container">
+    <div id="site-header">
+      <div class="left">
+        <a href="javascript:;" class="fa fa-bars"></a>
+      </div>
+      <div class="title">首页</div>
+      <div class="right">
+        <a href="javascript:;" class="fa fa-search"></a>
+      </div>
+    </div><!-- /#site-header -->
+
+    <div id="site-content">
+      <div id="indexBanner">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a class="link" href="./404.html">
+                <img class="img" src="./image/football.jpg" />
+                <div class="desc">
+                  <span class="text">足球少年，加入我们吧!!</span>
+                </div>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="link" href="./404.html">
+                <img class="img" src="./image/beach.jpg" />
+                <div class="desc">
+                  <span class="text">沙滩、美女、阳光、海岸，都不可能有的啦~</span>
+                </div>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a class="link" href="./404.html">
+                <img class="img" src="./image/fish.jpg" />
+                <div class="desc">
+                  <span class="text">钓鱼俱乐部，留给懂得钓鱼的你</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <!-- 这里改用 table 更爽~ -->
+      <table id="indexQuickList">
+        <tr>
+          <td>
+            <a class="item clearfix" href="javascript:console.log(1);">
+              <p class="name">式神-速250+</p>
+              <img class="icon" src="./image/quick/1.png" alt="式神">
+              <span class="desc">快的就是好的</span>
+            </a>
+          </td>
+          <td>
+            <a class="item clearfix" href="javascript:console.log(1);">
+              <p class="name">60成品号</p>
+              <img class="icon" src="./image/quick/2.png" alt="式神">
+              <span class="desc">斗技稳定3300</span>
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <a class="item clearfix" href="javascript:console.log(1);">
+              <p class="name">高暴伤流行显目</p>
+              <img class="icon" src="./image/quick/3.png" alt="式神">
+              <span class="desc">最爱一拳超人</span>
+            </a>
+          </td>
+          <td>
+            <a class="item clearfix" href="javascript:console.log(1);">
+              <p class="name">颜值即正义</p>
+              <img class="icon" src="./image/quick/4.png" alt="式神">
+              <span class="desc">皮肤空福音</span>
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <div id="recentList">
+        <h2 class="header">最新上架</h2>
+        <ul class="productList product-list">
+          <li>
+            <a href="javascript:;" class="link">
+              <div class="cnt">
+                <div class="masters">
+                  <i class="m m1 on"></i>
+                  <i class="m m2 on"></i>
+                  <i class="m m3 on"></i>
+                  <i class="m m4"></i>
+                </div>
+                <div class="info">
+                  <div class="hd clearfix">
+                    <span class="name">夏之婵</span>
+                    <span class="level">60级</span>
+                  </div>
+                  <table class="data">
+                    <tr>
+                      <th>六星式神：</th><td>3</td>
+                      <th>五星式神：</th><td>12</td>
+                    </tr>
+                    <tr>
+                      <th>SSR式神：</th><td>3</td>
+                      <th>SR式神：</th><td>12</td>
+                    </tr>
+                  </table>
+                  <div class="highlight">
+                    <span class="hl">一速256</span>
+                    <span class="hl">力量250</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="javascript:;" class="link">
+              <div class="cnt">
+                <div class="masters">
+                  <i class="m m1 on"></i>
+                  <i class="m m2"></i>
+                  <i class="m m3"></i>
+                  <i class="m m4"></i>
+                </div>
+                <div class="info">
+                  <div class="hd clearfix">
+                    <span class="name">无语之王-=3</span>
+                    <span class="level">60级</span>
+                  </div>
+                  <table class="data">
+                    <tr>
+                      <th>六星式神：</th><td>3</td>
+                      <th>五星式神：</th><td>12</td>
+                    </tr>
+                    <tr>
+                      <th>SSR式神：</th><td>3</td>
+                      <th>SR式神：</th><td>12</td>
+                    </tr>
+                  </table>
+                  <div class="highlight">
+                    <span class="hl">光速</span>
+                    <span class="hl">画质MAX</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /#site-content -->
+
+    <div id="site-footer">
+      <ul class="tabs">
+        <li>
+          <a href="./index.html" class="link on">
+            <i class="fa fa-home"></i>
+            <span class="text">首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="./page/order-list.html" class="link">
+            <i class="fa fa-book"></i>
+            <span class="text">订单</span>
+          </a>
+        </li>
+        <li>
+          <a href="./page/user.html" class="link">
+            <i class="fa fa-user-circle"></i>
+            <span class="text">用户</span>
+          </a>
+        </li>
+      </ul>
+    </div><!-- /#site-footer -->
+  </div><!-- /#site-container -->
+
+
+  <div id="site-sidebar">
+    <!-- 内容暂时从 ajax 处获取吧 -->
+  </div><!-- /#site-sidebar -->
+
+  <script src="./js/jquery.js" charset="utf-8"></script>
+  <script src="./js/swiper.min.js" charset="utf-8"></script>
+  <script src="./js/common.js" charset="utf-8"></script>
+  <script>
+    (function() {
+      var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        pagination : '.swiper-pagination',
+      	autoplay: 2000,
+        autoplayDisableOnInteraction: false
+      });
+    })();
+  </script>
+</body>
+</html>
