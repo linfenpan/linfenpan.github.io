@@ -7,6 +7,7 @@ $maxWidth: 640px;
 
 $backgroundBody: #eee;
 $backgroundNormal: #fff;
+$backgroundHeader: #3197d0;
 
 $paddingSmall: rem(5);
 $paddingNormal: rem(10);
@@ -27,6 +28,7 @@ $colorImportant: #f00;
 $colorHighlight: #eaeff4;
 
 $heightFooter: rem(40);
+$heightHeader: rem(40);
 
 
 @mixin textOverflowHidden {
@@ -46,5 +48,20 @@ $heightFooter: rem(40);
     display: table;
     height: 0;
     clear: both;
+  }
+}
+
+@mixin positionFixed($width) {
+  position: fixed;
+  width: $width;
+  @at-root {
+    @media only screen and (min-width: $maxWidth) {
+      & {
+        overflow: hidden;
+        left: 50%;
+        width: $maxWidth;
+        margin-left: -$maxWidth / 2;
+      }
+    }
   }
 }

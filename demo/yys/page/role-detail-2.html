@@ -156,11 +156,23 @@
       $win.on('resize', reset);
 
       var $scroll = $('#site-content');
+      var isAnimate = false;
       $scroll.on('scroll', function() {
-        if ($scroll.scrollTop() >= topStart) {
-          $content.addClass('active');
+        if (isAnimate) { return; }
+        var scrollTop = $scroll.scrollTop();
+        var hasClass = $content.hasClass('active');
+        if (hasClass) {
+          if (scrollTop < topStart) {
+            isAnimate = true;
+            $scroll.animate({ scrollTop: 0 }, 200, function() { isAnimate = false; });
+            $content.removeClass('active');
+          }
         } else {
-          $content.removeClass('active');
+          if (scrollTop > 10) {
+            isAnimate = true;
+            $scroll.animate({ scrollTop: topStart }, 200, function() { isAnimate = false; });
+            $content.addClass('active');
+          }
         }
       });
     });

@@ -78,3 +78,47 @@ function formatByDefault(str) {
     return true;
   });
 })();
+
+
+// module: 搜索功能
+$(function() {
+  In.add('modal-css', {
+    path: urlRoot + '/css/jquery-modal.css'
+  });
+  In.add('modal', {
+    rely: ['modal-css'],
+    path: urlRoot + '/js/jquery-modal.js'
+  });
+
+  var $body = $('body');
+  var $siteHeader = $('#site-header');
+  if ($siteHeader.length > 0) {
+    In('modal', function() {
+      $.get(urlRoot + '/ajax/search.html', function(html) {
+        $body.append(html);
+        bindClick();
+      });
+    });
+  }
+
+  function bindClick() {
+    $siteHeader.on('click', '.fa-search', function() {
+      var popup = $.popup('#popup-search');
+      var $root = popup.$root;
+
+      $root.on('submit', 'form', function() {
+        $.alert('搜索:' + $.trim($root.find('.input').val()))
+        return false;
+      });
+      $root.on('click', '.fa-search', function() {
+        var val = $.trim($root.find('.input').val());
+        if (val) {
+          $root.find('form').submit();
+        } else {
+          $root.find('.input').focus();
+        }
+        return false;
+      });
+    });
+  };
+});

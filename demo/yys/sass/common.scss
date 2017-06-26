@@ -2,6 +2,7 @@
 
 html,body { width: 100%; height: 100%; overflow: hidden; }
 body { max-width: $maxWidth; margin: 0 auto; }
+body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
 
 .pull-right { float: right; }
 .pull-left { float: left; }
@@ -13,22 +14,22 @@ body { max-width: $maxWidth; margin: 0 auto; }
 .light { color: $colorLight; }
 
 #site-container { height: 100%; display: flex; flex-direction: column; }
-#site-header { position: relative; z-index: 10; background: #3197d0; box-shadow: 0 2px 2px #fff; }
+#site-header, .site-header { position: relative; z-index: 10; background: $backgroundHeader; box-shadow: 0 2px 2px #fff; }
 #site-content { flex: 1; overflow: auto; position: relative; padding-bottom: $paddingSmall; }
 #site-footer { border-top: 1px solid $colorBorder; background: $backgroundNormal; }
 
-#site-header {
-  $h: 40;
-  $p: 5;
-  height: rem($h);
-  line-height: rem($h - 2 * $p);
-  padding: rem($p) rem(1.5 * $p);
+#site-header, .site-header {
+  $h: $heightHeader;
+  $p: rem(5);
+  height: $h;
+  line-height: $h - 2 * $p;
+  padding: $p 1.5 * $p;
   text-align: center;
   font-size: $fzBigger;
   color: #fff;
   a { color: #fff; }
 
-  .title { @include textOverflowHidden; position: absolute; top: rem($p); left: 50%; width: rem(120); margin-left: -1 * rem(60); }
+  .title { @include textOverflowHidden; position: absolute; top: $p; left: 50%; width: rem(120); margin-left: -1 * rem(60); }
   .right { float: right; }
   .left { float: left; }
 } // end #site-header
@@ -48,24 +49,15 @@ body { max-width: $maxWidth; margin: 0 auto; }
   }
 } // end #site-footer
 
+
+// module: 站点左边的侧边栏
 #site-sidebar {
   visibility: hidden;
-  position: fixed;
+  @include positionFixed(100%);
   z-index: 100;
   top: 0; left: 0;
-  width: 100%; height: 100%;
+  height: 100%;
   transition: visibility .3s ease .3s;
-
-  @at-root {
-    @media only screen and (min-width:$maxWidth) {
-      & {
-        overflow: hidden;
-        left: 50%;
-        width: $maxWidth;
-        margin-left: -$maxWidth / 2;
-      }
-    }
-  }
 
   .back {
     position: absolute;
@@ -147,7 +139,8 @@ body { max-width: $maxWidth; margin: 0 auto; }
   }
 } // end #site-sidebar
 
-// 阴阳师头像列表
+
+// module: 阴阳师头像列表
 .masters {
   font-size: 0;
   width: rem(55);
@@ -174,7 +167,8 @@ body { max-width: $maxWidth; margin: 0 auto; }
   }
 }
 
-// 产品列表
+
+// module: 产品列表
 .product-list {
   .link {
     display: block;
@@ -234,6 +228,8 @@ body { max-width: $maxWidth; margin: 0 auto; }
   } // end ./info
 }
 
+
+// module: 高亮
 .highlight {
   font-size: 0;
   span {
@@ -250,7 +246,8 @@ body { max-width: $maxWidth; margin: 0 auto; }
   }
 } // end ./highlight
 
-// 顶栏切换
+
+// module: 顶栏切换
 .title-tabs {
   position: relative;
   z-index: 10;
@@ -277,3 +274,99 @@ body { max-width: $maxWidth; margin: 0 auto; }
     transition: left .3s ease, width .3s ease;
   }
 }
+
+
+// module: 搜索弹出层
+body .popup-search {
+  @include positionFixed(100%);
+  overflow: hidden;
+  background: $backgroundNormal;
+
+  @at-root {
+    @media only screen and (max-width: $maxWidth) {
+      &.animate-ready { transform: translate(100%, 0); }
+      &.animate-active { transform: translate(0, 0); }
+      &.animate-out { transform: translate(100%, 0); }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .search-content {
+    flex: 1;
+    overflow: auto;
+    padding-bottom: $paddingNormal;
+  }
+
+  .search-header {
+    display: flex;
+    text-align: left;
+    font-size: $fzNormal;
+      .cnt {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        padding: 0 $paddingNormal;
+        background: rgba(255, 255, 255, .2);
+        border-radius: $paddingNormal * 3;
+      }
+      .input {
+        display: block;
+        flex: 1;
+        height: 100%;
+        margin-left: $marginSmall;
+        border: none;
+        font-size: $fzNormal;
+        color: #fff;
+        background: transparent;
+        &::-webkit-input-placeholder  {
+          color: rgba(255, 255, 255, .5);
+        }
+      }
+      .cancel {
+        margin-left: $marginNormal;
+      }
+  } // end ./search-header
+
+  .search-list {
+    padding: 0 $paddingSmall * 2;
+    margin-top: $marginNormal * 1.5;
+    font-size: $fzSmall;
+      .hd {
+        padding: $paddingSmall;
+        padding-top: 0;
+        border-bottom: rem(1) solid $colorBorder;
+        color: $colorLight;
+      }
+      .list {
+        font-size: 0;
+        padding-top: $paddingSmall / 2;
+        padding-bottom: $marginNormal * 1.5;
+        text-align: center;
+          a {
+            display: inline-block;
+            line-height: 2.1;
+            border: 1px solid $colorNormal;
+            padding: 0 $paddingNormal;
+            margin: $paddingNormal $paddingSmall 0 0;
+            font-size: $fzSmall;
+            border-radius: $paddingSmall * 2.5;
+            color: $colorNormal;
+          }
+          span {
+            display: inline-block;
+            width: 20%;
+          }
+      }
+
+      a {
+        transition: all .2s ease;
+        &:active { color: $colorActive; border-color: $colorActive; }
+      }
+  } // end .search-list
+
+} // end body .popup-search
