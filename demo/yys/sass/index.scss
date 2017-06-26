@@ -59,15 +59,13 @@
 
 // module: 最新上架
 #recentList {
-  padding-top: $paddingNormal;
   margin-top: $marginNormal;
   border: 1px solid $colorBorder; border-left: none; border-left: none;
   background: $backgroundNormal;
   @include bottomShadow;
 
   .header {
-    padding-left: $paddingSmall;
-    padding-bottom: $paddingSmall;
+    padding: $paddingNormal $paddingSmall;
     border-bottom: 1px solid $colorBorder;
     font-size: $fzBigger;
   }

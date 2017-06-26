@@ -23,7 +23,6 @@
   .product-list {
     li { margin-top: $marginNormal; @include bottomShadow; }
     li:first-child { margin-top: 0; }
-    .ft-cnt { width: 70%; margin-left: 30%; }
   }
 }
 

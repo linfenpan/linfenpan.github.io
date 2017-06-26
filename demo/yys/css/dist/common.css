@@ -225,12 +225,14 @@ body {
   .masters .m4 {
     background-image: url("../../image/master/4.png"); }
 
+.product-list li, .product-list .item {
+  background: #fff; }
+
 .product-list .link {
   display: block;
   padding: 0.5rem 0;
   padding-left: 0;
-  color: #333;
-  background: #fff; }
+  color: #333; }
 
 .product-list .hd-cnt {
   line-height: 1.2rem;
@@ -254,7 +256,6 @@ body {
 .product-list .ft-cnt {
   line-height: 1.2rem;
   padding: 0.25rem;
-  padding-bottom: 0;
   margin-top: 0.4rem;
   border-top: 1px solid #ddd;
   font-size: 0.6rem; }
@@ -264,10 +265,21 @@ body {
     display: table;
     height: 0;
     clear: both; }
-  .product-list .ft-cnt .pay {
-    float: right; }
-    .product-list .ft-cnt .pay span {
-      color: #f00; }
+
+.product-list .ft-oper {
+  display: flex;
+  border-top: 1px solid #ddd;
+  text-align: center; }
+  .product-list .ft-oper .btn {
+    flex: 1;
+    padding: 0.375rem 0.25rem 0.4375rem 0.25rem;
+    border-left: 1px solid #ddd;
+    transition: opacity .2s ease, background-color .2s ease; }
+    .product-list .ft-oper .btn:first-child {
+      border: none; }
+    .product-list .ft-oper .btn:active {
+      opacity: .7;
+      background-color: #eee; }
 
 .product-list .cnt {
   display: flex;

@@ -170,12 +170,14 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
 
 // module: 产品列表
 .product-list {
+  li, .item {
+    background: $backgroundNormal;
+  }
   .link {
     display: block;
     padding: $paddingNormal 0;
     padding-left: 0;
     color: $colorNormal;
-    background: $backgroundNormal;
   }
 
   .hd-cnt {
@@ -194,16 +196,24 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
   .ft-cnt {
     line-height: rem(24);
     padding: $paddingSmall;
-    padding-bottom: 0;
     margin-top: $marginNormal;
     border-top: 1px solid $colorBorder;
     font-size: $fzSmall;
     @include clearfix;
+  }
 
-    .pay {
-      float: right;
-      span { color: $colorImportant; }
-    }
+  .ft-oper {
+    display: flex;
+    border-top: 1px solid $colorBorder;
+    text-align: center;
+      .btn {
+        flex: 1;
+        padding: $paddingSmall * 1.5 $paddingSmall $paddingSmall * 1.75 $paddingSmall;
+        border-left: 1px solid $colorBorder;
+        transition: opacity .2s ease, background-color .2s ease;
+        &:first-child { border: none; }
+        &:active { opacity: .7; background-color: $backgroundBody; }
+      }
   }
 
   .cnt { display: flex; padding-right: $paddingSmall; }

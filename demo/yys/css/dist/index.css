@@ -71,7 +71,6 @@
     box-shadow: 0 0 3px #7bc4ff; }
 
 #recentList {
-  padding-top: 0.5rem;
   margin-top: 0.4rem;
   border: 1px solid #ddd;
   border-left: none;
@@ -79,8 +78,7 @@
   background: #fff;
   box-shadow: 0 2px 2px #ddd; }
   #recentList .header {
-    padding-left: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding: 0.5rem 0.25rem;
     border-bottom: 1px solid #ddd;
     font-size: 0.8rem; }
   #recentList .productList li {

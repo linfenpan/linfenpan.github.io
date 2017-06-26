@@ -19,9 +19,6 @@
     box-shadow: 0 2px 2px #ddd; }
   #orderList .product-list li:first-child {
     margin-top: 0; }
-  #orderList .product-list .ft-cnt {
-    width: 70%;
-    margin-left: 30%; }
 
 .notFind {
   display: block;
