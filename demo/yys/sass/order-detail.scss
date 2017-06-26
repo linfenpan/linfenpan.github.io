@@ -1,0 +1,83 @@
+@import "var";
+
+.orderDetail {
+  .module {
+    line-height: 1.7;
+    padding: $paddingNormal;
+    margin-top: $marginNormal;
+    background: $backgroundNormal;
+    @include bottomShadow();
+    &:first-child { margin-top: 0; }
+  }
+
+  .role-detail-item {
+    margin-top: $marginNormal;
+  }
+
+  .orderInfo {
+    line-height: 1.8;
+  }
+} // end .orderDetail
+
+.role-detail-item {
+  background: $backgroundNormal;
+  @include bottomShadow();
+
+  .hd {
+    padding: $paddingNormal;
+    padding-bottom: $paddingNormal * .75;
+    line-height: rem(20);
+      .platform { font-size: $fzSmall; color: $colorLight; }
+      .price { float: right; font-size: $fzSmall; color: $colorImportant; }
+  }
+
+  .preview {
+    padding: $paddingNormal 0;
+    border-top: rem(1) solid $colorBorder;
+    font-size: 0;
+    li { display: inline-block; width: 25%; padding: 0 2px; font-size: $fzNormal; text-align: center; }
+    .name { display: block; font-size: $fzSmall; @include textOverflowHidden(); }
+  }
+
+  .intro {
+    padding: $paddingNormal 0;
+    border-top: rem(1) solid $colorBorder;
+    line-height: 1;
+    font-size: 0;
+      span {
+        display: inline-block;
+        padding: 0 $paddingNormal;
+        margin: $marginSmall 0;
+        border-right: 1px solid $colorLight;
+        font-size: $fzSmall;
+        color: $colorLight;
+        &:last-child { border-right: none; }
+      }
+  }
+
+  .highlight {
+    padding: 0 $paddingNormal;
+  }
+
+  > :last-child {
+    padding-bottom: $paddingNormal;
+  }
+} // end .role-detail-item
+
+.orderFooter {
+  display: flex;
+  height: $heightFooter;
+  line-height: $heightFooter;
+
+  .info {
+    flex: 1;
+    color: $colorLight;
+    padding: 0 $paddingSmall;
+  }
+
+  .buyBtn {
+    padding: 0 $paddingBigger * 2;
+    color: #fff;
+    background: lighten($colorImportant, 7%);
+  }
+} // end .orderFooter

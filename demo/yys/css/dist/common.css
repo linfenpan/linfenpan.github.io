@@ -33,6 +33,15 @@ body {
 .light {
   color: #666; }
 
+.fzSmall {
+  font-size: 0.6rem; }
+
+.fzNormal {
+  font-size: 0.7rem; }
+
+.fzBigger {
+  font-size: 0.8rem; }
+
 #site-container {
   height: 100%;
   display: flex;

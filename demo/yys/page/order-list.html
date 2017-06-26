@@ -141,7 +141,7 @@
         var url = $content.data('url');
         $.get(url)
           .done(function(html) {
-            $content.html(html)
+            $content.html(formatByDefault(html));
           })
           .fail(function() {
             $content.html('<span class="notFind">没找到内容 IIOTZ_</span>');

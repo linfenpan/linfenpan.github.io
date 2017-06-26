@@ -13,6 +13,10 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
 .orange { color: $colorActive; }
 .light { color: $colorLight; }
 
+.fzSmall { font-size: $fzSmall; }
+.fzNormal { font-size: $fzNormal; }
+.fzBigger { font-size: $fzBigger; }
+
 #site-container { height: 100%; display: flex; flex-direction: column; }
 #site-header, .site-header { position: relative; z-index: 10; background: $backgroundHeader; box-shadow: 0 2px 2px #fff; }
 #site-content { flex: 1; overflow: auto; position: relative; padding-bottom: $paddingSmall; }
