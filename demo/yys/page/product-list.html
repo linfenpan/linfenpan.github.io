@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+  <title>sass学习</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/swiper.min.css">
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/dist/output.css">
+</head>
+<body>
+  <div id="site-container">
+    <div id="site-header">
+      <div class="left">
+        <a href="javascript:history.back();" class="fa fa-arrow-left"></a>
+      </div>
+      <div class="title">商品列表</div>
+      <div class="right">
+        <a href="javascript:;" class="fa fa-search"></a>
+        <a href="javascript:;" class="fa fa-envelope-o"></a>
+      </div>
+    </div><!-- /#site-header -->
+
+    <div id="site-content">
+      <div class="pageProductList">
+        <section class="productTabs">
+          <div class="tabs">
+            <a href="javascript:;" class="item on" data-sort="new">最新</a>
+            <a href="javascript:;" class="item" data-sort="collect">收藏最多</a>
+            <a href="javascript:;" class="item">
+              价格
+              <span class="sort">
+                <i class="fa fa-sort-up" data-sort="price:up"></i>
+                <i class="fa fa-sort-down" data-sort="price:down"></i>
+              </span>
+            </a>
+          </div>
+          <a href="javascript:;" class="filter">筛选</a>
+        </section>
+
+        <ul class="productFilters">
+          <li>
+            <div class="name">
+              操作系统<i class="fa fa-sort-down fa-fw"></i>
+            </div>
+            <div class="text"></div>
+          </li>
+          <li>
+            <div class="name">
+              御魂<i class="fa fa-sort-down fa-fw"></i>
+            </div>
+            <div class="text"></div>
+          </li>
+          <li>
+            <div class="name">
+              阴阳术<i class="fa fa-sort-down fa-fw"></i>
+            </div>
+            <div class="text"></div>
+          </li>
+          <li>
+            <div class="name">
+              皮肤<i class="fa fa-sort-down fa-fw"></i>
+            </div>
+            <div class="text"></div>
+          </li>
+        </ul>
+
+        <div class="productFloatFilters">
+          <div class="back"></div>
+          <div class="cnt">
+            <div class="space"></div>
+            <div class="select">
+              <ul class="list">
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">iOS(苹果手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="item">
+                    <span class="text">Android(安卓手机)</span>
+                    <i class="fa fa-check pull-right"></i>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="opers">
+              <a href="javascript:;" class="btn btnReset">重置</a>
+              <a href="javascript:;" class="btn btnSure">确认</a>
+            </div>
+          </div>
+        </div>
+
+        <section class="productList">
+          <a class="role-detail-item" href="/page/role-detail.html">
+            <div class="hd">
+              <span class="level">33级</span>
+              <span class="platform">
+                <i class="fa fa-apple fa-fw"></i>全平台-B站-形影不离
+              </span>
+              <span class="price">￥123456.00</span>
+            </div>
+            <ul class="preview">
+              <li>
+                <img src="../image/role/1.png" alt="妖刀姬" class="icon">
+                <span class="name">妖刀姬</span>
+              </li>
+              <li>
+                <img src="../image/role/2.png" alt="荒山之主" class="icon">
+                <span class="name">荒山之主</span>
+              </li>
+              <li>
+                <img src="../image/role/3.png" alt="桃花妖" class="icon">
+                <span class="name">桃花妖</span>
+              </li>
+              <li>
+                <img src="../image/role/4.png" alt="姑苏鸟" class="icon">
+                <span class="name">姑苏鸟</span>
+              </li>
+            </ul>
+            <div class="intro">
+              <span>SSR 15</span>
+              <span>六星式神 16</span>
+              <span>六星御魂 255</span>
+              <span>四星结界卡 365</span>
+            </div>
+            <div class="highlight">
+              <span>神速</span>
+              <span>妖孽</span>
+              <span>龙傲天 x3</span>
+              <div class="pull-right fzSmall light">收藏：123,55</div>
+            </div>
+          </a>
+
+          <a class="role-detail-item" href="/page/role-detail-2.html">
+            <div class="hd">
+              <span class="level">33级</span>
+              <span class="platform">
+                <i class="fa fa-apple fa-fw"></i>全平台-B站-形影不离
+              </span>
+              <span class="price">￥123456.00</span>
+            </div>
+            <ul class="preview">
+              <li>
+                <img src="../image/role/1.png" alt="妖刀姬" class="icon">
+                <span class="name">妖刀姬</span>
+              </li>
+              <li>
+                <img src="../image/role/2.png" alt="荒山之主" class="icon">
+                <span class="name">荒山之主</span>
+              </li>
+              <li>
+                <img src="../image/role/3.png" alt="桃花妖" class="icon">
+                <span class="name">桃花妖</span>
+              </li>
+              <li>
+                <img src="../image/role/4.png" alt="姑苏鸟" class="icon">
+                <span class="name">姑苏鸟</span>
+              </li>
+            </ul>
+            <div class="intro">
+              <span>SSR 15</span>
+              <span>六星式神 16</span>
+              <span>六星御魂 255</span>
+              <span>四星结界卡 365</span>
+            </div>
+            <div class="highlight">
+              <span>神速</span>
+              <span>妖孽</span>
+              <span>龙傲天 x3</span>
+              <div class="pull-right fzSmall light">收藏：123,55</div>
+            </div>
+          </a>
+        </section><!-- / .productList -->
+
+      </div><!-- / .pageProductList -->
+    </div><!-- /#site-content -->
+
+    <!--
+    <div id="site-footer">
+
+    </div>--><!-- /#site-footer -->
+  </div><!-- /#site-container -->
+
+
+  <div id="site-sidebar">
+    <!-- 内容暂时从 ajax 处获取吧 -->
+  </div><!-- /#site-sidebar -->
+
+  <script src="../js/in.js" charset="utf-8"></script>
+  <script src="../js/jquery.js" charset="utf-8"></script>
+  <script src="../js/swiper.min.js" charset="utf-8"></script>
+  <script src="../js/common.js" charset="utf-8"></script>
+  <script>
+    $(function initProductFilters() {
+      var $root = $('.productTabs');
+      $root.on('click', 'a', function() {
+        console.log('yyyy');
+        var $item = $(this);
+        var sort = $item.data('sort');
+
+        if (!$item.hasClass('on')) {
+          $root.find('.on').removeClass('on');
+          $item.addClass('on');
+        }
+
+        // 有排序的
+        //   第一次，第一个箭头高亮
+        //   第二次，两个箭头高亮状态，切换一次
+        var $sort = $item.find('.sort');
+        if ($sort.length > 0) {
+          if ($sort.find('.on').length > 0) {
+            $sort.find('.fa').toggleClass('on');
+          } else {
+            $sort.find('.fa').eq(0).addClass('on');
+          }
+
+          sort = $sort.find('.on').data('sort');
+        }
+
+        console.log(sort);
+      }); // end click
+    });
+  </script>
+
+  <script>
+    $(function initFloatFilters() {
+      var $float = $('.productFloatFilters');
+      var $filter = $('.productFilters');
+
+      $filter.on('click', 'li', function() {
+        var $el = $(this);
+        $el.addClass('on');
+        showFloat($el);
+      });
+
+      $float.on('click', 'li', function() {
+        $(this).toggleClass('on');
+      });
+      $float.on('click', '.btnReset', function() {
+        $float.trigger('reset');
+        $float.trigger('close');
+      });
+      $float.on('click', '.btnSure', function() {
+        $float.trigger('sure');
+        $float.trigger('close');
+      });
+      $float.on('click', function(e) {
+        var $target = $(e.target);
+        if ($target.hasClass('back') || e.target == $float[0]) {
+          $float.trigger('close');
+        }
+      });
+
+      $float.on('close', function() {
+        $float.hide();
+      });
+      $float.on('reset', function() {
+        $float.find('.on').removeClass('on');
+      });
+
+      function showFloat($target) {
+        $float.show();
+        console.log('TODO: 根据 $target 初始化列表的内容');
+        fixFloatPostion($target);
+        listenEvent($target);
+      }
+
+      function fixFloatPostion($target) {
+        var offsetTarget = $target.offset()
+        var offset = {
+          top: offsetTarget.top + $target.outerHeight(),
+          left: 0
+        };
+        $float.find('.cnt').css(offset);
+        $float.find('.back').css(offset);
+        $float.find('.cnt .space').css({
+          width: $target.width(),
+          left: Math.max( $target.find('.name').offset().left, $target.find('.text').offset().left )
+        });
+      }
+
+      function listenEvent($target) {
+        $float.one('close', function() {
+          var $list = $float.find('li.on');
+          if ($list.length > 0) {
+            $target.find('.name').hide();
+            $target.find('.text').show();
+            $target.addClass('on');
+
+            var text = $list.map(function(i, el) { return $(el).text().trim(); }).toArray().join(',');
+            $target.find('.text').text(text);
+          } else {
+            $target.find('.name').show();
+            $target.find('.text').hide().text('');
+            $target.removeClass('on');
+          }
+        });
+        console.log('触发搜索吗?');
+      };
+
+    });
+  </script>
+</body>
+</html>

@@ -78,10 +78,19 @@
   background: #fff;
   box-shadow: 0 2px 2px #ddd; }
   #recentList .header {
+    display: block;
+    line-height: 1rem;
     padding: 0.5rem 0.25rem;
     border-bottom: 1px solid #ddd;
-    font-size: 0.8rem; }
-  #recentList .productList li {
-    border-bottom: 1px solid #ddd; }
-  #recentList .productList li:last-child {
+    font-size: 0.8rem;
+    color: #333; }
+    #recentList .header .fa {
+      margin-top: 0.1rem; }
+  #recentList .productList .role-detail-item {
+    padding-bottom: 0.25rem;
+    border-bottom: 0.05rem solid #ddd;
+    box-shadow: none; }
+  #recentList .productList .role-detail-item:last-child {
     border-bottom: none; }
+  #recentList .productList .preview {
+    background: #f1f1f1; }

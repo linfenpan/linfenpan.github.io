@@ -34,8 +34,8 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
   a { color: #fff; }
 
   .title { @include textOverflowHidden; position: absolute; top: $p; left: 50%; width: rem(120); margin-left: -1 * rem(60); }
-  .right { float: right; }
-  .left { float: left; }
+  .right { float: right; .fa { margin-left: $marginSmall; &:first-child { margin-left: 0; } } }
+  .left { float: left; .fa { margin-right: $marginSmall; &:last-child { margin-right: 0; } } }
 } // end #site-header
 
 #site-footer {
@@ -241,6 +241,55 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
 
   } // end ./info
 }
+
+
+.role-detail-item {
+  display: block;
+  color: $colorNormal;
+  background: $backgroundNormal;
+  @include bottomShadow();
+
+  .hd {
+    padding: $paddingNormal;
+    padding-bottom: $paddingNormal * .75;
+    line-height: rem(20);
+      .platform { font-size: $fzSmall; color: $colorLight; }
+      .price { float: right; font-size: $fzSmall; color: $colorImportant; }
+  }
+
+  .preview {
+    padding: $paddingNormal 0;
+    border-top: rem(1) solid $colorBorder;
+    font-size: 0;
+    li { display: inline-block; width: 25%; padding: 0 2px; font-size: $fzNormal; text-align: center; }
+    img { max-width: 90%; }
+    .name { display: block; font-size: $fzSmall; @include textOverflowHidden(); }
+  }
+
+  .intro {
+    padding: $paddingNormal 0;
+    border-top: rem(1) solid $colorBorder;
+    line-height: 1;
+    font-size: 0;
+      span {
+        display: inline-block;
+        padding: 0 $paddingNormal;
+        margin: $marginSmall 0;
+        border-right: 1px solid $colorLight;
+        font-size: $fzSmall;
+        color: $colorLight;
+        &:last-child { border-right: none; }
+      }
+  }
+
+  .highlight {
+    padding: 0 $paddingNormal;
+  }
+
+  > :last-child {
+    padding-bottom: $paddingNormal;
+  }
+} // end .role-detail-item
 
 
 // module: 高亮

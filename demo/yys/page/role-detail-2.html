@@ -13,7 +13,7 @@
   <div id="site-container">
     <div id="site-header">
       <div class="left">
-        <a href="/index.html" class="fa fa-chevron-left"></a>
+        <a href="javascript:history.back();" class="fa fa-chevron-left"></a>
       </div>
       <div class="title">角色</div>
       <div class="right">
@@ -164,13 +164,13 @@
         if (hasClass) {
           if (scrollTop < topStart) {
             isAnimate = true;
-            $scroll.animate({ scrollTop: 0 }, 200, function() { isAnimate = false; });
+            $scroll.animate({ scrollTop: 0 }, 200, function() { setTimeout(function() {isAnimate = false;}, 200); });
             $content.removeClass('active');
           }
         } else {
           if (scrollTop > 10) {
             isAnimate = true;
-            $scroll.animate({ scrollTop: topStart }, 200, function() { isAnimate = false; });
+            $scroll.animate({ scrollTop: topStart }, 200, function() { setTimeout(function() {isAnimate = false;}, 200); });
             $content.addClass('active');
           }
         }

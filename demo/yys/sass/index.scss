@@ -65,13 +65,18 @@
   @include bottomShadow;
 
   .header {
+    display: block;
+    line-height: rem(20);
     padding: $paddingNormal $paddingSmall;
     border-bottom: 1px solid $colorBorder;
     font-size: $fzBigger;
+    color: $colorNormal;
+      .fa { margin-top: rem(2); }
   }
 
   .productList {
-    li { border-bottom: 1px solid $colorBorder; }
-    li:last-child { border-bottom: none; }
+    .role-detail-item { padding-bottom: $paddingSmall; border-bottom: rem(1) solid $colorBorder; box-shadow: none; }
+    .role-detail-item:last-child { border-bottom: none; }
+    .preview { background: #f1f1f1; }
   }
 }

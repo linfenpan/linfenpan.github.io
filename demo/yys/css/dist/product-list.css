@@ -1,0 +1,160 @@
+.productTabs {
+  display: flex;
+  background: #fff;
+  box-shadow: 0 2px 2px #ddd; }
+  .productTabs a {
+    display: block;
+    padding: 0.5rem;
+    text-align: center;
+    color: #333; }
+  .productTabs .tabs {
+    display: flex;
+    flex: 1; }
+    .productTabs .tabs a {
+      flex: 1;
+      transition: color .3s ease; }
+    .productTabs .tabs .sort {
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      position: relative;
+      vertical-align: middle; }
+    .productTabs .tabs .fa-sort-up, .productTabs .tabs .fa-sort-down {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #333; }
+    .productTabs .tabs .on {
+      color: #f00; }
+  .productTabs .filter {
+    padding: 0.5rem 0.75rem;
+    border-left: 0.05rem solid #ddd; }
+
+.productFilters {
+  margin-top: 0.4rem; }
+  .productFilters:after {
+    content: '';
+    overflow: hidden;
+    display: table;
+    height: 0;
+    clear: both; }
+  .productFilters li {
+    float: left;
+    width: 25%;
+    padding: 0 0.25rem;
+    text-align: center; }
+  .productFilters .name, .productFilters .text {
+    display: block;
+    padding: 0.25rem 2px;
+    border: 0.05rem solid #ddd;
+    font-size: 0.6rem;
+    background: #fff;
+    transition: color .3s ease; }
+    .productFilters .name .fa, .productFilters .text .fa {
+      display: inline-block;
+      position: relative;
+      top: -0.15rem; }
+  .productFilters .on {
+    border-bottom-color: #fff; }
+    .productFilters .on .name, .productFilters .on .text {
+      color: #ff5722; }
+  .productFilters .text {
+    display: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+
+.productFloatFilters {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%; }
+  .productFloatFilters .back, .productFloatFilters .cnt {
+    margin-top: 0.25rem;
+    transform: translateY(-0.1rem); }
+  .productFloatFilters .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); }
+  .productFloatFilters .cnt {
+    position: relative;
+    border-top: 0.05rem solid #ddd;
+    background: rgba(255, 255, 255, 0.97); }
+  .productFloatFilters .space {
+    position: absolute;
+    top: -0.25rem;
+    left: 0;
+    width: 100px;
+    height: 0.25rem;
+    border: 0.05rem solid #ddd;
+    border-top: none;
+    border-bottom: none;
+    background: #fff; }
+  .productFloatFilters .list {
+    overflow: auto;
+    max-height: 15em;
+    padding-bottom: 0.25rem; }
+    .productFloatFilters .list:after {
+      content: '';
+      overflow: hidden;
+      display: table;
+      height: 0;
+      clear: both; }
+    .productFloatFilters .list li {
+      float: left;
+      width: 50%; }
+    .productFloatFilters .list .item {
+      display: block;
+      padding: 0.375rem 0;
+      margin: 0 0.4rem;
+      border-bottom: 0.05rem solid transparent;
+      transition: color .3s ease, border-color .3s ease; }
+      .productFloatFilters .list .item:after {
+        content: '';
+        overflow: hidden;
+        display: table;
+        height: 0;
+        clear: both; }
+    .productFloatFilters .list .text {
+      float: left;
+      width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
+    .productFloatFilters .list .fa {
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity .3s ease, color .3s ease; }
+    .productFloatFilters .list li.on .item {
+      border-color: #ff5722;
+      color: #ff5722; }
+    .productFloatFilters .list li.on .fa {
+      opacity: 1; }
+  .productFloatFilters .opers {
+    display: flex;
+    border-top: 0.05rem solid #ddd; }
+    .productFloatFilters .opers .btn {
+      display: block;
+      flex: 1;
+      padding: 0.5rem 0;
+      border-left: 0.05rem solid #ddd;
+      text-align: center;
+      color: #333; }
+    .productFloatFilters .opers .btn:first-child {
+      border-left: none; }
+    .productFloatFilters .opers .btn {
+      transition: all .3s ease; }
+    .productFloatFilters .opers .btn:active {
+      opacity: .8; }
+    .productFloatFilters .opers .btnSure {
+      color: #fff;
+      background: #ff3333; }
+
+.pageProductList .role-detail-item {
+  margin-top: 0.4rem; }
