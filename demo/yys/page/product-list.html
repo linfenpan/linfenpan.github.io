@@ -36,7 +36,7 @@
               </span>
             </a>
           </div>
-          <a href="javascript:;" class="filter">筛选</a>
+          <a href="javascript:;" class="filter"><i class="fa fa-filter fa-fw"></i>筛选</a>
         </section>
 
         <ul class="productFilters">
@@ -268,8 +268,7 @@
   <script>
     $(function initProductFilters() {
       var $root = $('.productTabs');
-      $root.on('click', 'a', function() {
-        console.log('yyyy');
+      $root.on('click', '.tabs a', function() {
         var $item = $(this);
         var sort = $item.data('sort');
 

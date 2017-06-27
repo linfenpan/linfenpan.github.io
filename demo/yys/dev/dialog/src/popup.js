@@ -58,6 +58,7 @@ class Popup extends Base {
     if (ctx.isShow || !$root) { return; }
 
     super.show();
+    $layer.show();
 
     // 依赖 animate.js
     Animate.ready($layer, function() {

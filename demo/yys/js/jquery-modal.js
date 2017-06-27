@@ -3,7 +3,7 @@
   @rely: jQuery
   @author: da宗熊
   @version: 1.0.0
-  @lastModify: 2017/6/26
+  @lastModify: 2017/6/27
 */
 
 +(function($) {
@@ -581,6 +581,7 @@ var Popup = function (_Base2) {
       }
 
       _get(Popup.prototype.__proto__ || Object.getPrototypeOf(Popup.prototype), 'show', this).call(this);
+      $layer.show();
 
       // 依赖 animate.js
       Animate.ready($layer, function () {

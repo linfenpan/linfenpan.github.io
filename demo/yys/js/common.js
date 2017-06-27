@@ -122,3 +122,41 @@ $(function() {
     });
   };
 });
+
+
+// module: 筛选功能
+$(function initFilter() {
+  var $root = $('body');
+  var $filters = $root.find('.fa-filter');
+
+  if ($filters.length > 0) {
+    $.get(urlRoot + '/ajax/filter.html')
+      .done(function(html) {
+        $root.append(html);
+        initFilter();
+      });
+  }
+
+  function initFilter() {
+    $filters.each(function(i, el) {
+      var $a = $(el).closest('a');
+      if ($a.length > 0) {
+        $a.click(showFilter);
+      }
+    });
+  }
+
+  var popup;
+  function showFilter() {
+    if (!popup) {
+      var $root = $('#popupFilters')
+      popup = new $.Popup({
+        cls: $root.attr('class'),
+        content: $root.html(),
+        autoDestroy: false
+      });
+    }
+
+    popup.show();
+  }
+});

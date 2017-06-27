@@ -49,7 +49,7 @@
   position: relative;
   padding-top: 0.75rem;
   margin-bottom: -0.5rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-align: center;
 }
 .modal .modal-close {
@@ -106,11 +106,11 @@
           border-bottom-right-radius: 0.35rem;
 }
 .modal .modal-button {
-  height: 2.2rem;
-  line-height: 2.2rem;
+  height: 2rem;
+  line-height: 2rem;
   padding: 0 0.25rem;
   border-right: 1px solid #b5b5b5;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #0894ec;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -276,6 +276,9 @@
   display: block;
   width: 1.7rem;
   height: 1.7rem;
+}
+.modal-preloader {
+  width: 9.75rem;
 }
 /* module: popup */
 .popup {

@@ -340,18 +340,20 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
 
 
 // module: 搜索弹出层
+body .modal-popup {
+  @at-root {
+    @media only screen and (max-width: $maxWidth) {
+      & { transition-property: opacity, transform; }
+      &.animate-ready { opacity: .8; transform: translate(100%, 0); }
+      &.animate-active { opacity: 1; transform: translate(0, 0); }
+      &.animate-out { opacity: .92; transform: translate(100%, 0); }
+    }
+  }
+}
 body .popup-search {
   @include positionFixed(100%);
   overflow: hidden;
   background: $backgroundNormal;
-
-  @at-root {
-    @media only screen and (max-width: $maxWidth) {
-      &.animate-ready { transform: translate(100%, 0); }
-      &.animate-active { transform: translate(0, 0); }
-      &.animate-out { transform: translate(100%, 0); }
-    }
-  }
 
   .content {
     display: flex;
@@ -406,12 +408,14 @@ body .popup-search {
         color: $colorLight;
       }
       .list {
-        font-size: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
         padding-top: $paddingSmall / 2;
         padding-bottom: $marginNormal * 1.5;
-        text-align: center;
           a {
-            display: inline-block;
+            display: block;
             line-height: 2.1;
             border: 1px solid $colorNormal;
             padding: 0 $paddingNormal;
