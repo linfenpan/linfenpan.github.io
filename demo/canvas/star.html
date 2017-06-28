@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>星球</title>
+  <style>
+    * { padding: 0; margin: 0; }
+  </style>
+</head>
+<body style="background: #000;">
+  <canvas width="560" height="560"></canvas>
+
+  <script>
+    /**
+     * Index page animation helper: Galaxy anim controller
+     */
+    function Galaxy(canvas, orbitColor) {
+      var ctx = canvas.getContext("2d")
+
+      this.ctx = ctx
+      this.offset = Math.random() * 360
+      this.width = canvas.width
+      this.height = canvas.height
+      this.orbitColor = orbitColor
+      this.radius = this.width / 2
+      this.x = this.width / 2
+      this.y = this.height / 2
+      this.orbits = []
+
+      this.bigBang()
+    }
+
+    Galaxy.prototype.bigBang = function () {
+      var ctx = this.ctx,
+          that = this
+
+      for (var i = 1; i <= 8; i++) {
+        var color = 'rgba(' + hexToRgb(this.orbitColor) + ',' + i/10 + ')',
+            orbit = new Orbit(that.x, that.y, that.radius - i*23, color)
+
+        that.orbits.push(orbit)
+
+        if (i < 5) {
+          for (var j = 0; j < 4; j++) {
+            var size = j === 1
+                      ? Math.floor(Math.random() * 8 + 10)
+                      : Math.floor(Math.random() * 6 + 3),
+                velocity = 1 / ((size - 3) * 45),
+                planet = new Planet(size, '#fff', velocity)
+
+            orbit.addPlanet(planet)
+          }
+        }
+      }
+    }
+
+    Galaxy.prototype.spin = function () {
+      var that = this,
+          ctx = this.ctx
+
+      ctx.save()
+      ctx.clearRect(0, 0, this.width, this.height)
+
+      this.orbits.forEach(function (orbit, index) {
+        orbit.draw(ctx)
+        orbit.planets.forEach(function (planet) {
+          planet.draw.call(planet, ctx)
+        })
+      })
+      ctx.restore()
+
+      that.spinAnim = window.requestAnimationFrame(that.spin.bind(that))
+    }
+
+    Galaxy.prototype.pause = function () {
+      var that = this,
+          ctx = this.ctx
+
+      window.cancelAnimationFrame(that.spinAnim)
+      ctx.clearRect(0, 0, this.width, this.height)
+    }
+
+    function Orbit (x, y, radius, color) {
+      this.planets = []
+      this.radius = radius
+      this.color = color
+      this.x = x
+      this.y = y
+    }
+
+    Orbit.prototype.draw = function (ctx) {
+      ctx.beginPath()
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
+      ctx.closePath()
+      ctx.lineWidth = '2'
+      ctx.strokeStyle = this.color
+      ctx.stroke()
+    }
+
+    Orbit.prototype.addPlanet = function (planet) {
+      this.planets.push(planet)
+      planet.orbit = this
+    }
+
+    function Planet (size, color, velocity) {
+      this.size = size
+      this.color = color
+      this.velocity = velocity
+      this.offset = Math.random() * 360
+    }
+
+    Planet.prototype.draw = function (ctx) {
+      this.x = this.orbit.x + this.orbit.radius * Math.cos(this.offset)
+      this.y = this.orbit.y + this.orbit.radius * Math.sin(this.offset)
+
+      ctx.beginPath()
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, true)
+      ctx.closePath()
+      ctx.fillStyle = this.color
+      ctx.fill()
+      ctx.strokeStyle = this.color
+      ctx.stroke()
+
+      this.offset += this.velocity
+    }
+
+    function hexToRgb(hex) {
+      var bigint = parseInt(hex, 16);
+      var r = (bigint >> 16) & 255;
+      var g = (bigint >> 8) & 255;
+      var b = bigint & 255;
+
+      return [r, g, b].join(',')
+    }
+  </script>
+
+  <script>
+    new Galaxy(document.querySelector('canvas'), 'DFFDFD').spin();
+  </script>
+</body>
+</html>
