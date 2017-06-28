@@ -341,6 +341,7 @@ body { background: $backgroundBody; font-size: $fzNormal; color: $colorNormal; }
 
 // module: 搜索弹出层
 body .modal-popup {
+  @include positionFixed(100%);
   @at-root {
     @media only screen and (max-width: $maxWidth) {
       & { transition-property: opacity, transform; }
@@ -351,7 +352,6 @@ body .modal-popup {
   }
 }
 body .popup-search {
-  @include positionFixed(100%);
   overflow: hidden;
   background: $backgroundNormal;
 

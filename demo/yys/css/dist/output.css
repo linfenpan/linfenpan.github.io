@@ -413,30 +413,31 @@ body {
     background: #ff5722;
     transition: left .3s ease, width .3s ease; }
 
-@media only screen and (max-width: 640px) {
-  body .modal-popup {
-    transition-property: opacity, transform; }
-  body .modal-popup.animate-ready {
-    opacity: .8;
-    transform: translate(100%, 0); }
-  body .modal-popup.animate-active {
-    opacity: 1;
-    transform: translate(0, 0); }
-  body .modal-popup.animate-out {
-    opacity: .92;
-    transform: translate(100%, 0); } }
-
-body .popup-search {
+body .modal-popup {
   position: fixed;
-  width: 100%;
-  overflow: hidden;
-  background: #fff; }
+  width: 100%; }
   @media only screen and (min-width: 640px) {
-    body .popup-search {
+    body .modal-popup {
       overflow: hidden;
       left: 50%;
       width: 640px;
       margin-left: -320px; } }
+  @media only screen and (max-width: 640px) {
+    body .modal-popup {
+      transition-property: opacity, transform; }
+    body .modal-popup.animate-ready {
+      opacity: .8;
+      transform: translate(100%, 0); }
+    body .modal-popup.animate-active {
+      opacity: 1;
+      transform: translate(0, 0); }
+    body .modal-popup.animate-out {
+      opacity: .92;
+      transform: translate(100%, 0); } }
+
+body .popup-search {
+  overflow: hidden;
+  background: #fff; }
   body .popup-search .content {
     display: flex;
     flex-direction: column;
@@ -819,11 +820,15 @@ body .popup-search {
 
 .productTabs {
   display: flex;
+  height: 1.9rem;
+  min-height: 1.9rem;
+  line-height: 1.9rem;
+  margin-bottom: 0.4rem;
   background: #fff;
   box-shadow: 0 2px 2px #ddd; }
   .productTabs a {
     display: block;
-    padding: 0.5rem;
+    padding-top: 1.5px;
     text-align: center;
     color: #333; }
   .productTabs .tabs {
@@ -846,11 +851,12 @@ body .popup-search {
     .productTabs .tabs .on {
       color: #f00; }
   .productTabs .filter {
-    padding: 0.5rem 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
     border-left: 0.05rem solid #ddd; }
 
 .productFilters {
-  margin-top: 0.4rem; }
+  margin-bottom: 0.4rem; }
   .productFilters:after {
     content: '';
     overflow: hidden;
@@ -976,7 +982,7 @@ body .popup-search {
       background: #ff3333; }
 
 .pageProductList .role-detail-item {
-  margin-top: 0.4rem; }
+  margin-bottom: 0.4rem; }
 
 .page404 {
   position: absolute;
@@ -1064,7 +1070,7 @@ body .popup-filters {
       color: #fff;
       background: #ff3333; }
   body .popup-filters .option {
-    padding: 0.75rem 0 1rem 0; }
+    padding: 0.75rem 0 0.75rem 0; }
     body .popup-filters .option .hd {
       position: relative;
       line-height: 1rem;
@@ -1083,7 +1089,10 @@ body .popup-filters {
       body .popup-filters .option .hd .fa {
         position: absolute;
         top: 0.125rem;
-        right: 2px; }
+        right: 2px;
+        transition: transform .3s ease; }
+      body .popup-filters .option .hd.on .fa {
+        transform: rotate(180deg); }
   body .popup-filters .select {
     padding-top: 0.5rem; }
     body .popup-filters .select:after {
@@ -1095,12 +1104,11 @@ body .popup-filters {
     body .popup-filters .select li {
       float: left;
       line-height: 0.9rem;
-      margin-top: 5px;
       font-size: 0.6rem; }
       body .popup-filters .select li .text {
         display: block;
-        padding: 0.25rem 5px;
-        margin: 0 2.5px;
+        padding: 0.25rem 6px;
+        margin: 0 3px;
         border: 0.05rem solid #eee;
         text-align: center;
         color: #333;
@@ -1115,26 +1123,25 @@ body .popup-filters {
           border-color: #ff5722;
           background: #fff; }
     body .popup-filters .select.select2 li {
-      width: 50%;
-      margin-top: 0; }
+      width: 50%; }
       body .popup-filters .select.select2 li:nth-child(n + 3) {
-        margin-top: 5px; }
+        margin-top: 6px; }
     body .popup-filters .select.select3 li {
-      width: 33.33333%;
-      margin-top: 0; }
+      width: 33.33333%; }
       body .popup-filters .select.select3 li:nth-child(n + 4) {
-        margin-top: 5px; }
+        margin-top: 6px; }
     body .popup-filters .select.select4 li {
-      width: 25%;
-      margin-top: 0; }
+      width: 25%; }
       body .popup-filters .select.select4 li:nth-child(n + 5) {
-        margin-top: 5px; }
+        margin-top: 6px; }
   body .popup-filters .input {
+    height: 1.5rem;
+    line-height: 1.5rem;
     border: 1px solid #b3b3b3;
-    padding: 0.25rem 5px; }
+    padding: 5px; }
   body .popup-filters .range {
     display: flex;
-    padding: 0.375rem 2.5px;
+    padding: 0.375rem 3px;
     padding-bottom: 0;
     justify-content: center;
     align-items: center; }
@@ -1150,17 +1157,49 @@ body .popup-filters {
       margin: 0 4px;
       background: #333; }
   body .popup-filters .iarea {
-    padding: 0.375rem 2.5px;
-    padding-bottom: 0; }
-    body .popup-filters .iarea .item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.375rem 0;
+    padding-bottom: 0;
+    font-size: 0.6rem; }
+    body .popup-filters .iarea .input {
+      display: block;
+      width: 20%; }
+    body .popup-filters .iarea .wp {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      width: 100%; }
-      body .popup-filters .iarea .item .title {
-        margin-right: 0.4rem; }
-      body .popup-filters .iarea .item .input {
+      height: 1.5rem;
+      line-height: 1.5rem;
+      margin: 0 3px; }
+      body .popup-filters .iarea .wp :first-child {
+        margin-right: 4.5px; }
+      body .popup-filters .iarea .wp :last-child {
         flex: 1; }
+    body .popup-filters .iarea label.wp {
+      display: block;
+      padding-left: 6px;
+      padding-right: 6px;
+      background: #eee; }
+    body .popup-filters .iarea.iarea1 li {
+      width: 100%; }
+      body .popup-filters .iarea.iarea1 li:nth-child(n + 2) {
+        margin-top: 6px; }
+    body .popup-filters .iarea.iarea2 li {
+      width: 50%; }
+      body .popup-filters .iarea.iarea2 li:nth-child(n + 3) {
+        margin-top: 6px; }
+    body .popup-filters .iarea.iarea3 li {
+      width: 33.33333%; }
+      body .popup-filters .iarea.iarea3 li:nth-child(n + 4) {
+        margin-top: 6px; }
+    body .popup-filters .iarea.iarea4 li {
+      width: 25%; }
+      body .popup-filters .iarea.iarea4 li:nth-child(n + 5) {
+        margin-top: 6px; }
   body .popup-filters .bb {
     border-bottom: 0.05rem solid #ddd; }
+    body .popup-filters .bb:last-child {
+      border-bottom: none; }

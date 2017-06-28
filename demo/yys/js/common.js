@@ -155,8 +155,16 @@ $(function initFilter() {
         content: $root.html(),
         autoDestroy: false
       });
+      bindEvent(popup.$root);
     }
 
     popup.show();
+  }
+
+  function bindEvent($root) {
+    console.log('xxx');
+    $root.on('click', '.toggle', function() {
+      $(this).toggleClass('on').closest('.option').find('.cnt').toggleClass('hide');
+    });
   }
 });

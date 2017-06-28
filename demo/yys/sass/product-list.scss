@@ -2,11 +2,16 @@
 
 .productTabs {
   display: flex;
+  $h: rem(38);
+  height: $h;
+  min-height: $h;
+  line-height: $h;
+  margin-bottom: $marginNormal;
   background: $backgroundNormal;
   @include bottomShadow();
     a {
       display: block;
-      padding: $paddingNormal;
+      padding-top: 1.5px;
       text-align: center;
       color: $colorNormal;
     }
@@ -19,14 +24,15 @@
         .on { color: $colorImportant; }
     }
     .filter {
-      padding: $paddingNormal $paddingBigger;
+      padding-left: $paddingBigger;
+      padding-right: $paddingBigger;
       border-left: rem(1) solid $colorBorder;
     }
 } // .productTabs
 
 
 .productFilters {
-  margin-top: $marginNormal;
+  margin-bottom: $marginNormal;
   @include clearfix();
     li { float: left; width: 25%; padding: 0 $paddingSmall; text-align: center; }
       .name, .text {
@@ -105,6 +111,6 @@
 
 .pageProductList {
     .role-detail-item {
-      margin-top: $marginNormal;
+      margin-bottom: $marginNormal;
     }
 } // .pageProductList

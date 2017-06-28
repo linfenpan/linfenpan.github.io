@@ -1,10 +1,14 @@
 .productTabs {
   display: flex;
+  height: 1.9rem;
+  min-height: 1.9rem;
+  line-height: 1.9rem;
+  margin-bottom: 0.4rem;
   background: #fff;
   box-shadow: 0 2px 2px #ddd; }
   .productTabs a {
     display: block;
-    padding: 0.5rem;
+    padding-top: 1.5px;
     text-align: center;
     color: #333; }
   .productTabs .tabs {
@@ -27,11 +31,12 @@
     .productTabs .tabs .on {
       color: #f00; }
   .productTabs .filter {
-    padding: 0.5rem 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
     border-left: 0.05rem solid #ddd; }
 
 .productFilters {
-  margin-top: 0.4rem; }
+  margin-bottom: 0.4rem; }
   .productFilters:after {
     content: '';
     overflow: hidden;
@@ -157,4 +162,4 @@
       background: #ff3333; }
 
 .pageProductList .role-detail-item {
-  margin-top: 0.4rem; }
+  margin-bottom: 0.4rem; }
