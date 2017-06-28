@@ -1203,3 +1203,39 @@ body .popup-filters {
     border-bottom: 0.05rem solid #ddd; }
     body .popup-filters .bb:last-child {
       border-bottom: none; }
+
+body .popup-area-select {
+  display: flex;
+  flex-direction: column;
+  height: 100%; }
+
+.popup-area-select .content {
+  flex: 1;
+  display: flex; }
+  .popup-area-select .content a {
+    display: block;
+    color: #333;
+    transition: color .3s ease, background-color .3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .popup-area-select .content .area, .popup-area-select .content .server {
+    overflow: auto;
+    height: 100%;
+    text-align: center; }
+  .popup-area-select .content .area {
+    flex: 2;
+    padding: 0.5rem 0;
+    border-right: 0.05rem solid #ddd; }
+    .popup-area-select .content .area a {
+      padding: 0.5rem 0; }
+    .popup-area-select .content .area .on, .popup-area-select .content .area a:active {
+      color: #ff5722;
+      background: #eee; }
+  .popup-area-select .content .server {
+    flex: 3;
+    padding: 0.45rem 0; }
+    .popup-area-select .content .server a {
+      padding: 0.45rem 0; }
+    .popup-area-select .content .server .on, .popup-area-select .content .server a:active {
+      color: #ff5722; }

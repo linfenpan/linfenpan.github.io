@@ -168,3 +168,38 @@ $(function initFilter() {
     });
   }
 });
+
+
+// module: 区服选择
+$(function() {
+  $('body').on('click', '[data-area-select]', function() {
+    renderAreaSelect();
+  });
+
+  var isInit = false;
+  function renderAreaSelect() {
+    if (isInit) {
+      showAreaSelect();
+    } else {
+      isInit = true;
+      $.get(urlRoot + '/ajax/area-select.html')
+        .done(function(html) {
+          $('body').append(html);
+          showAreaSelect();
+        });
+    }
+  }
+
+  var popup;
+  function showAreaSelect() {
+    var $root = $('#popupAreaSelect');
+    if (!popup) {
+      popup = new $.Popup({
+        cls: $root.attr('class'),
+        content: $root.html(),
+        autoDestroy: false
+      });
+    }
+    popup.show();
+  }
+});

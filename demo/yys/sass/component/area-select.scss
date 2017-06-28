@@ -1,0 +1,48 @@
+@import "../var";
+
+body .popup-area-select {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.popup-area-select{
+  .content {
+    flex: 1;
+    display: flex;
+      a {
+        display: block;
+        color: $colorNormal;
+        transition: color .3s ease, background-color .3s ease;
+        @include textOverflowHidden();
+      }
+      .area, .server {
+        overflow: auto;
+        height: 100%;
+        text-align: center;
+      }
+      .area {
+        flex: 2;
+        padding: $paddingNormal 0;
+        border-right: rem(1) solid $colorBorder;
+          a {
+            padding: $paddingNormal 0;
+          }
+          .on, a:active {
+            color: $colorActive;
+            background: $backgroundBody;
+          }
+      }
+      .server {
+        $p: $paddingNormal * .9;
+        flex: 3;
+        padding: $p 0;
+          a {
+            padding: $p 0;
+          }
+          .on, a:active {
+            color: $colorActive;
+          }
+      }
+  } // .content
+}
