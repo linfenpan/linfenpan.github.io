@@ -12,6 +12,9 @@ body {
   font-size: 0.7rem;
   color: #333; }
 
+img {
+  vertical-align: bottom; }
+
 .pull-right {
   float: right; }
 

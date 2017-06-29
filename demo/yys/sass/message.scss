@@ -1,0 +1,70 @@
+@import "./var";
+
+.pageMessage {
+  overflow: auto;
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: $backgroundNormal;
+
+    .mHead, .mContent, .mBanner, .mGoods {
+      padding: $paddingNormal $paddingSmall;
+      margin: 0 $marginSmall;
+    }
+
+    .mHead {
+      line-height: 1.5;
+      border-bottom: 1px solid $colorBorder;
+      .title { font-size: $fzBigger; }
+      .time { font-size: $fzSmall; color: $colorLight; }
+    }
+
+    .mContent {
+      padding-top: $paddingBigger;
+      line-height: 1.5;
+      a { color: darken(#2ea3e4, 10%); }
+    }
+
+    .mGoods {
+      padding-bottom: 0;
+    }
+    .goodsList {
+      li {
+        margin-top: $marginNormal;
+        background: lighten($backgroundBody, 2%);
+      }
+      .item {
+        display: flex;
+        padding: $paddingSmall;
+        line-height: 1.6;
+        color: $colorNormal;
+      }
+      .imgWrap {
+        $s: rem(50);
+        width: $s; height: $s;
+          img { width: 100%; height: 100%; }
+      }
+      .info {
+        flex: 1;
+        margin-left: $marginNormal;
+        margin-top: - rem(3);
+      }
+      .cnt, .hd {
+        @include clearfix();
+      }
+      .title, .attr {
+        @include textOverflowHidden();
+      }
+      .level, .server, .cnt, .ft {
+        font-size: $fzSmall;
+        color: $colorLight;
+      }
+    }
+
+    .mBanner {
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: $marginNormal;
+        a { display: block; padding: 2px; border: 1px solid $colorBorder; box-shadow: 1px 1px 2px $colorBorder; }
+        .img { width: 100%; }
+    }
+}

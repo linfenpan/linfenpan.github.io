@@ -3,7 +3,7 @@
   @rely: jQuery
   @author: da宗熊
   @version: 1.0.0
-  @lastModify: 2017/6/27
+  @lastModify: 2017/6/29
 */
 
 +(function($) {
@@ -409,11 +409,11 @@ var Modal = function (_Base) {
         }
       });
 
-      if (ctx.opts.closeByOutside) {
-        ctx.$layer.on('click', function () {
+      ctx.$layer.on('click', function () {
+        if (ctx.opts.closeByOutside) {
           ctx.hide();
-        });
-      }
+        }
+      });
     }
   }, {
     key: 'show',
@@ -815,7 +815,6 @@ $(function () {
 //显示一个消息，会在2秒钟后自动消失
 $.toast = function (content, time) {
   var toast = new Popup({ cls: 'toast', content: content, closeByOutside: false });
-  toast.$layer.hide();
   toast.$root.removeClass('modal-popup');
   // 修正位置
   Base.prototype.fixPosition.call(toast);
@@ -824,7 +823,10 @@ $.toast = function (content, time) {
     toast.hide();
   }, time || 2000);
 
-  return toast.show();
+  toast.show();
+  toast.$layer.hide();
+
+  return toast;
 };
 
 // 给外部拓展

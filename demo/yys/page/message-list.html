@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+  <title>sass学习</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/swiper.min.css">
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/dist/output.css">
+</head>
+<body>
+  <div id="site-container">
+    <div id="site-header">
+      <div class="left">
+        <a href="javascript:history.back();" class="fa fa-arrow-left"></a>
+      </div>
+      <div class="title">系统邮件</div>
+      <div class="right">
+        <a href="javascript:;" class="fa fa-edit"> 编辑</a>
+      </div>
+    </div><!-- /#site-header -->
+
+    <div id="site-content">
+      <div class="messageClassify">
+        <ul class="messageList">
+          <li>
+            <a href="./message.html">
+              <div class="time">
+                10-10
+              </div>
+              <div class="cnt">
+                <div class="oper">
+                  <span class="check"><i class="fa fa-check"></i></span>
+                </div>
+                <div class="imgWrap">
+                  <img src="../image/role/1.png" alt="">
+                  <!-- <span class="num">98</span> -->
+                </div>
+                <div class="info">
+                  <p class="title">降价提醒</p>
+                  <p class="tip">您关注的【屠龙|100级】已降价</p>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="./message.html">
+              <div class="time">
+                10-10
+              </div>
+              <div class="cnt">
+                <div class="oper">
+                  <span class="check"><i class="fa fa-check"></i></span>
+                </div>
+                <div class="imgWrap">
+                  <img src="../image/role/2.png" alt="">
+                  <!-- <span class="num">9</span> -->
+                </div>
+                <div class="info">
+                  <p class="title">降价提醒</p>
+                  <p class="tip">您关注的【屠龙|100级】已降价</p>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="./message.html">
+              <div class="time">
+                10-10
+              </div>
+              <div class="cnt">
+                <div class="oper">
+                  <span class="check"><i class="fa fa-check"></i></span>
+                </div>
+                <div class="imgWrap">
+                  <img src="../image/role/3.png" alt="">
+                  <!-- <span class="num">10</span> -->
+                </div>
+                <div class="info">
+                  <p class="title">降价提醒</p>
+                  <p class="tip">您关注的【屠龙|100级】已降价</p>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="./message.html">
+              <div class="time">
+                10-10
+              </div>
+              <div class="cnt">
+                <div class="oper">
+                  <span class="check"><i class="fa fa-check"></i></span>
+                </div>
+                <div class="imgWrap">
+                  <img src="../image/role/4.png" alt="">
+                  <!-- <span class="num">99+</span> -->
+                </div>
+                <div class="info">
+                  <p class="title">降价提醒</p>
+                  <p class="tip">您关注的【屠龙|100级】已降价</p>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div><!-- /.messageClassify -->
+    </div><!-- /#site-content -->
+
+    <div class="messageFooter">
+      <a href="javascript:;" class="btn btnAllRead">全部已读</a>
+      <a href="javascript:;" class="btn">已读</a>
+      <a href="javascript:;" class="btn btnRemove pull-right">删除</a>
+    </div><!-- /#site-footer -->
+  </div><!-- /#site-container -->
+
+  <script src="../js/in.js" charset="utf-8"></script>
+  <script src="../js/jquery.js" charset="utf-8"></script>
+  <script src="../js/swiper.min.js" charset="utf-8"></script>
+  <script src="../js/common.js" charset="utf-8"></script>
+  <script>
+    $(function() {
+      var $list = $('.messageList');
+      var $foot = $('.messageFooter');
+
+      $('#site-header .fa-edit').click(function() {
+        $list.toggleClass('state-edit');
+        $foot.toggleClass('state-edit');
+        $(this).text(' ' + ($list.hasClass('state-edit') ? '取消' : '编辑'));
+      });
+
+      $list.on('click', 'a', function() {
+        if (!$list.hasClass('state-edit')) { return true; }
+        var $li = $(this).closest('li');
+        $li.toggleClass('checked');
+        $list.trigger('checkChanged');
+        return false;
+      });
+
+      $list.on('checkChanged', function() {
+        $foot.find('.btnRemove')[$list.find('.checked').length > 0 ? 'addClass' : 'removeClass']('active');
+      });
+
+      $foot.on('click', '.btnRemove', function() {
+        $.toast('删除所有选中元素');
+      });
+
+      $foot.on('click', '.btnAllRead', function() {
+        $.toast('全中的消息，已读');
+      });
+    });
+  </script>
+</body>
+</html>

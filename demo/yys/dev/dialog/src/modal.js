@@ -174,11 +174,11 @@ class Modal extends Base {
       }
     });
 
-    if (ctx.opts.closeByOutside) {
-      ctx.$layer.on('click', function() {
+    ctx.$layer.on('click', function() {
+      if (ctx.opts.closeByOutside) {
         ctx.hide();
-      });
-    }
+      }
+    });
   }
 
   show() {

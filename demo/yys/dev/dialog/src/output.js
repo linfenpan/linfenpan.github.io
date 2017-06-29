@@ -189,7 +189,6 @@ $(function() {
 //显示一个消息，会在2秒钟后自动消失
 $.toast = function(content, time) {
   const toast = new Popup({ cls: 'toast', content: content, closeByOutside: false });
-  toast.$layer.hide();
   toast.$root.removeClass('modal-popup');
   // 修正位置
   Base.prototype.fixPosition.call(toast);
@@ -198,7 +197,10 @@ $.toast = function(content, time) {
     toast.hide();
   }, time || 2000);
 
-  return toast.show();
+  toast.show();
+  toast.$layer.hide();
+
+  return toast;
 };
 
 
