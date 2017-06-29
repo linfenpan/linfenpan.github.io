@@ -1,0 +1,94 @@
+body .popup-role-select {
+  display: flex;
+  flex-direction: column;
+  height: 100%; }
+
+.popup-role-select .area {
+  padding: 0.25rem 0;
+  text-align: center;
+  background: #eee; }
+
+.popup-role-select .content {
+  flex: 1;
+  overflow: auto; }
+
+.popup-role-select .roleList li {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 0.05rem solid #ddd;
+  cursor: pointer;
+  transition: background-color .3s ease; }
+
+.popup-role-select .roleList .imgWrap {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem; }
+
+.popup-role-select .roleList .icon {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #643b1b;
+  box-sizing: border-box;
+  border-radius: 50%; }
+
+.popup-role-select .roleList .level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.6rem;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  transform: scale(0.7);
+  transform-origin: 0 0; }
+  .popup-role-select .roleList .level .text {
+    position: relative;
+    color: #fff; }
+  .popup-role-select .roleList .level:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid #e4ba9a;
+    background: #643b1b;
+    transform: rotate(45deg); }
+
+.popup-role-select .roleList .info {
+  position: relative;
+  flex: 1;
+  line-height: 1.5;
+  padding-left: 0.25rem; }
+  .popup-role-select .roleList .info .name, .popup-role-select .roleList .info .id {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .popup-role-select .roleList .info .name {
+    padding-top: 0.25rem; }
+  .popup-role-select .roleList .info .id {
+    font-size: 0.6rem; }
+  .popup-role-select .roleList .info .fa {
+    position: absolute;
+    visibility: hidden;
+    right: 0;
+    top: 50%;
+    margin-top: -0.25rem;
+    opacity: 0;
+    transform: scale(0.5) rotate(150deg);
+    transition: opacity .3s ease, transform .3s ease, color 3s ease, visibility 0s ease .3s; }
+
+.popup-role-select .roleList .on {
+  background-color: #f8f8f8; }
+  .popup-role-select .roleList .on .fa {
+    visibility: visible;
+    color: #30b930;
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition: opacity .3s ease, transform .3s ease; }
+
+.popup-role-select .roleList .disabled {
+  opacity: .35; }

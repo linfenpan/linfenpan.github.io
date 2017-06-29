@@ -80,16 +80,17 @@ function formatByDefault(str) {
 })();
 
 
+// 加载弹窗
+In.add('modal-css', {
+  path: urlRoot + '/css/jquery-modal.css'
+});
+In.add('modal', {
+  rely: ['modal-css'],
+  path: urlRoot + '/js/jquery-modal.js'
+});
+
 // module: 搜索功能
 $(function() {
-  In.add('modal-css', {
-    path: urlRoot + '/css/jquery-modal.css'
-  });
-  In.add('modal', {
-    rely: ['modal-css'],
-    path: urlRoot + '/js/jquery-modal.js'
-  });
-
   var $body = $('body');
   var $siteHeader = $('#site-header');
   if ($siteHeader.length > 0) {
@@ -130,11 +131,13 @@ $(function initFilter() {
   var $filters = $root.find('.fa-filter');
 
   if ($filters.length > 0) {
-    $.get(urlRoot + '/ajax/filter.html')
-      .done(function(html) {
-        $root.append(html);
-        initFilter();
-      });
+    In('modal', function() {
+      $.get(urlRoot + '/ajax/filter.html')
+        .done(function(html) {
+          $root.append(html);
+          initFilter();
+        });
+    });
   }
 
   function initFilter() {
@@ -162,7 +165,6 @@ $(function initFilter() {
   }
 
   function bindEvent($root) {
-    console.log('xxx');
     $root.on('click', '.toggle', function() {
       $(this).toggleClass('on').closest('.option').find('.cnt').toggleClass('hide');
     });
@@ -172,8 +174,10 @@ $(function initFilter() {
 
 // module: 区服选择
 $(function() {
-  $('body').on('click', '[data-area-select]', function() {
-    renderAreaSelect();
+  In('modal', function() {
+    $('body').on('click', '[data-area-select]', function() {
+      renderAreaSelect();
+    });
   });
 
   var isInit = false;
@@ -196,10 +200,51 @@ $(function() {
     if (!popup) {
       popup = new $.Popup({
         cls: $root.attr('class'),
-        content: $root.html(),
+        content: formatByDefault($root.html()),
         autoDestroy: false
       });
     }
     popup.show();
+  }
+});
+
+
+// module: 角色选择
+$(function() {
+  var $body = $('body');
+
+  In('modal', function() {
+    $body.on('click', '[data-role-select]', function() {
+      initRoleSelect();
+    });
+  });
+
+  function initRoleSelect() {
+    $.get(urlRoot + '/ajax/role-select.html')
+      .done(function(html) {
+        $body.append(html);
+        showRoleSelect();
+      })
+    initRoleSelect = showRoleSelect;
+  }
+
+  function showRoleSelect() {
+    var $root = $('#popupRoleSelect');
+    if ($root.length <= 0) { return; }
+
+    var popup = $.popup({
+      content: formatByDefault($root.html()),
+      cls: $root.attr('class')
+    });
+
+    bindEvent(popup.$root);
+  }
+
+  function bindEvent($root) {
+    $root.on('click', '.roleList li', function() {
+      if ($(this).hasClass('disabled')) { return; }
+      $(this).toggleClass('on');
+      console.log('选中角色:' + $(this).index());
+    });
   }
 });
