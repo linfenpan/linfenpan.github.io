@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>全屏切换笔记</title>
+    <meta name="description" content="移动端经常有全屏切换的需求，推荐一个小巧的插件 slip.js" />
+    <meta name="keywords" content="移动,全屏切换" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item active" data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item " data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="blog" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html" data-pjax>博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            全屏切换笔记
+        </h1>
+        <div class="meta">
+            10-27,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+                    <span>移动</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>最近有收到需求，要做全屏切换的活动宣传也。<br>
+细思极恐，发现自己压根儿没有全屏切换相关的积累。<br>
+于是决定留下点什么内容，以供参考。</p>
+<hr>
+<p>全屏切换，现在主流有几款插件</p>
+<ul>
+<li>swiper.js 各类强大的切换功能</li>
+<li>fullpage.js 基于 jquery.js 的全屏滚动插件</li>
+<li>slip.js 移动端没依赖的屏幕滚动插件</li>
+</ul>
+<p>这次做移动端，所以主要使用 slip.js 了。<br>
+<a target="_blank" href="https://github.com/binnng/slip.js">官方地址</a></p>
+<hr>
+<h1>使用小例子</h1>
+<pre><code class="prettyprint linenums lang-javascript">// 以 #container 作为父容器，创建 'y' 轴滚动；同样，传入 'x'，则是 x轴滚动了
+var slip = Slip(document.querySelector('#container'), 'y');
+// 开始构建全屏滚动
+slip.webapp();
+// 动画时间，设定为 300ms
+slip.time(300);
+
+// 滚动结束时的回调
+slip.end(function() {
+  console.log(this, this.page);
+});
+</code></pre>
+<p>不过官方的脚本，对屏幕 resize 和 orientationchange 的支持不友好。<br>
+所以这里小小修改了一下脚本: <a target="_blank" href="/demo/slip.js">非压缩版</a>/<a target="_blank" href="/demo/slip-min.js">压缩版</a><br>
+添加了 resetWebapp 方法，提供有需要的同学，自动重置当前webapp的状态</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20161209-1481251257718/index.html" class="prev" data-pjax>元素自动进入屏幕可是区域</a>
+                <a href="/article/20160928-reset-style/index.html" class="next" data-pjax>移动端reset样式整理</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

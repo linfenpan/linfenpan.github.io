@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>emmet语法生成html</title>
+    <meta name="description" content="有感于 emmet 语法的方便，编写了一个js插件，把 emmet字符串 转为 html代码。 纯手打，不依赖外部脚本。
+" />
+    <meta name="keywords" content="emmet,转html,插件" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item " data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item active" data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item " data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="plugin" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/pluginlist/list_1.html" data-pjax>插件</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            emmet语法生成html
+        </h1>
+        <div class="meta">
+            11-11,2015 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h2>语法分析</h2>
+<p>关于emmet的语法，有几个常用的，在编码前，先进行介绍.</p>
+<table>
+<thead>
+<tr><th style="text-align:center">语法</th><th style="text-align:left">作用</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">div</td><td style="text-align:left">指定标签，eg: &quot;div&quot; --&gt; <code>&lt;div&gt;&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">.</td><td style="text-align:left">指定标签的类名, eg: &quot;.text&quot; --&gt; <code>&lt;div class=&quot;text&quot;&gt;&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">#</td><td style="text-align:left">指定标签的id</td></tr>
+<tr><td style="text-align:center">&gt;</td><td style="text-align:left">子元素，eg: &quot;.pt&gt;.txt&quot; --&gt; <code>&lt;div class=&quot;pt&gt;&lt;div class=&quot;txt&quot;&gt;&lt;/div&gt;&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">+</td><td style="text-align:left">兄弟元素, eg: &quot;.a+.b&quot; --&gt; <code>&lt;div class=&quot;a&quot;&gt;&lt;div class=&quot;b&quot;&gt;&lt;/div&gt;&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">^</td><td style="text-align:left">回到上一层, eg: &quot;.pt1&gt;.ch^.pt2&quot; --&gt; <code>&lt;div class=&quot;pt1&quot;&gt;&lt;div class=&quot;ch&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;pt2&quot;&gt;&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">{}</td><td style="text-align:left">文本内容, eg: &quot;{文字}&quot; --&gt; <code>&lt;div&gt;文字&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">[]</td><td style="text-align:left">属性, eg: &quot;[a=1 b=2]&quot; --&gt; <code>&lt;div a=&quot;1&quot; b=&quot;2&quot;&gt;&lt;/div&gt;</code></td></tr>
+<tr><td style="text-align:center">* 数字</td><td style="text-align:left">元素重复出现多少次</td></tr>
+</tbody>
+</table>
+<p>不同编辑器的 emmet 语法，会有些许差异，上述只做参考。</p>
+<hr>
+<h2>字符串解析</h2>
+<p>如何将一段字符，解析成 html 呢？关于这点，有两个方案：</p>
+<p>一、正则匹配</p>
+<p>按照 emmet 语法的特性，使用正则，对字符进行划词，及解析。因为仔细观察，其实，每一个元素，都是以 +、&gt;、^ 这3个符号，进行划分的。划词的正则，粗略编写，如下即可:</p>
+<pre><code class="prettyprint linenums lang-javascript">var reg =  /(.*?)(\+|&gt;|\^|$)/g;
+var str = &quot;#id&gt;.cls&quot;;
+
+reg.exec(str); // ⇒ [&quot;#id&gt;&quot;, &quot;#id&quot;, &quot;&gt;&quot;]
+reg.exec(str); // ⇒ [&quot;.cls&quot;, &quot;.cls&quot;, &quot;&quot;]
+reg.exec(str); // ⇒ [&quot;&quot;, &quot;&quot;, &quot;&quot;]
+</code></pre>
+<p>二、逐字符编译</p>
+<p>把字符串，剪切为单个字符，遇到类似 +、&gt;、^ 等符号，进行特殊处理:</p>
+<pre><code class="prettyprint linenums lang-javascript">var str = &quot;#id&gt;.cls&quot;;
+var list = str.split(&quot;&quot;); // ⇒ [&quot;#&quot;, &quot;i&quot;, &quot;d&quot;, &quot;&gt;&quot;, &quot;.&quot;, &quot;c&quot;, &quot;l&quot;, &quot;s&quot;];
+</code></pre>
+<p>两种方法各有优劣，正则比较简单快速，但是遇到特殊情况，如遇到这种镶嵌情况: &quot;{文{哈哈}字}&quot;，就显得相当的苍白了，如果运行环境相当安全，可以选择正则的方式。</p>
+<p>在这里，选择方法二，因为后续比较好拓展。</p>
+<hr>
+<h2>节点组织</h2>
+<p>字符串解析出来的，实际上，可以组织为一个数据树。如此字符: &quot;#pt&gt;.ch1+.chi2&quot;，最终解析如下:</p>
+<p><img src="./assert/tree.png" alt="树"></p>
+<p>编写一个节点类，支持相关的语法：</p>
+<p><img src="./assert/node.png" alt="节点类"></p>
+<hr>
+<h2>工具方法</h2>
+<p>因为采用了 逐个字符编译 的方法，所以，接下来的重点，就是对 split 之后的 array 对象的查找。我们需要几个方法，帮助我们快速解析 array。</p>
+<p>一、从array当前位置，一直寻找，直到某个指定字符未知<br>
+因为遇到像&quot;{&quot;，那直到 &quot;}&quot; 未知，它们里面的所有内容，都属于文本内容。而遇到 &quot;[&quot; &lt;--&gt; &quot;]&quot;，它们里面的所有内容，都属于属性。<br>
+编写方法:</p>
+<pre><code class="prettyprint linenums lang-javascript">/**
+* 直到找到某个 key 为止
+* @param list {Array} 数据列表，如 [&quot;a&quot;, &quot;b&quot;, &quot;}&quot;], findUntil(list, &quot;}) ⇒ &quot;ab&quot;
+* @param key  {String} 单个字母或正则
+*/
+function findUntil(list, key){
+    var pre, cur = null;
+    var res = [];
+
+     // 如果下一个字符，是 '|&quot;|`，则尽量多匹配内容
+     //  {'这是一个{{name}}'} ===&gt; '这是一个{{name}}' 而不是 '这是一个{{name
+     var first = list[0], matchFirst = /^('|&quot;|`)/.test(first);
+     matchFirst &amp;&amp; list.shift();
+
+     while(pre = cur, cur = list.shift()){
+         if(cur === key &amp;&amp; pre != '\\'){
+             if(matchFirst){
+                 if(pre === first){
+                     // 去掉最后一个 '|&quot;|`
+                     res.pop();
+                     break;
+                 }
+             }else{
+                 break;
+             }
+         }
+         res.push(cur);
+     }
+     return res.join('');
+}
+</code></pre>
+<p>二、找到下一个结束的括号: &quot;)&quot;</p>
+<p>括号，是最烦人的玩意，因为括号内，可以再镶嵌括号，所以，找成对的括号，很有必要。</p>
+<pre><code class="prettyprint linenums lang-javascript">// 找到下一个结束的括号
+// toNextBracket([&quot;a&quot;, &quot;b&quot;, &quot;)&quot;, &quot;c&quot;]); ⇒ &quot;ab&quot; [&quot;c&quot;]
+function toNextBracket(list){
+    var counter = 1, res = [], str, lstr;
+    while(true){
+        lstr = str;
+        str = list.shift();
+        switch(str){
+            case &quot;)&quot;:
+                if(lstr != &quot;\\&quot;){
+                    counter--;
+                }
+                break;
+            case &quot;(&quot;:
+                counter++;
+                break;
+        }
+        if(counter &lt;= 0 || !str){
+            break;
+        }else{
+            res.push(str);
+        }
+    };
+    return res.join(&quot;&quot;);
+};
+</code></pre>
+<hr>
+<h2>编译</h2>
+<p>最后剩下的，就是对字符串split后的数组，进行解析了。方法很简单，一个循环，进行swtich/case判定即可:</p>
+<p><img src="./assert/case.png" alt="case判断">;</p>
+<hr>
+<h2>最后</h2>
+<p>实际上，还是编码的过程，还是遇到很多坑的，如默认标签，如 &quot;^&quot;符号的操作，还有更多像&quot;data=123,age=10&quot;转为属性之类的问题。</p>
+<p><a target="_blank" href="https://github.com/linfenpan/simple-emmet.js">完整代码在此</a></p>
+<p>为了满足模板引擎的需求，此项目额外添加了自己的语法。</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20160928-localstorage/index.html" class="prev" data-pjax>兼容ie的localStorage</a>
+                <a href="/article/20151101-project-js/index.html" class="next" data-pjax>编写简单的模块加载器</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

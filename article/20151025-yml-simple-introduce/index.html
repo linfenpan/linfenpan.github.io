@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>YAML简单介绍</title>
+    <meta name="description" content="简介YAML[ Yet Another Markup Language ]英译过来，就是“另一门标志语言”。它是一种直观的，容易被人类阅读，以及被机器识别的数据格式。 它类似于XML和，但语法上，要比前者简洁很多。
+" />
+    <meta name="keywords" content="yaml,yml学习,yml前端应用" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item active" data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item " data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="blog" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html" data-pjax>博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            YAML简单介绍
+        </h1>
+        <div class="meta">
+            10-25,2015 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h1>简介</h1>
+<p>YAML[ Yet Another Markup Language ]英译过来，就是“另一门标志语言”。它是一种直观的，容易被人类阅读，以及被机器识别的数据格式。</p>
+<p>它类似于XML和，但语法上，要比前者简洁很多。</p>
+<p>具体感受一下，一个简单的 yml 文件:</p>
+<pre><code class="prettyprint linenums lang-yml">Author:
+  name: da宗熊
+  age: 还年轻
+</code></pre>
+<p>通过解析器生成后，最终得到数据 :</p>
+<pre><code class="prettyprint linenums lang-json">{
+  Author: {
+    name: &quot;da宗熊&quot;,
+    age : &quot;还年轻&quot;
+  }
+}
+</code></pre>
+<hr>
+<h1>格式</h1>
+<p>YAML文件，可以存储 map 或 array 对象。</p>
+<h2>map和array定义</h2>
+<p>map通过缩进来表示，其中的 key/map对，用 &quot;:&quot; 进行间隔。array通过减少&quot;-&quot;来表示。“#”代表注释。如下例子:</p>
+<pre><code class="prettyprint linenums lang-yml"># 这一行注释，是不会输出的
+Author:
+  name: da宗熊 # 这也是注释，不会输出的
+  desc:
+    - 帅气
+    - 阳光
+    - 很好看
+</code></pre>
+<p>将得出数据:</p>
+<pre><code class="prettyprint linenums lang-json">{
+  Author: {
+    name: &quot;da宗熊&quot;,
+    desc: [&quot;帅气&quot;, &quot;阳光&quot;, &quot;很好看&quot;]
+  }
+}
+</code></pre>
+<p>map对象，也可以使用json方式定义:</p>
+<pre><code class="prettyprint linenums lang-yml">Author: {name: da宗熊, age: 未知}
+</code></pre>
+<p>PS: JSON的语法是YAML1.2版的子集，同时非常接近YAML1.0与1.1版的子集，因此大部分的JSON文件都可以被YAML的剖析器剖析</p>
+<p>同样的，array对象，也可以类似的定义:</p>
+<pre><code class="prettyprint linenums lang-yml">List1: [a, b, c]
+# 与下面定义等价
+List2:
+  - a
+  - b
+  - c
+</code></pre>
+<h2>空值</h2>
+<p>YAML有几种空值的表现方式，分别是 &quot;null&quot;、&quot;~&quot; 和 不填。</p>
+<pre><code class="prettyprint linenums lang-yml">text1: null
+text2: ~
+text3:
+</code></pre>
+<p>最后得出数据:</p>
+<pre><code class="prettyprint linenums lang-json">{text1: null, text2: null, text3: null}
+</code></pre>
+<h2>字符串</h2>
+<p>字符串如果涉及到换行，可以使用 &quot;|&quot; 或 &quot;&gt;&quot; 作为前缀标志。&quot;|&quot;表示下面的内容，换行; “&gt;&quot;表示，下面内容中，所有的换行，变为空格。</p>
+<pre><code class="prettyprint linenums lang-yml">text1: |
+  一段文字
+  第二段文字
+text2: &gt;
+  一段文字
+  第二段文字
+</code></pre>
+<p>将得到:</p>
+<pre><code class="prettyprint linenums lang-json">{
+  text1: &quot;一段文字↵第二段文字&quot;,
+  text2: &quot;一段文字 第二段文字&quot;
+}
+</code></pre>
+<h2>合并</h2>
+<p>可指定特定的数据，与数组中当前的数据进行合并:</p>
+<pre><code class="prettyprint linenums lang-javascript">merge:
+  # 声明两个可引用的数据，这两个数据，也会输出
+  - &amp;CENTER {x: 1, y: 1}
+  - &amp;LEFT {x: 0, y: 1}
+  - # 定义对象1
+    &lt;&lt;: *CENTER
+    label: 引入CENTER数据，与当前数据合并
+  - # 定义对象2
+    &lt;&lt;: [*CENTER, *LEFT]
+    label: 可引入多个数据
+  - # 定义对象3
+    center: *CENTER
+    left:   *LEFT
+    label:  也可以纯粹的引入，而不合并
+</code></pre>
+<p>将会输出:</p>
+<pre><code class="prettyprint linenums lang-json">{
+  &quot;merge&quot;: [
+    {
+      &quot;x&quot;: 1,
+      &quot;y&quot;: 1
+    },
+    {
+      &quot;x&quot;: 0,
+      &quot;y&quot;: 1
+    },
+    {
+      &quot;x&quot;: 1,
+      &quot;y&quot;: 1,
+      &quot;label&quot;: &quot;引入CENTER数据，与当前数据合并&quot;
+    },
+    {
+      &quot;x&quot;: 1,
+      &quot;y&quot;: 1,
+      &quot;label&quot;: &quot;可引入多个数据&quot;
+    },
+    {
+      &quot;center&quot;: {
+        &quot;x&quot;: 1,
+        &quot;y&quot;: 1
+      },
+      &quot;left&quot;: {
+        &quot;x&quot;: 0,
+        &quot;y&quot;: 1
+      },
+      &quot;label&quot;: &quot;也可以纯粹的引入，而不合并&quot;
+    }
+  ]
+}
+</code></pre>
+<hr>
+<h1>最后</h1>
+<p>更多语法，可参考 <a target="_blank" href="http://nodeca.github.io/js-yaml/">这里</a></p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20151025-pipevalid-inctroduce/index.html" class="prev" data-pjax>数据验证</a>
+                <a href="/article/20151025-javascript-regexp-learn/index.html" class="next" data-pjax>[入门]javascript正则表达式</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

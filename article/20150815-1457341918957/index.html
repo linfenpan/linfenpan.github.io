@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>css3渐变</title>
+    <meta name="description" content="学习简单的线性 和 放射性 渐变" />
+    <meta name="keywords" content="css3,线性渐变,放射性渐变" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item " data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item active" data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="note" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/notelist/list_1.html" data-pjax>笔记</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            css3渐变
+        </h1>
+        <div class="meta">
+            08-15,2015 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>看了下简单的线性 和 放射性渐变，总结如下：</p>
+<p>a) 线性渐变</p>
+<pre><code class="prettyprint linenums lang-css">background: linear-gradient(to right bottom, red, blue);
+background: repeating-linear-gradient(red, blue 20%, black 30%);
+</code></pre>
+<p>配置颜色之前的，可以是角度值，也可以是 &quot;to right bottom&quot; 这种字符。<br>
+0deg，是从上到下，正值的角度，是按顺时针旋转，默认的角度是180deg<br>
+而 &quot;repeating-linear-gradient&quot;解析如下:<br>
+从红色开始，到20%的时候，完全变为蓝色，到30%的时候，完全变为黑色。重复 0% - 30% 这个变化</p>
+<hr>
+<p>b) 放射性渐变</p>
+<p>background: radial-gradient(circle|ellipse[默认形状], red, blue);<br>
+==&gt; background: radial-gradient(red, blue); 椭圆的渐变<br>
+==&gt; background: radial-gradient(circle, red, blue); 圆形的渐变<br>
+==&gt; background: radial-gradient(60% 60%, circle, red, blue 30%); 圆心在(60%,60%)位置的圆形渐变<br>
+0%是红色，渐变到蓝色，从 30% 开始，就是纯蓝色</p>
+<p>同样，也有repeating的属性:</p>
+<pre><code class="prettyprint linenums lang-css">background: repeating-radial-gradient(center, circle, red, blue 5%, black 10%);
+</code></pre>
+<p>background-image 配合 background-size，可构建很多重复的图形，类似:<br>
+做出一个 格子 的背景</p>
+<pre><code class="prettyprint linenums lang-css">.rect{
+    margin:20px;
+    width:200px;height:200px;
+    border-radius:100px;
+    box-shadow:0 0 0 10px rgba(255, 255, 255, .4) inset;
+
+    background-image:
+        linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+        linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+    background-size: 50px 50px;
+    /* size 的一半 */
+    background-position: 0 0, 25px 25px;
+}
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20150907-1457330875394/index.html" class="prev" data-pjax>常用的meta</a>
+                <a href="/article/20150811-1457342664218/index.html" class="next" data-pjax>perspective记录</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

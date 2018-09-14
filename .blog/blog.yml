@@ -23,7 +23,7 @@ publishRoot: ../
 timeFormate: :month-:date,:year #:month-:date,:year :hour::minute
 
 # 文章路径
-articlePath: :year:month:date/:id
+articlePath: article/:year:month:date-:id
 
 
 # 博客列表

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>元素自动进入屏幕可是区域</title>
+    <meta name="description" content="介绍dom的scrollIntoView方法" />
+    <meta name="keywords" content="js,可是区域,scrollIntoView" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item active" data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item " data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="blog" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/bloglist/list_1.html" data-pjax>博客</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            元素自动进入屏幕可是区域
+        </h1>
+        <div class="meta">
+            12-09,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>scrollIntoView(alignWithTop)  滚动浏览器窗口或容器元素，以便在当前视窗的可见范围看见当前元素。<br>
+如果alignWithTop为true，或者省略它，窗口会尽可能滚动到自身顶部与元素顶部平齐。<br>
+如果alignWithTop为false，窗口会尽可能的滚动把自身底部，与元素的底部齐平。<br>
+目前IE8及以上的浏览器均支持:</p>
+<p>参考资料: <a target="_blank" href="http://caniuse.com/#search=scrollIntoView">兼容性查询</a>、<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView">文档资料</a></p>
+<p>看个例子:</p>
+<pre><code class="prettyprint linenums lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;TODO supply a title&lt;/title&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a onClick=&quot;onc()&quot;&gt;到达内容区域&lt;/a&gt;
+        &lt;div style=&quot;width:400px; height:400px; border: 1px solid #f00;&quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;nn&quot; style=&quot;border:1px solid #666&quot;&gt;
+            &lt;div style=&quot;height:900px;&quot;&gt;内容区域&lt;/div&gt;  
+        &lt;/div&gt;
+    &lt;script&gt;
+     //作为一个事件的函数来被调用
+        function onc () {
+            var dd = document.getElementById(&quot;nn&quot;).scrollIntoView(true);     //这个意思其实就是将这个元素到顶部来浏览器窗口的顶部来显示
+        }
+    &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20170407-1491534899074/index.html" class="prev" data-pjax>node.js多任务执行，任务运行环境配置</a>
+                <a href="/article/20161027-full-screen-switch/index.html" class="next" data-pjax>全屏切换笔记</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

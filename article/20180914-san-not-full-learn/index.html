@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>san.js的一次不完全实践</title>
+    <meta name="description" content="san.js，是一款体积小巧，兼容性好（IE6），性能卓越，是一个可靠、可依赖的实现响应式用户界面的解决方案
+" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item " data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item active" data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="note" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/notelist/list_1.html" data-pjax>笔记</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            san.js的一次不完全实践
+        </h1>
+        <div class="meta">
+            09-14,2018 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h1>背景</h1>
+<p>近几月，新项目需要电脑与手机端，均能正常使用的。考虑到 <code>vue.js</code>、<code>reacti.js</code>、<code>riot.js</code> 等，对 IE 均不友好，于是兴起了使用新框架的念头。</p>
+<p>百度的 <code>san.js</code> 逐步浮现在眼前。</p>
+<blockquote>
+<p>它体积小巧，兼容性好（IE6），性能卓越，是一个可靠、可依赖的实现响应式用户界面的解决方案。</p>
+</blockquote>
+<p>上述是它自己吹的哈。小巧和兼容，是肯定的，至于性能？MVVM框架的性能，肯定是有损失的。在性能和维护、效率间权衡了一下，还是投身到MVVM的怀抱中。</p>
+<p>传送门: <a target="_blank" href="https://baidu.github.io/san/">san.js</a></p>
+<h1>优点</h1>
+<p><code>san.js</code> 有以下几点，是非常吸引人的:</p>
+<ul>
+<li>兼容性很好，在移动、电脑端均能放心使用</li>
+<li>体积相对较小</li>
+<li>有类似冒泡的事件机制，一个<code>dispatch</code>方法，让组件耦合更加松散。子组件 <code>dispatch</code> 事件，一路冒泡，直至有父级组件，对其进行处理。</li>
+<li>更加灵活的组件机制，我们甚至可以把动态加载的子组件，挂载到任意组件内。</li>
+<li>能灵活使用在任何地方，与任意框架配合使用。自带模板编译，不经 <code>webpack</code> 编译，也可以进行动态创建组件。</li>
+<li>有组件反解、服务端渲染等功能呢。</li>
+<li>模板语法与 <code>vue.js</code> 语法类似，很低的学习成本；状态管理有类似 <code>flux</code> 的单向流，容易使用。</li>
+<li>截止本文发布时，已有 <code>san-store</code>，<code>san-router</code>，<code>san-update</code> 等优秀配套框架，而且还在持续更新中</li>
+</ul>
+<h1>缺点</h1>
+<p>在使用的过程中，也遇到一些问题:</p>
+<ul>
+<li>取值的表达式，不能支持函数，如 <code>{{ [1, 2, 3].join('x') }}</code>，输出将会是 <code>1,2,3</code>，其中的 <code>.join</code> 被完全忽略了</li>
+<li>没有全局的混入、拓展等操作，组件间的<code>继承</code>比较麻烦</li>
+</ul>
+<h1>使用</h1>
+<h2>简单例子</h2>
+<pre><code class="prettyprint linenums lang-javascript">var MyApp = san.defineComponent({
+    template: '&lt;p&gt;Hello {{name}}!&lt;/p&gt;',
+
+    initData: function () {
+        return {
+            name: 'San'
+        };
+    }
+});
+
+
+var myApp = new MyApp();
+myApp.attach(document.body);
+</code></pre>
+<p>可以看到，通常情况使用 San 会经过这么几步：</p>
+<ol>
+<li>我们先定义了一个 San 的组件，在定义时指定了组件的 内容模板 与 初始数据 。</li>
+<li>初始化组件对象</li>
+<li>让组件在相应的地方渲染</li>
+</ol>
+<p>用 <code>ESNext</code> 编写，则是:</p>
+<pre><code class="prettyprint linenums lang-javascript">class myApp extends san.Component {
+  // static 关键字，是必须的，包括后面用到的 computed，filters，components  等字段，建议都用 static 关键字
+  static template = `&lt;p&gt;Hello {{name}}!&lt;/p&gt;`;
+
+  initData: function () {
+        return {
+            name: 'San'
+        };
+    }
+}
+
+var myApp = new MyApp();
+myApp.attach(document.body);
+</code></pre>
+<h2>计时器例子</h2>
+<pre><code class="prettyprint linenums lang-javascript">var MyTimer = san.defineComponent({
+  template: `&lt;div&gt;当前索引: {{ index }}&lt;/div&gt;`,
+
+  initData: function() {
+      return { index: 0 };
+  },
+
+  attached: function() {
+      var data = this.data;
+      // 取值和赋值，必须通过 data.set 和 data.get 操作进行
+      // 支持表达式赋值、取值，eg: data.get('list[0].name', 'xxx')
+      var index = data.get('index');
+      setInterval(function() {
+          data.set('index', index++);
+      }, 1000);
+  }
+});
+
+var myTimer = new MyTimer({
+  // 覆盖掉 initData 中，设置的默认值
+  data: {
+      index: 10
+  }
+});
+myTimer.attach(document.body);
+</code></pre>
+<p>可以看到，计时器从 <code>10</code> 开始，每秒进行递增。</p>
+<h2>过滤器、计算属性等</h2>
+<pre><code class="prettyprint linenums lang-javascript">var MyTest = san.defineComponent({
+  template: `
+    &lt;div&gt;
+      姓名: {{ name }}&lt;br/&gt;
+      性别: {{ gender | parseSex }}&lt;br/&gt;
+      简介: {{ introduce }}
+    &lt;/div&gt;
+  `,
+
+  computed: {
+    // 根据 good 的值，计算 introduce 的值
+    // 在计算属性内，不允许访问 this.data 外的属性
+    introduce: function() {
+      var good = this.data.get('good');
+      return '你是个' + (good ? '好人' : '坏人');
+    }
+  },
+
+  filters: {
+    // 过滤器的使用与 vue.js 等框架一致
+    parseSex: function(val) {
+      return val == 1 ? '男' : '女';
+    }
+  },
+
+  initData: function() {
+    return { good: false, name: '', gender: 0 };
+  },
+
+  attached: function() {
+    var data = this.data;
+    setInterval(function() {
+      data.set('good', !data.get('good'));
+    }, 1000);
+  }
+});
+
+var myTest = new MyTest({
+  data: {
+    name: 'san',
+    gender: 1
+  }
+});
+myTest.attach(document.body);
+</code></pre>
+<p>效果如下:<br>
+<img src="http://g.fp.ps.netease.com/km/file/5b924e278b742760596ca6bdRoMFgka0" alt="jdfw.gif"></p>
+<p>更多的使用，可查阅官网。下面仅介绍一些 <code>san.js + webpack</code> 使用时，与个人做项目时，遇到的一些问题，以及解决方案。</p>
+<h1>遇到的问题</h1>
+<h2>san-loader (0.0.7版本)</h2>
+<p>官方仅在偏僻的角落，以及一些例子中，有提及 <a target="_blank" href="https://www.npmjs.com/package/san-loader">san-loader</a>，它的用法，与 <code>vue-loader</code> 的<strong>旧版</strong>形式一致，对此熟悉同事，可掠过此小节。</p>
+<p>使用如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">{
+    module: {
+        loaders: [
+            {
+                test: /\.san$/,
+                loader: 'san-loader'
+            }
+        ]
+    }
+}
+</code></pre>
+<p>假设有 <code>index.san</code> 文件:</p>
+<pre><code class="prettyprint linenums lang-html">&lt;template&gt;
+    &lt;div class=&quot;index&quot;&gt;Hello {{ name }}!&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  initData() {
+    return { name: 'San' };
+  }
+};
+&lt;/script&gt;
+
+&lt;style&gt;
+.index { color: red; }
+&lt;/style&gt;
+</code></pre>
+<p>在 <code>san-loader</code> 的作用下，<code>index.san</code> 会被划分为 <code>html</code>，<code>css</code>，<code>js</code> 三块，并且交由 <code>webpack</code> 中，对应的 <code>loader</code> 进行编译、打包。</p>
+<p>查看了<code>san-loader</code> 的源码:<br>
+<img src="http://g.fp.ps.netease.com/km/file/5b6d5a465e602739695c22e5lGXN1z4C" alt="Popo截图2018810172619.png"><br>
+可得知 <code>html</code> 部分交由 <code>html-loader</code> 处理；<code>css</code> 部分交由<code>style-loader</code>处理；<code>js</code>部分，交由<code>babel-loader</code>处理。</p>
+<blockquote>
+<p>PS: 如果无法编译出内容或报错，可查看项目，是否已经引用了 html-loader、style-loader 和 babel-loader</p>
+</blockquote>
+<p>如果要覆盖默认的处理，可按以下格式传入参数:</p>
+<pre><code class="prettyprint linenums lang-javascript">{
+    module: {
+        loaders: [
+            {
+                test: /\.san$/,
+                use: [
+                    {
+                        loader: 'san-loader',
+                        options: {
+                            // 改写 loaders 中的值，达到覆盖默认 loader 的效果
+                            loaders: {
+                                html: [ 'html-loader' ],
+                                css: [ 'style-loader' ],
+                                js: [ 'babel-loader' ]
+                            }
+                        } // end options
+                    }
+                ]
+            }
+        ]
+    }
+}
+</code></pre>
+<p>细心的同学，可能就注意到，默认的 <code>html-loader</code> 带了一个参数 <code>?minimize=false</code>。此参数代表了 <code>san-loader</code> 编译出来的 <code>html</code> 内容，均不会被压缩。在实际应用中，些许不友好。我们可以通过重写 <code>options.loaders.html</code> 的值，达到我们压缩 <code>html</code> 的目的。</p>
+<blockquote>
+<p>html-loader: <a target="_blank" href="https://www.npmjs.com/package/html-loader">https://www.npmjs.com/package/html-loader</a></p>
+</blockquote>
+<h2>继承</h2>
+<p>官方有提及，组件间继承，有两种方式: <code>san.inherits</code> 和 <code>ESNext</code>。</p>
+<pre><code class="prettyprint linenums lang-javascript">var CompA = san.defineCompoent({ /* 配置 */ });
+
+// san.inherits
+function CompB(options) {
+   CompA.call(this, options);
+}
+san.inerits(CompB, CompA);
+MyApp.prototype.template = `&lt;div&gt;内容&lt;/div&gt;`;
+CompB.prototype.initData = function() {
+    return {};
+};
+
+// ESNext
+class CompC extends CompA {
+    /* 可缺省
+    constructor(options) {
+        super(options);
+    }
+    */
+
+    static template = `&lt;div&gt;内容&lt;/div&gt;`;
+
+    initData() {
+        return {};
+    }
+}
+</code></pre>
+<p>二者对比，推荐使用 <code>ESNext</code> 的继承方式。</p>
+<blockquote>
+<p>官方原话:  由于 ESNext 没有能够编写 prototype 属性的语法，所以 San 对组件定义时的属性支持 static property，通过 ESNext 的 extends 继承时，template / filters / components 属性请使用 static property 的方式定义。</p>
+</blockquote>
+<p>继承一切都好好的，问题就处在了 <code>static</code> 属性上。假如 <code>CompA</code> 现在如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">class CompA extends san.Component {
+    static components = {
+        'navbar': Navbar,  // 假设 Navbar 组件，已经存在
+    };
+
+    // ....
+}
+</code></pre>
+<p>当 <code>CompB</code> 继承 <code>CompA</code> 时，<code>san.herits</code> 代码如下:<br>
+<img src="http://g.fp.ps.netease.com/km/file/5b6d65dc7f9d2a39e2670afaZIrT9XpL" alt="Popo截图2018810181539.png"><br>
+<code>static</code> 的属性，被完美忽略了。于是 <code>CompB</code> 并没有引入到组件 <code>Navbar</code>。</p>
+<p>而 <code>CompC</code> 继承 <code>CompA</code> 时，<code>babel</code> 的继承代码:<br>
+<img src="http://g.fp.ps.netease.com/km/file/5b6d66576f04940d6059f610R5zCv2oX" alt="Popo截图2018810181746.png"><br>
+[抽自 babel-runtime/helpers/inherits.js]<br>
+可见倒数第二行，<code>subClass.__proto__ = superClass</code>，意图继承  <code>superClass</code> 的静态属性，可惜的是 <code>__proto__</code> 属性，在当前的 <code>IE</code> 下，全军覆没。[做手机端的同学，木有这个烦恼]</p>
+<p>被迫无奈，如果要继承 <code>static</code> 属性，须自己编写继承代码，这是之前写好的代码，可做参考:</p>
+<pre><code class="prettyprint linenums lang-javascript">'use strict';
+import { extend, merge, deepCloneArray } from './extend';
+import { typeOf } from './typeof';
+
+/**
+ * 类间，静态属性继承
+ * es6 的继承，是不会继承 static 属性的，这里修正一下
+ *
+ * @param {Function} subClass 子类函数
+ * @param {Function} superClass 父类函数
+ */
+export function inheritStatic(subClass, superClass) {
+  // 合并 static 的属性，如 superClass.template
+  Object.keys(superClass).forEach(key =&gt; {
+    const subValue = subClass[key];
+    const superValue = superClass[key];
+    const subType = typeOf(subValue);
+    const superType = typeOf(superValue);
+
+    if (subType == superType &amp;&amp; subType == 'object') {
+      subClass[key] = merge({}, superValue, subValue);
+    } else if (subValue == null) {
+      switch (superType) {
+        case 'object':
+          subClass[key] = extend(true, superValue);
+          break;
+        case 'array':
+          subClass[key] = deepCloneArray(superValue);
+          break;
+        default:
+          subClass[key] = superValue;
+      }
+    }
+  });
+}
+</code></pre>
+<p>在<code>CompC</code>继承<code>CompA</code>后，只需调用 <code>inheritStatic(CompC, CompA)</code>，即可继承 <code>CompA</code> 中的静态属性及方法，并且对静态属性的 <code>object</code> 对象，进行了简单的合并操作。</p>
+<h2>san-store</h2>
+<p><a target="_blank" href="https://github.com/baidu/san-store">san-store地址</a>：https://github.com/baidu/san-store<br>
+截止本文发布前，<code>san-store</code> 与 <code>san</code> 配合时，仅建议使用单个 <code>san-store</code>对象，看下面官方的例子:</p>
+<pre><code class="prettyprint linenums lang-javascript">// 引入的 store 对象，实际是全局声明的
+// 所以，后面的所有 store.addAction，实际上，均是捆绑在一个全局对象下
+import {store, connect} from 'san-store';
+import {builder} from 'san-update';
+
+
+store.addAction('changeUserName', function (name) {
+    return builder().set('user.name', name);
+});
+
+
+let UserNameEditor = san.defineComponent({
+    submit() {
+        store.dispatch('changeUserName', this.data.get('name'));
+    }
+});
+connect.san({
+    name: 'user.name'
+})(UserNameEditor);
+</code></pre>
+<p>如果是单页面应用，或者单实例，问题不大。如果需要多个 <code>store</code> 实例，可通过 <code>new Store()</code> 声明新的 <code>Store</code> 对象。然后通过组件继承、或者 <code>$owner</code> 传递的形式，把父级的 <code>store</code> 对象，分发给子组件。</p>
+<p>下面，是本人写的一个抽象工具类:</p>
+<pre><code class="prettyprint linenums lang-javascript">// abstract.js 所有组件，均继承此类
+
+/**
+* 获取父组件的 $store 值
+*/
+function getStore(context) {
+    if (context) {
+      if (context.$store) {
+        return context.$store;
+      }
+      let owner = context.owner;
+      while (owner) {
+        if (owner.$store) {
+          return owner.$store;
+        }
+        owner = owner.owner;
+      }
+    }
+    return null;
+}
+
+export default class Abstract extends san.Component {
+    constructor(options, store) {
+        super();
+
+        if (store) {
+          // 最顶层组件，传入一个新的 new Store 对象，保存到 this.$store 中
+          this.$store = store;
+        } else {
+          // 子组件找不到 $store 属性，就指向父组件的 $store 对象
+          this.$store = getStore(this);
+        }
+    }
+}
+</code></pre>
+<h2>san-store/connect</h2>
+<p>在 <code>san-store</code> 的 <code>src/connect/createConnector</code>中，有这么一段脚本:<br>
+<img src="http://g.fp.ps.netease.com/km/file/5b925010143cfa44fc75ca8bURGFjGTB" alt="xxx.png"></p>
+<p>如果该组件，已经通过 <code>connect.san</code> 绑定过 <code>san-store</code> 了，将不会重复去初始化 该组件的 <code>actions</code>，本意是很好的。<br>
+但是如果我们子组件是继承父组件而来的，而父组件使用过了 <code>connect.san</code>，那么子组件的 <code>connect.san</code> 的绑定，将会失效。</p>
+<p>为解决此问题，我们可以把子组件的<code>prototype</code>中的<code>actions</code>值，置为<code>null</code>，然后再调用 <code>connect.san</code>，即可解决</p>
+<h1>总结</h1>
+<p>因为体积小，又可实时编译，在做一些小组件、移动端活动的时候，还是非常便捷的，不用考虑兼容 和 体积问题，省下很多功夫。</p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20160705-1467699541437/index.html" class="next" data-pjax>组件编写的反思01</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

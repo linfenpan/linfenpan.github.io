@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>css3之clip-path</title>
+    <meta name="description" content="样式裁剪，初步学习" />
+    <meta name="keywords" content="css3,clip-path" />
+    <!-- <link rel="stylesheet" href="/css/base.css" charset="utf-8">
+    <link rel="stylesheet" href="/css/common.css" charset="utf-8"> -->
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item " data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item active" data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="note" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/index.html" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/notelist/list_1.html" data-pjax>笔记</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            css3之clip-path
+        </h1>
+        <div class="meta">
+            03-18,2016 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <p>clip-path这个属性，当前IE全线不支持，而android 4.4版本后，开始支持。<br>
+至于firefox，当前也仅仅支持与svg的配合。<br>
+其余的，还得添加各自前缀，不过学习一下无妨。</p>
+<p>其中，收集的一些 clip-path属性，如下:</p>
+<pre><code class="prettyprint linenums lang-txt">1. inset 矩形，9个参数 (top right bottom left round top-left-radius top-right-radius bottom-right-radius bottom-left-radius);
+       其中，前4和后4个参数，均可合并【类似margin和border-radius】
+
+2. circle 圆形，3个参数 (radius at x y)
+
+3. ellipse 椭圆，4个参数 (x-radius y-radius a x y)
+
+4. polygon 不规则自闭合图形，参数成对出现 (x1 y1, x2 y2, ...)
+
+5. 引用 svg 的 &lt;clipPath&gt;，url(#clipPath)
+</code></pre>
+<p>学习代码:</p>
+<pre><code class="prettyprint linenums lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;css3 剪切&lt;/title&gt;
+    &lt;style&gt;
+        * { margin: 0; padding: 0; }
+        #back { width: 600px; height: 450px; background: url(./pic.jpg) no-repeat; }
+
+        /*
+            inset 最多可容纳 9 个参数
+            inset (top right bottom left round top-left-radius top-right-radius bottom-right-radius bottom-left-radius);
+            其中，top right bottom left 可参考 padding，都是可以合并为1个或2个参数
+            而 top-left-radius、top-right-radius、bottom-right-radius、bottom-left-radius 也是可以参考 border-radius
+        */
+        .clip1 {
+            /* 切一个矩形: 上右下左，以边缘定位 */
+            -webkit-clip-path: inset(30px 200px 200px 20px);
+        }
+        .clip2 {
+            -webkit-clip-path: inset(10% round 20% 20% 20% 0);
+        }
+
+
+        /*
+            画圆，只有一种参数: circle(r at x y);
+        */
+        .clip3 {
+            -webkit-clip-path: circle(200px at 200px 200px);
+        }
+
+        /*
+            话椭圆，只有一种参数：ellipse(x-radius y-radius at x-axis y-axis)
+        */
+        .clip4 {
+            -webkit-clip-path: ellipse(200px 100px at 200px 200px);
+        }
+
+        /*
+            自闭合多边形，polygon(x1 y1, x2 y2, ...) 参数不限
+        */
+        .clip5 {
+            -webkit-clip-path: polygon(10px 10px, 400px 10px, 400px 400px, 350px 400px, 350px 500px, 300px 400px, 10px 400px);
+        }
+
+        /*
+            也可以使用 svg 的 &lt;clipPath&gt; 元素
+        */
+        .clip6 {
+            -webkit-clip-path: url(#svgPath);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;svg height=&quot;0&quot; width=&quot;0&quot;&gt;
+        &lt;defs&gt;
+            &lt;clipPath id=&quot;svgPath&quot;&gt;
+                &lt;circle stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; /&gt;
+                &lt;circle stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; cx=&quot;193.949&quot; cy=&quot;235&quot; r=&quot;74.576&quot;/&gt;
+                &lt;circle stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; cx=&quot;426.576&quot; cy=&quot;108.305&quot; r=&quot;47.034&quot;/&gt;
+                &lt;circle stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; cx=&quot;346.915&quot; cy=&quot;255.763&quot; r=&quot;43.644&quot;/&gt;
+                &lt;circle stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; cx=&quot;255.39&quot; cy=&quot;82.882&quot; r=&quot;35.17&quot;/&gt;
+                 &lt;text x=&quot;0&quot; y=&quot;100&quot; textLength=&quot;800px&quot; lengthAdjust=&quot;spacing&quot; font-family=&quot;Vollkorn&quot; font-size=&quot;60px&quot; font-weight=&quot;700&quot; font-style=&quot;italic&quot;&gt;da宗熊&lt;/text&gt;
+            &lt;/clipPath&gt;
+        &lt;/defs&gt;
+    &lt;/svg&gt;
+    &lt;div id=&quot;back&quot; class=&quot;clip6&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20160331-1459390671643/index.html" class="prev" data-pjax>mongodb学习-01</a>
+                <a href="/article/20160114-process-stdout/index.html" class="next" data-pjax>process.stdout随手记录[node.js]</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2018 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>
