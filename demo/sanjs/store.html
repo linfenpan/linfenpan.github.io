@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui,shrink-to-fit=no,viewport-fit=cover">
+  <title>san store测试</title>
+  <style>
+    html, body { padding: 0; margin: 0; }
+    .my-app { padding: 30px; font-size: 18px; line-height: 200%; }
+    .my-app .pet { color: red; }
+  </style>
+</head>
+<body>
+
+<!--[if lte IE 9]>
+  <script src="./es5-shim.min.js"></script>
+  <script src="./es5-sham.min.js"></script>
+<![endif]-->
+
+<!-- san.js + san-store + san-update + es6-shim -->
+<script src="./lib.all.js"></script>
+<script>
+  var san = CCaLib.san;
+  var sanStore = CCaLib.sanStore;
+  var sanUpdate = CCaLib.sanUpdate;
+</script>
+
+<script type="text/html" id="jsTemplate">
+  <div class="my-app">
+    <div>
+      <button on-click="plus">+1</button>
+      &nbsp;&nbsp;
+      <button on-click="subtract">-1</button>
+    </div>
+    值: {{ value }}
+  </div>
+</script>
+
+<script>
+  var store = sanStore.store;
+  var connect = sanStore.connect;
+  var builder = sanUpdate.builder;
+
+  // 初始数据（当然，大家不要这么用哈~），官方完全没有这么推荐的，这里仅为了测试
+  store.raw.index = 10;
+
+  store.addAction('plus', function(_/* 参数，当时外面传入的是 void 0 */, st) {
+    // st 仅有 getState 和 dispatch 两方法
+    var value = st.getState('index') || 0;
+    return builder().set('index', value + 1);
+  });
+
+  store.addAction('subtract', function(_, st) {
+    var value = st.getState('index') || 0;
+    return builder().set('index', value - 1);
+  });
+
+  var MyApp = san.defineComponent({
+    template: document.getElementById('jsTemplate').innerHTML,
+
+    plus: function() {
+      store.dispatch('plus');
+    },
+
+    subtract: function() {
+      // 使用 connect.san 后，会生成 this.actions，第二个参数，就是 actions 中插入的内容
+      this.actions.subtract();
+    }
+  });
+
+  connect.san(
+    { value: 'index', user: 'user' },
+    { subtract: 'subtract' }
+  )(MyApp);
+
+  var myApp = new MyApp();
+  myApp.attach(document.getElementsByTagName('body')[0]);
+</script>
+</body>
+</html>
