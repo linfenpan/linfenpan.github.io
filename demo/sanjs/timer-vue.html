@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui,shrink-to-fit=no,viewport-fit=cover">
+  <title>计时器用例</title>
+  <style>
+    html, body { padding: 0; margin: 0; }
+    .my-app { padding: 30px; font-size: 18px; line-height: 200%; }
+    .my-app .pet { color: red; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <!--[if lte IE 9]>
+    <script src="./es5-shim.min.js"></script>
+    <script src="./es5-sham.min.js"></script>
+  <![endif]-->
+  <script src="./vue.js"></script>
+  <script type="text/html" id="jsTemplate">
+    <div class="my-app">
+      <label v-for="name,index in nameList" @click="updateIndex(index)">
+        <input type="radio" name="name" :checked="index == currentIndex" />{{ name }}
+      </label>
+      <div>
+        <span class="pet">{{ nameList[currentIndex ]}}</span>步行距离: {{ step }} 米
+      </div>
+    </div>
+  </script>
+  <script>
+    var MyApp = new Vue({
+      template: document.getElementById('jsTemplate').innerHTML,
+
+      el: '#app',
+
+      data: {
+        nameList: ['白猫', '黑狗'],
+        step: 1,
+        currentIndex: 1
+      },
+
+      methods: {
+        updateIndex: function(index) {
+          this.currentIndex = index;
+        }
+      },
+
+      mounted: function() {
+        var ctx = this;
+        ctx.timer = setInterval(function() {
+          ctx.step += 1;
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
