@@ -16,7 +16,7 @@ function render(html, data) {
   var start = 0;
 
   function pure(str) {
-    return typeof str === 'string' ? str.replace(/"/g, '\\"').replace(/\n|\r/g, '\\n').replace(/^[\s\\n]+$/, '').replace(/(\\n)+\s+/g, '\\n') : str;
+    return typeof str === 'string' ? str.replace(/"/g, '\\"').replace(/\n|\r/g, '\\n') : str;
   }
 
   // 添加转义函数
@@ -44,12 +44,9 @@ function render(html, data) {
     var offset = str.length;
 
     if (start < index) {
-      var s = pure(html.slice(start, index));
-      if (s) {
-        functionBody.push('__res.push("'+ s +'");\n');
-      }
-      start = index + offset;
+      functionBody.push('__res.push("'+ pure(html.slice(start, index)) +'");\n');
     }
+    start = index + offset;
 
     // <%= value %> 转义输出
     // <%=# value %> 不转义输出

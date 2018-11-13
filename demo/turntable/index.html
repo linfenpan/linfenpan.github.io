@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,shrink-to-fit=no,viewport-fit=cover">
+  <title>转盘抽奖例子</title>
+  <style>
+    * { padding: 0; margin: 0; }
+    .turntable { position: relative; width: 450px; height: 450px; margin: 20px; overflow: hidden; }
+    .icon { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url(./turntable.png) no-repeat; /*animation: turn 1s linear;*/ }
+    .btn { position: absolute; top: 111px; left: 111px; width: 228px; height: 248px; background: url(./pointer.png) no-repeat; }
+
+    @keyframes turn {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <link href="./price.css" rel="stylesheet" />
+</head>
+<body>
+
+  <h1>例子1 - 顺时针转动</h1>
+  <div id="msg1"></div>
+  <div class="turntable" id="turntable1">
+    <span class="icon"></span>
+    <a href="javascript:;" class="btn"></a>
+  </div>
+
+
+  <br>
+  <hr>
+  <br>
+
+  <h1>例子2 - 逆时针转动</h1>
+  <div id="msg2"></div>
+  <div class="turntable" id="turntable2">
+    <span class="icon"></span>
+    <a href="javascript:;" class="btn"></a>
+  </div>
+
+
+  <br>
+  <hr>
+  <br>
+
+  <h1>例子3 - 九宫格抽奖</h1>
+  <!-- 从非常久远的角落，偷回来的代码 -->
+  <div id="msg3"></div>
+  <div class="prizesList" id="turntable3">
+    <div class="item item1">
+        <span class="wrap"></span>
+        <span class="ico ico1"></span>
+        <span class="text">10元红包</span>
+    </div>
+    <div class="item item2">
+        <span class="wrap"></span>
+        <span class="ico ico2"></span>
+        <span class="text">ipad mini4</span>
+    </div>
+    <div class="item item3">
+        <span class="wrap"></span>
+        <span class="ico ico3"></span>
+        <span class="text">3元红包</span>
+    </div>
+    <div class="item item8">
+        <span class="wrap"></span>
+        <span class="ico ico8"></span>
+        <span class="text">移动充值卡</span>
+    </div>
+    <div class="item itemBtn">
+        <a href="javascript:;" class="drawPrizeBtn"></a>
+    </div>
+    <div class="item item4">
+        <span class="wrap"></span>
+        <span class="ico ico4"></span>
+        <span class="text">元宵节快乐</span>
+    </div>
+    <div class="item item7">
+        <span class="wrap"></span>
+        <span class="ico ico7"></span>
+        <span class="text">5元红包</span>
+    </div>
+    <div class="item item6">
+        <span class="wrap"></span>
+        <span class="ico ico6"></span>
+        <span class="text">移动充值卡</span>
+    </div>
+    <div class="item item5">
+        <span class="wrap"></span>
+        <span class="ico ico5"></span>
+        <span class="text">50元红包</span>
+    </div>
+</div>
+
+
+  <script src="./turntable.js"></script>
+  <script>
+    // @notice 如果是顺时针旋转，奖品的角度，请以逆时针进行配置；如果是以逆时针旋转，奖品的角度，请以顺时针进行配置。
+    var priceValues1 = {
+      1: [-36, 36, '8元'],
+      5: [36, 108, '888元'],
+      4: [108, 180, '388元'],
+      3: [180, 252, '188元'],
+      2: [252, 324, '88元']
+    };
+
+    var turntable1 = new Turntable({
+      // 360deg/s
+      angularPerSecond: 720,
+      // 加速度 -> 每 n 秒 增加多少deg
+      angularAcceleration: 180,
+      // @notice 奖品的角度，请以逆时针进行配置
+      values: priceValues1
+    });
+    var elIcon1 = document.querySelector('#turntable1 .icon');
+    var elBtn1 = document.querySelector('#turntable1 .btn');
+    turntable1.animate = function(r) {
+      // @notice 顺时针旋转
+      elIcon1.style.transform = `rotate(${r}deg)`;
+    };
+    turntable1.wonCallback = function(index, r) {
+      document.querySelector('#msg1').innerHTML = '抽中: ' + index + ' , 当前角度: ' + r + 'deg' + ' , 奖品: ' + priceValues1[index][2];
+    };
+    elBtn1.addEventListener('click', function() {
+      if (turntable1.isDrawing) { return; }
+      var index = Math.ceil(Math.random() * 5);
+      console.log('抽中了:' + index);
+      turntable1.setWonIndexAndStop(index);
+    }, false);
+    // turntable1.start();
+    // turntable1.setWonIndexAndStop(index: number, immediately?: boolean);
+
+
+
+    // @notice 如果是顺时针旋转，奖品的角度，请以逆时针进行配置；如果是以逆时针旋转，奖品的角度，请以顺时针进行配置。
+    var priceValues2 = {
+      1: [36, -36, '8元'],
+      2: [36, 108, '88元'],
+      3: [108, 180, '188元'],
+      4: [180, 252, '388元'],
+      5: [252, 324, '888元']
+    };
+    var turntable2 = new Turntable({
+      // 360deg/s
+      angularPerSecond: 360,
+      // 加速度 -> 每 n 秒 增加多少deg
+      angularAcceleration: 180,
+      // 结束时，几圈后停止转动
+      roundForEnd: 1,
+      // @notice 奖品的角度，请以逆时针进行配置
+      values: priceValues2
+    });
+    var turntable2FirstDraw = true;
+    turntable2.start();
+
+    var elBtn2 = document.querySelector('#turntable2 .btn');
+    var elIcon2 = document.querySelector('#turntable2 .icon');
+
+    turntable2.animate = function(r) {
+      // @notice 逆时针旋转
+      elIcon2.style.transform = `rotate(-${r}deg)`;
+    };
+    turntable2.wonCallback = function(index, r) {
+      document.querySelector('#msg2').innerHTML = '抽中: ' + index + ' , 当前角度: ' + r + 'deg' + ' , 奖品: ' + priceValues2[index][2];
+    };
+    elBtn2.addEventListener('click', function() {
+      if (turntable2FirstDraw == false && turntable2.isDrawing) { return; }
+      turntable2FirstDraw = false;
+      var index = Math.ceil(Math.random() * 5);
+      console.log('抽中了:' + index);
+      turntable2.setWonIndexAndStop(index);
+    }, false);
+
+
+
+    // 九宫格模拟例子
+    var priceCount = 8;
+    var priceValues3 = {};
+    var perAngular3 = 360/priceCount;
+    for (var i = 1; i <= priceCount; i++) {
+      priceValues3[i] = [ (i - 1) * perAngular3, i * perAngular3 ];
+    }
+
+    var elRoot3 = document.querySelector('#turntable3');
+    var turntable3 = new Turntable({
+      angularPerSecond: 720,
+      angularAcceleration: 480,
+      roundForEnd: 2,
+      values: priceValues3,
+      animate: function(r) {
+        var i = Math.ceil(r / perAngular3);
+        elRoot3.className = elRoot3.className.replace(/\b\s*active(\d*)\b/g, '') + ' active' + i;
+      },
+      wonCallback: function(index, r) {
+        document.querySelector('#msg3').innerHTML = '抽中: ' + index + ' , 当前角度: ' + r + 'deg';
+      }
+    });
+
+    elRoot3.querySelector('.drawPrizeBtn').addEventListener('click', function() {
+      if (turntable3.isDrawing) { return; }
+      turntable3.start();
+      setTimeout(function() {
+        turntable3.setWonIndexAndStop(Math.ceil(Math.random() * priceCount));
+      }, 2500);
+    }, false);
+  </script>
+</body>
+</html>
