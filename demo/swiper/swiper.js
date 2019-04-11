@@ -249,7 +249,7 @@ Swiper.prototype = {
             if (this.visibleCount % 2 == 0) { this.visibleCount++; }
         }
 
-        console.log(this.visibleCount);
+        // console.log(this.visibleCount);
 
         if (this.oldNextDistance != this.nextDistance) {
             this.nextDistance = this.nextDistance < 1 ? this.nextDistance * this.rootWidth : this.nextDistance;
