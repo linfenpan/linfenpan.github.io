@@ -15,16 +15,26 @@ var nunjucks = require("./nunjucks");
 var article = {
     // 查账内容编译插件
     plugins: {
-        ".md": function(text){
+        ".md": function(text, options, data/* { to, link, options } */){
             var Remarkable = require("remarkable");
             var md = new Remarkable("full", {
                 html: true,
                 breaks: true,
                 langPrefix: "prettyprint linenums lang-"
             });
-            return md.render(text).replace(/<a href=/gi, function(){
+
+            var link = data.link;
+            var result = md.render(text).replace(/<a href=/gi, function(){
                 return '<a target="_blank" href=';
             });
+            if (link) {
+                var dir = '/' + link.replace(/[^\/]*$/, '').replace(/\/\//g, '/');
+                result = result.replace(/(<img[^>]*?src=)(["'])(.*?)\2/gi, function(str, prev, x, src) {
+                    return prev + x + (dir + src.replace(/^\./, '')) + x;
+                });
+            }
+            
+            return result;
         },
         "default": function(text){
             return text;
@@ -154,9 +164,8 @@ var article = {
                     let item = pages[i];
                     let fn = this.plugins[path.extname(item.from)] || this.plugins["default"];
                     let options = item.options;
-
                     nunjucks.render(options.template || obj.template || "article.html", item.to, Object.assign({
-                        articleContent: fn(fs.readFileSync(item.from).toString(), options),
+                        articleContent: fn(fs.readFileSync(item.from).toString(), options, item),
                         articlePrev: this.urlItemOption(list[index  - 1]),
                         articleNext: this.urlItemOption(list[index  + 1])
                     }, options));
@@ -175,6 +184,18 @@ var article = {
             // 文章的 poster 属性，需要加工一下
             if(config.poster && !/:\/\//.test(config.poster)){
                 config.poster = path.join(path.dirname(config.link), config.poster).replace(/\\+/g, "/");
+            }
+            // 修正一下描述
+            if (config.homeDescription) {
+                var desc = config.homeDescription;
+                var link = config.link;
+                if (link) {
+                    var dir = '/' + link.replace(/[^\/]*$/, '').replace(/\/\//g, '/');
+                    desc = desc.replace(/(<img[^>]*?src=)(["'])(.*?)\2/gi, function(str, prev, x, src) {
+                        return prev + x + (dir + src.replace(/^\./, '')) + x;
+                    });
+                }
+                config.homeDescription = desc;
             }
             return config;
         }else{

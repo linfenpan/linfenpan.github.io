@@ -90,7 +90,7 @@ commander 通过处理 process.argv 列表，把参数转化为更容易编程�
 commander.parse(process.argv);
 </code></pre>
 <p>一个带有帮助命令的界面，已经轻松完成了:</p>
-<p><img src="./assert/pic1.png" alt="命令"></p>
+<p><img src="/article/20160114-node-commander//assert/pic1.png" alt="命令"></p>
 <hr>
 <h2>设置Options列表</h2>
 <pre><code class="prettyprint linenums lang-javascript">var commander = require(&quot;commander&quot;);
@@ -103,9 +103,9 @@ if(commander.ptest){
 }
 </code></pre>
 <p>运行命令:  -h<br>
-<img src="./assert/pic2.png" alt="运行命令"></p>
+<img src="/article/20160114-node-commander//assert/pic2.png" alt="运行命令"></p>
 <p>运行命令: -p 数据<br>
-<img src="./assert/pic3.png" alt="运行命令"></p>
+<img src="/article/20160114-node-commander//assert/pic3.png" alt="运行命令"></p>
 <hr>
 <h2>设置当前版本、用法</h2>
 <pre><code class="prettyprint linenums lang-javascript">var commander = require(&quot;commander&quot;);
@@ -115,10 +115,10 @@ if(commander.ptest){
         .parse(process.argv);
 </code></pre>
 <p>运行: -h<br>
-<img src="./assert/seeHelp.png" alt="帮助"><br>
+<img src="/article/20160114-node-commander//assert/seeHelp.png" alt="帮助"><br>
 留意usage，其中的信息，已经被更新了</p>
 <p>运行: -V<br>
-<img src="./assert/version.png" alt="版本"><br>
+<img src="/article/20160114-node-commander//assert/version.png" alt="版本"><br>
 能看到版本信息</p>
 <hr>
 <h2>对传入参数进行处理</h2>
@@ -131,7 +131,7 @@ console.log(&quot;integer: %d&quot;, commander.integer);
 </code></pre>
 <p>-i 接受1个参数，此参数会经过 parseInt 的操作<br>
 运行 -i 113.xx<br>
-<img src="./assert/parseInt.png" alt="parseInt"></p>
+<img src="/article/20160114-node-commander//assert/parseInt.png" alt="parseInt"></p>
 <hr>
 <h2>传入参数验证，验证不通过，采用默认值</h2>
 <pre><code class="prettyprint linenums lang-javascript">var commander = require(&quot;commander&quot;);
@@ -161,7 +161,7 @@ console.log(&quot;integer: %d&quot;, commander.integer);
 commander.parse(process.argv);
 </code></pre>
 <p>运行: setup xxx -s nooo<br>
-<img src="./assert/command.png" alt="命令效果"></p>
+<img src="/article/20160114-node-commander//assert/command.png" alt="命令效果"></p>
 <hr>
 <h2>帮助补充</h2>
 <pre><code class="prettyprint linenums lang-javascript">commander.on(&quot;--help&quot;, function(){
@@ -173,7 +173,7 @@ commander.parse(process.argv);
 });
 </code></pre>
 <p>运行 -h<br>
-<img src="./assert/moreHelp.png" alt="帮助补充"></p>
+<img src="/article/20160114-node-commander//assert/moreHelp.png" alt="帮助补充"></p>
 
         </div>
         <!-- END 内容容器 -->
@@ -197,7 +197,7 @@ commander.parse(process.argv);
     <div class="credits">
         <div class="container">
             <span class="text">
-                @2018 da宗熊<br>
+                @2019 da宗熊<br>
                 Email: 1071093121@qq.com
             </span>
             <span class="logo"></span>

@@ -102,12 +102,12 @@ XX：..熊熊，你辛苦了<br>
 <p>处于 css3 红红火火的时期，大家对 transform: scale 应该不陌生。<br>
 只要给 body 来一发 transform: scale，整个页面就缩放成需要的大小，妥妥的，但事实呢？</p>
 <p>如，有设计稿，宽度是 640px 的，而在 320px 的屏幕下，需要给 body 设置 <code>transform: scale(0.5);</code>，效果如下:<br>
-<img src="./assert/scale05.png" alt="scale0.5"><br>
+<img src="/article/20160215-wap-page//assert/scale05.png" alt="scale0.5"><br>
 当页面滚动到最底部时，多出的空白，到底是什么鬼？？</p>
 <p>默然回首，真相只有一个！<code>transform: scale(0.5)</code> 虽然在视觉上，缩小的页面，但其实际大小、占据的空间，并没有改变。<br>
 具体可看<a target="_blank" href="http://sentsin.com/web/999.html">transform你不知道的那些事</a></p>
 <p>到此为止，可看出 transform:scale 做缩放，是个坑，请果断放弃之。但是，其思想，非常值得学习，我们可以使用 zoom 代替 transform: scale，达到缩放的效果:<br>
-<img src="./assert/zoom.png" alt="zoom"><br>
+<img src="/article/20160215-wap-page//assert/zoom.png" alt="zoom"><br>
 效果还是不错的，为什么 zoom 可以，请参考:<a target="_blank" href="http://www.zhangxinxu.com/wordpress/2015/11/zoom-transform-scale-diff/">3金大神的文章</a><br>
 在根元素上设置 zoom，能更好的与 rem 玩耍哦~</p>
 <p>..........<br>
@@ -125,7 +125,7 @@ XX：( ╯□╰ )<br>
 其中 <code>initial-scale=1.0</code>、<code>minimum-scale=1.0</code>、 <code>maximum-scale=1.0</code> 分别用于 设置页面原始、最小、最大的缩放比例。<br>
 通过修改上述3个值，可控制页面的整体缩放。</p>
 <p>640px稿子，320px屏幕下：<br>
-<img src="./assert/meta.png" alt="meta"><br>
+<img src="/article/20160215-wap-page//assert/meta.png" alt="meta"><br>
 效果颇肥~，就连某些同学要求的 260px 屏幕下，文字也完美缩放了。</p>
 <p>神功大成，日出东方，唯我不败啊......<br>
 ..........<br>
@@ -194,7 +194,7 @@ H君：对了，页面弄回原本大小吧，老大说现在不好看。<br>
     <div class="credits">
         <div class="container">
             <span class="text">
-                @2018 da宗熊<br>
+                @2019 da宗熊<br>
                 Email: 1071093121@qq.com
             </span>
             <span class="logo"></span>

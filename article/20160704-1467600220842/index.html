@@ -128,7 +128,7 @@ parameter: 可选，一些参数，如Accept请求头的q参数， Content-Type�
 }).then(...);
 </code></pre>
 <p>内容，将会在 <code>Form Data</code>中<br>
-<img src="./assert/form.png" alt="表单方式"></p>
+<img src="/article/20160704-1467600220842//assert/form.png" alt="表单方式"></p>
 <p>如果 content-type 为 application/json，则会在 <code>Request Payload</code> 中</p>
 <pre><code class="prettyprint linenums lang-javascript">$.ajax({
   method: 'POST',
@@ -137,7 +137,7 @@ parameter: 可选，一些参数，如Accept请求头的q参数， Content-Type�
   contentType: 'application/json'
 }).then(...);
 </code></pre>
-<p><img src="./assert/json.png" alt="json方式"></p>
+<p><img src="/article/20160704-1467600220842//assert/json.png" alt="json方式"></p>
 <p>之所以看到<code>x=1</code> 完全是因为jquery对json数据，做了一层转为，改改</p>
 <pre><code class="prettyprint linenums lang-javascript">$.ajax({
   method: 'POST',
@@ -146,7 +146,7 @@ parameter: 可选，一些参数，如Accept请求头的q参数， Content-Type�
   contentType: 'application/json'
 }).then(...);
 </code></pre>
-<p><img src="./assert/json2.png" alt="json方式"><br>
+<p><img src="/article/20160704-1467600220842//assert/json2.png" alt="json方式"><br>
 以此方式提交，到后端时，能完整获取到json数据，包含正确的格式</p>
 <hr>
 <p>补充一点，<br>
@@ -192,7 +192,7 @@ server.listen(3000)
     <div class="credits">
         <div class="container">
             <span class="text">
-                @2018 da宗熊<br>
+                @2019 da宗熊<br>
                 Email: 1071093121@qq.com
             </span>
             <span class="logo"></span>

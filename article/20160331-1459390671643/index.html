@@ -86,7 +86,7 @@
 安装完成后，需要在C盘，亲自建立data/db文件夹【这个略坑】，才能正常使用。</p>
 <p>之后，在安装 Robomongo【一款mongodb的图形化软件】，进行图形化的处理。<br>
 在控制台运行 mongod，正式启动db。</p>
-<p><img src="./assert/robomongo.png" alt="robomongo登录"></p>
+<p><img src="/article/20160331-1459390671643//assert/robomongo.png" alt="robomongo登录"></p>
 <p>填好信息，connect进入。</p>
 <hr>
 <h2>插入操作</h2>
@@ -119,7 +119,7 @@
 </code></pre>
 <p>查询 age 大于 16 的所有数据，并且只返回其中的 <code>name/status/_id</code> 字段。<br>
 木有错，所有新增的数据，都会自带一个 <code>_id</code> 的字段，用于标志数据的唯一性。<br>
-<img src="./assert/find.png" alt="搜索结果"></p>
+<img src="/article/20160331-1459390671643//assert/find.png" alt="搜索结果"></p>
 <p>搜索接受两个参数，第1个，为条件【类似where】，第2个为限制【类似返回数据列，1为返回，0不返回】。<br>
 “限制”中，除了 <code>_id</code> 其它的数据，禁止 0 和 1 混合使用。<br>
 下面的查询，报错:</p>
@@ -155,7 +155,7 @@
     cursor.objsLeftInBatch();
 </code></pre>
 <p>将会打印出第1条找到的数据，以及在游标中，剩下的数据量。<br>
-<img src="./assert/cursor.png" alt="游标"></p>
+<img src="/article/20160331-1459390671643//assert/cursor.png" alt="游标"></p>
 <p>4、查询优化</p>
 <pre><code class="prettyprint linenums lang-sql">    db.users.createIndex({ status: 1 });
 </code></pre>
@@ -175,7 +175,7 @@
     );
 </code></pre>
 <p>年龄大于10的1条数据，把 status 更新为2，没错，仅1条数据:<br>
-<img src="./assert/update.png" alt="更新"></p>
+<img src="/article/20160331-1459390671643//assert/update.png" alt="更新"></p>
 <p>如果要更新多条数据，可设置第3个参数为 <code>{multi: true}</code></p>
 <pre><code class="prettyprint linenums lang-sql">    db.users.update(
         { age: {$gt: 10} },
@@ -189,7 +189,7 @@
         { name: &quot;da宗熊&quot;, age: 20, status: 3, weight: 85 }
     );
 </code></pre>
-<p><img src="./assert/update-data.png" alt="更新数据列"></p>
+<p><img src="/article/20160331-1459390671643//assert/update-data.png" alt="更新数据列"></p>
 <p>可以看到，旧的数据中，甚至连 <code>weight</code> 也插入了。<br>
 感觉，就更 javascript 一样，保存的，其实就是个对象吧？</p>
 <hr>
@@ -240,7 +240,7 @@
     <div class="credits">
         <div class="container">
             <span class="text">
-                @2018 da宗熊<br>
+                @2019 da宗熊<br>
                 Email: 1071093121@qq.com
             </span>
             <span class="logo"></span>

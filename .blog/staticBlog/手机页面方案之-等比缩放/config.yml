@@ -20,5 +20,5 @@ options:
         description: >
             介绍移动端页面等比缩放的几种常用方法，包括所有字体和图片
         homeDescription: >
-            <img src="/20160215/wap-page/assert/home.jpg" />
+            <img src="./assert/home.jpg" />
             移动端等比缩放页面的几种方式，适用于简单的站点。

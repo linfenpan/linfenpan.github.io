@@ -124,9 +124,9 @@ var list = str.split(&quot;&quot;); // ⇒ [&quot;#&quot;, &quot;i&quot;, &quot;
 <hr>
 <h2>节点组织</h2>
 <p>字符串解析出来的，实际上，可以组织为一个数据树。如此字符: &quot;#pt&gt;.ch1+.chi2&quot;，最终解析如下:</p>
-<p><img src="./assert/tree.png" alt="树"></p>
+<p><img src="/article/20151111-emmet2html//assert/tree.png" alt="树"></p>
 <p>编写一个节点类，支持相关的语法：</p>
-<p><img src="./assert/node.png" alt="节点类"></p>
+<p><img src="/article/20151111-emmet2html//assert/node.png" alt="节点类"></p>
 <hr>
 <h2>工具方法</h2>
 <p>因为采用了 逐个字符编译 的方法，所以，接下来的重点，就是对 split 之后的 array 对象的查找。我们需要几个方法，帮助我们快速解析 array。</p>
@@ -195,7 +195,7 @@ function toNextBracket(list){
 <hr>
 <h2>编译</h2>
 <p>最后剩下的，就是对字符串split后的数组，进行解析了。方法很简单，一个循环，进行swtich/case判定即可:</p>
-<p><img src="./assert/case.png" alt="case判断">;</p>
+<p><img src="/article/20151111-emmet2html//assert/case.png" alt="case判断">;</p>
 <hr>
 <h2>最后</h2>
 <p>实际上，还是编码的过程，还是遇到很多坑的，如默认标签，如 &quot;^&quot;符号的操作，还有更多像&quot;data=123,age=10&quot;转为属性之类的问题。</p>
@@ -224,7 +224,7 @@ function toNextBracket(list){
     <div class="credits">
         <div class="container">
             <span class="text">
-                @2018 da宗熊<br>
+                @2019 da宗熊<br>
                 Email: 1071093121@qq.com
             </span>
             <span class="logo"></span>
