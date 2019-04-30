@@ -177,16 +177,24 @@ $(function(){
   if ($root.find('[data-pjax-container]').length <= 0) { return; }
 
   var pjax = $.pjax($root, { cache: true, animateTime: 0 });
+  var pjaxScrollMap = {};
 
   $('body').on('click', 'a[data-pjax]', function() {
     if (!$.pjax.support) { return true; }
+    // pjaxScrollMap[location.href] = window.scrollY;
     pjax.push(this);
     return false;
   });
 
-  // 请求完成时，滚动到页面顶部
-  pjax.on('pjax:success', function() {
-    $('body,html').animate({ scrollTop: 0 }, 200);
+  // 渲染完成时，滚动历史记录的位置
+  // pjax.on('dom:beforeshow', function(url) {
+  //   $(window).scrollTop(pjaxScrollMap[url] || 0);
+  // });
+  // pjax.on('dom:show', function(url) {
+  //   $('body,html').animate({ scrollTop: pjaxScrollMap[url] || 0 }, 60);
+  // });
+  pjax.on('pjax:request', function(url) {
+    $('body,html').animate({ scrollTop: 0 || 0 }, 120);
   });
 
   // loading 效果
@@ -202,7 +210,7 @@ $(function(){
   }
 
   // 设置导航、代码格式化
-  pjax.on('dom:ready', function($dom) {
+  pjax.on('dom:ready', function(url, $dom) {
     // 应该做文章页面的严格判定，才比较合理的说..
     var type = $dom.attr('data-type');
     if (type) {

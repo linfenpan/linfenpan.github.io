@@ -1,4 +1,4 @@
-/* By da宗熊 2017-06-19 */
+/* By da宗熊 2019-04-30 */
 /** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
 /** module: 主体内容 */
 .content {
@@ -20,11 +20,9 @@
   background: #fff;
   word-wrap: break-word;
   word-break: break-all;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .article-cnt:after {
   content: " ";
@@ -34,7 +32,6 @@
 .article-cnt .title .link {
   font-size: 2.2rem;
   color: #2D3642;
-  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 .article-cnt .title .link:hover {
@@ -77,10 +74,8 @@
   max-width: 100%;
   padding: 3px;
   margin-bottom: 10px;
-  -webkit-box-shadow: 1px 1px 2px 1px #D6D6D6;
-          box-shadow: 1px 1px 2px 1px #D6D6D6;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-shadow: 1px 1px 2px 1px #D6D6D6;
+  box-sizing: border-box;
 }
 .article-cnt .desc:after {
   content: " ";
@@ -107,7 +102,6 @@
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  -webkit-transition: width 0.3s ease-in-out;
   transition: width 0.3s ease-in-out;
 }
 .article-cnt .more:hover {
@@ -126,7 +120,7 @@
   background-image: url(../assert/css/1x/post-formats/note.png);
 }
 @media (max-width: 768px) {
-  .content {
+  .article-cnt .content {
     width: 100%;
     padding: 10px 0 10px 0;
   }

@@ -1,4 +1,4 @@
-/* By da宗熊 2017-06-19 */
+/* By da宗熊 2019-04-30 */
 /**
 * @description: 文章内容
 * @author: da宗熊
@@ -7,8 +7,7 @@
 /** 只分4个段，size >= 1200 大, 992 <= size <= 1199 中 md, 768 <= size <= 991 小 sm, size <= 767 移动 xs */
 .article {
   margin: 25px auto 15px auto;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .article .bread {
   padding: 15px;
@@ -18,7 +17,6 @@
 .article .bread a {
   margin: 0 5px;
   color: #654646;
-  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 .article .bread a:hover {
@@ -84,8 +82,7 @@
   color: #555;
 }
 .articleCnt .content code {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
   padding: 2px 5px;
   background: #f7f7f9;
@@ -96,8 +93,7 @@
   max-width: 100%;
   padding: 5px;
   margin: 5px 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .articlePager {
   padding: 10px 15px;
@@ -111,7 +107,6 @@
   color: #fff;
   background: #212831;
   border-radius: 3px;
-  -webkit-transition: background-color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -179,7 +174,6 @@
 }
 .markdown a {
   color: #4fa1db;
-  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 .markdown a:hover {
@@ -270,8 +264,7 @@
 }
 .markdown .prettyprint.linenums {
   background: #f7f7f7;
-  -webkit-box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset;
-          box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset;
+  box-shadow: 40px 0 0 #FBFBFC inset, 41px 0 0 #ECECF0 inset;
 }
 .markdown ol.linenums {
   color: #1E347B;

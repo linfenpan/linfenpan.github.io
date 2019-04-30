@@ -1,4 +1,4 @@
-/* By da宗熊 2017-06-19 */
+/* By da宗熊 2019-04-30 */
 /**
 * @description: 站点公共样式
 * @author: da宗熊
@@ -17,8 +17,7 @@ body {
   min-height: 100%;
   padding-bottom: 7.5rem;
   background: #f2f2f2 url(../assert/css/body.jpg) repeat;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 /** module: 导航菜单 */
 .navigation {
@@ -36,7 +35,6 @@ body {
   z-index: 10;
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
-  -webkit-transition: height .7s ease;
   transition: height .7s ease;
 }
 .navigation ._box {
@@ -46,7 +44,6 @@ body {
   display: inline-block;
   padding: 1.5rem 2rem;
   color: #fff;
-  -webkit-transition: background-color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out;
 }
 .navigation .item:hover,
@@ -70,7 +67,6 @@ body {
   height: 3px;
   margin-top: 3px;
   background: #fff;
-  -webkit-transition: opacity .3s ease, -webkit-transform .2s ease;
   transition: opacity .3s ease, -webkit-transform .2s ease;
   transition: opacity .3s ease, transform .2s ease;
   transition: opacity .3s ease, transform .2s ease, -webkit-transform .2s ease;
@@ -117,7 +113,6 @@ body {
     opacity: 1;
     -webkit-transform: translateY(0) translateZ(0);
             transform: translateY(0) translateZ(0);
-    -webkit-transition: opacity .15s linear, -webkit-transform .15s linear;
     transition: opacity .15s linear, -webkit-transform .15s linear;
     transition: opacity .15s linear, transform .15s linear;
     transition: opacity .15s linear, transform .15s linear, -webkit-transform .15s linear;
@@ -128,8 +123,7 @@ body {
     width: 100%;
     padding: 0 20px;
     background: none;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
     -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
             transform: translateY(-50%);
@@ -141,9 +135,7 @@ body {
     width: 100%;
     border-bottom: 1px solid #363F4A;
     background-color: #2D3642;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    -webkit-transition: none;
+    box-sizing: border-box;
     transition: none;
   }
   .navigation .item:hover {
@@ -169,7 +161,6 @@ body {
   border: 5px solid #fff;
   border-radius: 50%;
   vertical-align: middle;
-  -webkit-transition: border-radius 0.3s ease-in-out;
   transition: border-radius 0.3s ease-in-out;
 }
 .header .home:hover {
@@ -183,7 +174,6 @@ body {
   height: 100%;
   border-radius: 50%;
   vertical-align: bottom;
-  -webkit-transition: border-radius 0.3s ease-in-out;
   transition: border-radius 0.3s ease-in-out;
 }
 .header .title {
@@ -194,7 +184,6 @@ body {
 }
 .header .author {
   color: #fff;
-  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 .header .author:hover {
@@ -303,17 +292,14 @@ body {
   padding: 6px;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.8);
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity .3s ease;
   transition: opacity .3s ease;
 }
 .pjax-preloader.on {
   opacity: 1;
   visibility: visible;
-  -webkit-transition: opacity .3s ease, visibility .3s ease .3s;
   transition: opacity .3s ease, visibility .3s ease .3s;
 }
 .pjax-preloader span {

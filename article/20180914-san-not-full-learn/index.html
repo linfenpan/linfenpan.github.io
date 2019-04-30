@@ -63,7 +63,7 @@
     <!-- 面包屑 -->
     <div class="bread">
         <span>当前位置:</span>
-        <a href="/index.html" data-pjax>首页</a>
+        <a href="/" data-pjax>首页</a>
         <span class="sep">/</span>
         <a href="/notelist/list_1.html" data-pjax>笔记</a>
     </div>
@@ -220,7 +220,7 @@ var myTest = new MyTest({
 myTest.attach(document.body);
 </code></pre>
 <p>效果如下:<br>
-<img src="/article/20180914-san-not-full-learn/http://g.fp.ps.netease.com/km/file/5b924e278b742760596ca6bdRoMFgka0" alt="jdfw.gif"></p>
+<img src="http://g.fp.ps.netease.com/km/file/5b924e278b742760596ca6bdRoMFgka0" alt="jdfw.gif"></p>
 <p>更多的使用，可查阅官网。下面仅介绍一些 <code>san.js + webpack</code> 使用时，与个人做项目时，遇到的一些问题，以及解决方案。</p>
 <h1>遇到的问题</h1>
 <h2>san-loader (0.0.7版本)</h2>
@@ -256,7 +256,7 @@ export default {
 </code></pre>
 <p>在 <code>san-loader</code> 的作用下，<code>index.san</code> 会被划分为 <code>html</code>，<code>css</code>，<code>js</code> 三块，并且交由 <code>webpack</code> 中，对应的 <code>loader</code> 进行编译、打包。</p>
 <p>查看了<code>san-loader</code> 的源码:<br>
-<img src="/article/20180914-san-not-full-learn/http://g.fp.ps.netease.com/km/file/5b6d5a465e602739695c22e5lGXN1z4C" alt="Popo截图2018810172619.png"><br>
+<img src="http://g.fp.ps.netease.com/km/file/5b6d5a465e602739695c22e5lGXN1z4C" alt="Popo截图2018810172619.png"><br>
 可得知 <code>html</code> 部分交由 <code>html-loader</code> 处理；<code>css</code> 部分交由<code>style-loader</code>处理；<code>js</code>部分，交由<code>babel-loader</code>处理。</p>
 <blockquote>
 <p>PS: 如果无法编译出内容或报错，可查看项目，是否已经引用了 html-loader、style-loader 和 babel-loader</p>
@@ -332,10 +332,10 @@ class CompC extends CompA {
 }
 </code></pre>
 <p>当 <code>CompB</code> 继承 <code>CompA</code> 时，<code>san.herits</code> 代码如下:<br>
-<img src="/article/20180914-san-not-full-learn/http://g.fp.ps.netease.com/km/file/5b6d65dc7f9d2a39e2670afaZIrT9XpL" alt="Popo截图2018810181539.png"><br>
+<img src="http://g.fp.ps.netease.com/km/file/5b6d65dc7f9d2a39e2670afaZIrT9XpL" alt="Popo截图2018810181539.png"><br>
 <code>static</code> 的属性，被完美忽略了。于是 <code>CompB</code> 并没有引入到组件 <code>Navbar</code>。</p>
 <p>而 <code>CompC</code> 继承 <code>CompA</code> 时，<code>babel</code> 的继承代码:<br>
-<img src="/article/20180914-san-not-full-learn/http://g.fp.ps.netease.com/km/file/5b6d66576f04940d6059f610R5zCv2oX" alt="Popo截图2018810181746.png"><br>
+<img src="http://g.fp.ps.netease.com/km/file/5b6d66576f04940d6059f610R5zCv2oX" alt="Popo截图2018810181746.png"><br>
 [抽自 babel-runtime/helpers/inherits.js]<br>
 可见倒数第二行，<code>subClass.__proto__ = superClass</code>，意图继承  <code>superClass</code> 的静态属性，可惜的是 <code>__proto__</code> 属性，在当前的 <code>IE</code> 下，全军覆没。[做手机端的同学，木有这个烦恼]</p>
 <p>被迫无奈，如果要继承 <code>static</code> 属性，须自己编写继承代码，这是之前写好的代码，可做参考:</p>
@@ -438,7 +438,7 @@ export default class Abstract extends san.Component {
 </code></pre>
 <h2>san-store/connect</h2>
 <p>在 <code>san-store</code> 的 <code>src/connect/createConnector</code>中，有这么一段脚本:<br>
-<img src="/article/20180914-san-not-full-learn/http://g.fp.ps.netease.com/km/file/5b925010143cfa44fc75ca8bURGFjGTB" alt="xxx.png"></p>
+<img src="http://g.fp.ps.netease.com/km/file/5b925010143cfa44fc75ca8bURGFjGTB" alt="xxx.png"></p>
 <p>如果该组件，已经通过 <code>connect.san</code> 绑定过 <code>san-store</code> 了，将不会重复去初始化 该组件的 <code>actions</code>，本意是很好的。<br>
 但是如果我们子组件是继承父组件而来的，而父组件使用过了 <code>connect.san</code>，那么子组件的 <code>connect.san</code> 的绑定，将会失效。</p>
 <p>为解决此问题，我们可以把子组件的<code>prototype</code>中的<code>actions</code>值，置为<code>null</code>，然后再调用 <code>connect.san</code>，即可解决</p>

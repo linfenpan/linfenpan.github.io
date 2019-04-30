@@ -1,4 +1,4 @@
-/* By da宗熊 2017-06-19 */
+/* By da宗熊 2019-04-30 */
 /*
 * @description: 站点基础样式
 * @author: da宗熊
@@ -83,74 +83,62 @@ img {
 .col-12 {
   float: left;
   width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-11 {
   float: left;
   width: 91.66666667%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-10 {
   float: left;
   width: 83.33333333%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-9 {
   float: left;
   width: 75%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-8 {
   float: left;
   width: 66.66666667%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-7 {
   float: left;
   width: 58.33333333%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-6 {
   float: left;
   width: 50%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-5 {
   float: left;
   width: 41.66666667%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-4 {
   float: left;
   width: 33.33333333%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-3 {
   float: left;
   width: 25%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-2 {
   float: left;
   width: 16.66666667%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-1 {
   float: left;
   width: 8.33333333%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .col-offset-12 {
   margin-left: 100%;
@@ -192,74 +180,62 @@ img {
   .col-md-12 {
     float: left;
     width: 100%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-11 {
     float: left;
     width: 91.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-10 {
     float: left;
     width: 83.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-9 {
     float: left;
     width: 75%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-8 {
     float: left;
     width: 66.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-7 {
     float: left;
     width: 58.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-6 {
     float: left;
     width: 50%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-5 {
     float: left;
     width: 41.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-4 {
     float: left;
     width: 33.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-3 {
     float: left;
     width: 25%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-2 {
     float: left;
     width: 16.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-md-1 {
     float: left;
     width: 8.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-offset-md-12 {
     margin-left: 100%;
@@ -302,74 +278,62 @@ img {
   .col-sm-12 {
     float: left;
     width: 100%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-11 {
     float: left;
     width: 91.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-10 {
     float: left;
     width: 83.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-9 {
     float: left;
     width: 75%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-8 {
     float: left;
     width: 66.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-7 {
     float: left;
     width: 58.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-6 {
     float: left;
     width: 50%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-5 {
     float: left;
     width: 41.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-4 {
     float: left;
     width: 33.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-3 {
     float: left;
     width: 25%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-2 {
     float: left;
     width: 16.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-sm-1 {
     float: left;
     width: 8.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-offset-sm-12 {
     margin-left: 100%;
@@ -412,74 +376,62 @@ img {
   .col-xs-12 {
     float: left;
     width: 100%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-11 {
     float: left;
     width: 91.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-10 {
     float: left;
     width: 83.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-9 {
     float: left;
     width: 75%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-8 {
     float: left;
     width: 66.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-7 {
     float: left;
     width: 58.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-6 {
     float: left;
     width: 50%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-5 {
     float: left;
     width: 41.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-4 {
     float: left;
     width: 33.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-3 {
     float: left;
     width: 25%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-2 {
     float: left;
     width: 16.66666667%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-xs-1 {
     float: left;
     width: 8.33333333%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
   }
   .col-offset-xs-12 {
     margin-left: 100%;

@@ -16,7 +16,7 @@
     <!-- 面包屑 -->
     <div class="bread">
         <span>当前位置:</span>
-        <a href="{{ url + root }}index.html" data-pjax>首页</a>
+        <a href="{{ url + root }}" data-pjax>首页</a>
         <span class="sep">/</span>
         <a href="{{ url + root }}{{ blogListObject[type].link | default('#') }}" data-pjax>{{ blogListObject[type].name | default("未知") }}</a>
     </div>

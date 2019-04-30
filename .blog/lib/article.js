@@ -30,7 +30,10 @@ var article = {
             if (link) {
                 var dir = '/' + link.replace(/[^\/]*$/, '').replace(/\/\//g, '/');
                 result = result.replace(/(<img[^>]*?src=)(["'])(.*?)\2/gi, function(str, prev, x, src) {
-                    return prev + x + (dir + src.replace(/^\./, '')) + x;
+                    if (/^\./.test(src)) {
+                        return prev + x + (dir + src.replace(/^\./, '')) + x;
+                    }
+                    return str;
                 });
             }
             
@@ -192,7 +195,10 @@ var article = {
                 if (link) {
                     var dir = '/' + link.replace(/[^\/]*$/, '').replace(/\/\//g, '/');
                     desc = desc.replace(/(<img[^>]*?src=)(["'])(.*?)\2/gi, function(str, prev, x, src) {
-                        return prev + x + (dir + src.replace(/^\./, '')) + x;
+                        if (/^\./.test(src)) {
+                            return prev + x + (dir + src.replace(/^\./, '')) + x;
+                        }
+                        return str;
                     });
                 }
                 config.homeDescription = desc;
