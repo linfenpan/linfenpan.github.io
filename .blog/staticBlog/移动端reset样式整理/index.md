@@ -26,6 +26,8 @@ html,body,form,fieldset,p,div,h1,h2,h3,h4,h5,h6,section,article {
 
 body {
   font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif,"microsoft yahei";
+  // 移动端用此行样式，修正文字 line-height 不居中的问题
+  // font-family: -apple-system-font,PingFangSC,Microsoft Yahei,Heiti SC,miui,sans-serif,arial,helvetica;
   word-break: break-all;
 }
 
