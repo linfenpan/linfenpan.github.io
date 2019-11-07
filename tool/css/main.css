@@ -131,6 +131,8 @@
   margin-left: 10px;
   border: 6px solid rgba(221, 221, 221, 0.5);
   background: #fff;
+  border-radius: 4px;
+  box-shadow: 4px 4px 6px #999;
 }
 .content .preview .wrap {
   position: absolute;
