@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>二维码生成工具</title>
+  <link rel="stylesheet" href="/css/base.css" />
+  <style>
+    body { font-size: 18px; }
+    label { display: block; margin: 5px 0; }
+    input { border: 1px solid #ddd; padding: 4px 8px; }
+    .long { width: 22em; }
+    #result {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    img {
+      margin: 0 auto;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <label>
+    二维地址: <input type="text" id="url" class="long" />
+  </label>
+  <label>
+    图片尺寸: <input type="number" id="size" value="100" />
+  </label>
+  <label>
+    四周留白: <input type="number" id="space" />
+  </label>
+  <button onclick="create()">创建</button>
+
+  <br/>
+  <div id="result"></div>
+  <script src="./qrcode.min.js"></script>
+  <script>
+    var elUrl = document.getElementById('url'),
+      elSize = document.getElementById('size'),
+      elSpace = document.getElementById('space');
+    var elResult = document.getElementById('result');
+
+    function create() {
+      var url = elUrl.value.trim();
+      if (!url) { return alert('输入连接'); }
+      var size = parseInt(elSize.value.trim());
+      var space = parseInt(elSpace.value.trim()) || 0;
+      var width = size - 2 * space;
+
+      elResult.innerHTML = '';
+      var qrcode = new QRCode(elResult, {
+        width: width,
+        height: width
+      });
+      qrcode.makeCode(url);
+
+
+      // 增加间距
+      if (space > 0) {
+        setTimeout(() => {
+          elResult.innerHTML = '';
+          var elImage = qrcode._oDrawing._elImage;
+          var canvas = document.createElement('canvas');
+          canvas.width = canvas.height = size;
+          var context = canvas.getContext('2d');
+          context.drawImage(elImage, space, space, width, width);
+
+          var image = document.createElement('img');
+          image.setAttribute('src', canvas.toDataURL());
+          elResult.appendChild(image);
+        }, 200);
+      }
+      
+    }
+  </script>
+</body>
+</html>
