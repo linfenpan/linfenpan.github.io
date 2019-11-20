@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width">
+    <title>解决IOS键盘收起时，界面错乱、不归位的问题</title>
+    <meta name="description" content="IOS键盘收起后，在wkWebview下，有一定几率出现界面错乱，样式偏移等问题
+" />
+    <meta name="keywords" content="IOS,键盘" />
+    <link rel="stylesheet" href="/css/all.css" charset="utf-8">
+  <!-- <link rel="stylesheet" href="/css/article.css" charset="utf-8"> -->
+</head>
+<body>
+    <!-- 导航 by 小亮 -->
+    <div class="navigation">
+        <div class="_box">
+            <div class="container menu">
+                <a data-type="index" href="/" class="item " data-pjax>
+                    主页
+                </a><a data-type="blog" href="/bloglist/list_1.html" class="item " data-pjax>
+                    博客
+                </a><a data-type="plugin" href="/pluginlist/list_1.html" class="item " data-pjax>
+                    插件
+                </a><a data-type="note" href="/notelist/list_1.html" class="item active" data-pjax>
+                    笔记
+                </a><a target="_blank" href="/show/" class="item ">
+                    作品展
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航按钮 -->
+    <div class="navigation-toggle hidden show-xs">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 顶部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 冒泡背景 -->
+            <canvas id="canvas" class="bubbles" width="500" height="300"></canvas>
+
+            <a href="/" class="home" data-pjax>
+                <img src="/assert/personal.png" alt="da宗熊" class="logo">
+            </a>
+            <h1 class="title">
+                <a href="/" class="author" data-pjax>
+                    da宗熊
+                </a>
+            </h1>
+
+        </div>
+    </header>
+    <!-- END 顶部 -->
+
+    <!-- pjax 单页面改造 -->
+    <div id="pjax-container">
+<article class="article container" data-type="note" data-pjax-container>
+    <!-- 面包屑 -->
+    <div class="bread">
+        <span>当前位置:</span>
+        <a href="/" data-pjax>首页</a>
+        <span class="sep">/</span>
+        <a href="/notelist/list_1.html" data-pjax>笔记</a>
+    </div>
+
+    <!-- 内容 -->
+    <div class="articleCnt">
+        <h1 class="title">
+            解决IOS键盘收起时，界面错乱、不归位的问题
+        </h1>
+        <div class="meta">
+            11-20,2019 <span class="sep">/</span> da宗熊
+            <p class="tag">
+                Tags:
+                    <span>前端</span>
+            </p>
+        </div>
+        <!-- 内容容器 -->
+        <div class="content markdown">
+            <h1>背景介绍</h1>
+<p>在 IOS 的 wkWebview 下，input 和 textarea 收起键盘时，一定概率导致界面错位，问题效果如下:<br>
+<img src="/article/20191120-1574243357132//asset/1.png" alt="命令"></p>
+<p>输入法的某些操作，会更容易触发此问题:<br>
+<img src="/article/20191120-1574243357132//asset/2.png" alt="命令"></p>
+<p>虽然用户滚动页面后，此问题就会自动修正，但毕竟体验不太友好。<br>
+要解决这个问题，我们可以给全体 input 和 textarea 增加 blur 时间，当输入法焦点离开时，触发一下 window.scrollTo 方法即可。</p>
+<h1>绑定事件</h1>
+<p>第一个想法，肯定就是事件代理了：</p>
+<pre><code class="prettyprint linenums lang-javascript">document.body.addEventListener('blur', function() {
+  window.scrollTo(0, 0);
+}, false);
+</code></pre>
+<p>在 body 层，监听到 blur 事件，然后就强制触发一下滚动。<br>
+但是很遗憾的，focus 和 blur 事件，均不支持冒泡。</p>
+<p>但作为类似的，有 focusin 和 focusout 事件，在 caniuse 上面，可看到手机上支持还不错（毕竟只管 IOS 的）。<br>
+<img src="/article/20191120-1574243357132//asset/3.png" alt="命令"></p>
+<p>于是代码如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">// 两者配套使用，记下 focusin 时的滚动位置，在 focusout 时修复
+let lastScrollY = null;
+document.body.addEventListener('focusin', () =&gt; { 
+  lastScrollY = window.scrollY;
+});
+document.body.addEventListener('focusout', () =&gt; {
+  window.scrollTo(0, lastScrollY);
+});
+</code></pre>
+<p>一切很美好，直到......</p>
+<p>部分输入法，有“完成”和“收起”两个功能，如百度输入法的数字、字母输入面板。<br>
+其中的“收起”功能，是不会触发 focusout 事件的。<br>
+如果是“收起”关闭输入法键盘，input重新获得焦点时，focusin 事件也不会触发。</p>
+<p>心如死灰中......<br>
+<img src="/article/20191120-1574243357132//asset/4.jpg" alt="命令"></p>
+<p>果然只有 focus 和 blur 才是王道，最糟糕的场景，就是不走事件代理而已。<br>
+给每个 input 和 textarea 添加监听。<br>
+但是，<br>
+w3c的dom事件模型，实际是有 捕获 和 冒泡 两个阶段的。<br>
+虽然 focus 和 blur 冒泡阶段无法监听，但是 捕获阶段 可以。</p>
+<p>代码变通一下:</p>
+<pre><code class="prettyprint linenums lang-javascript">// 两者配套使用，记下 focus 时的滚动位置，在 blur 时修复
+let lastScrollY = null;
+document.body.addEventListener('focus', () =&gt; { 
+  lastScrollY = window.scrollY;
+}, true);
+document.body.addEventListener('blur', () =&gt; {
+  window.scrollTo(0, lastScrollY);
+}, true);
+</code></pre>
+<p>完美、收工~~~</p>
+<h1>后来</h1>
+<p>个鬼呢，太难了。。。<br>
+实际会遇到以下的问题:</p>
+<ol>
+<li>多个输入框时，输入法自带的聚焦到上一个、下一个输入框的功能，会导致 blur 被触发多次，页面抖动<br>
+可增加计时器防抖<br>
+<img src="/article/20191120-1574243357132//asset/5.png" alt="命令"></li>
+</ol>
+<ol start="2">
+<li>遇到 position: fixed 有输入框的，要真正触发一下滚动位置变化一下，才能100%保证显示</li>
+</ol>
+<p>于是整合的最终代码如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">// 下面例子，就不增加元素类型的判定了
+let timer = null;
+let lastScrollY = null;
+
+document.body.addEventListener('focus', () =&gt; { 
+  clearTimeout(timer);
+  lastScrollY = window.scrollY;
+}, true);
+
+document.body.addEventListener('blur', () =&gt; {
+  clearTimeout(timer);
+  const y = lastScrollY;
+  // 第一次 setTimeout 防抖，第二次为了修复 position:fixed 有输入框的场景
+  timer = setTimeout(() =&gt; {
+    window.scrollTo(0, y + 1);
+    setTimeout(() =&gt; {
+      window.scrollTo(0, y);
+    }, 20);
+  }, 0);
+}, true);
+</code></pre>
+<p>另外，判断是否在 IOS 的 Webview，代码如下:</p>
+<pre><code class="prettyprint linenums lang-javascript">// @see https://github.com/wuliqiangqiang/is-webview
+const userAgent = navigator.userAgent;
+const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // 网上抄录的，此判断可自己调整
+const isIOSWebview = isIOS &amp;&amp; userAgent.indexOf(&quot; Mobile/&quot;) &gt; 0 &amp;&amp; userAgent.indexOf(&quot; Safari/&quot;) === -1;
+</code></pre>
+<p>the end<sub>，希望对大家有所帮助</sub></p>
+
+        </div>
+        <!-- END 内容容器 -->
+    </div>
+    <!-- END 内容 -->
+
+    <!-- 分页 -->
+
+    <div class="articlePager">
+                <a href="/article/20180914-san-not-full-learn/index.html" class="next" data-pjax>san.js的一次不完全实践</a>
+    </div>
+    <!-- END 分页 -->
+</article>
+    </div>
+    <!-- pjax 单页面 loading -->
+    <div class="pjax-preloader"><span></span></div>
+
+
+    <!-- 页脚 -->
+    <div class="credits">
+        <div class="container">
+            <span class="text">
+                @2019 da宗熊<br>
+                Email: 1071093121@qq.com
+            </span>
+            <span class="logo"></span>
+        </div>
+    </div>
+    <!-- END 页脚 -->
+
+<script>
+    window.ROOT_PATH = "/";
+</script>
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/jquery-pjax.min.js" charset="utf-8"></script>
+<script src="/js/common.js"></script>
+  <script src="/js/lib/prettify.js"></script>
+  <script src="/js/article.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+id: 1574243357132
+type: note
+time: 2019-11-20 17:49
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+poster: ./asset/poster.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 解决IOS键盘收起时，界面错乱、不归位的问题
+        keywords: IOS,键盘
+        description: >
+            IOS键盘收起后，在wkWebview下，有一定几率出现界面错乱，样式偏移等问题
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:
