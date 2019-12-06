@@ -31,7 +31,7 @@ body {
   word-break: break-all;
 }
 
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,iframe {
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
   display: block;
 }
 
