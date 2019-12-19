@@ -1,18 +1,40 @@
 /*!
     @author da宗熊
-    @version 1.0.0
+    @version 1.0.2
     @license ISC
-    @lastModify 2016-3-31
+    @lastModify 2019-12-19
     @repository https://github.com/linfenpan/collection/tree/master/plugins/swipe
     @example
         var swiper = new Swiper(element, options)
     @options
-        [index, ratio, elastic, slideTime, resetTime, nextDistance, interval, repeat, wrapSelector, childSelector, slideCallback]
+        [
+          index[开始索引], ratio[每个子元素，占总宽度百分比 < 1], elastic[阻力大小 < 1],
+          slideTime[滑动时间], resetTime[重置事件], nextDistance[到下一帧距离px或<1],
+          interval[自动切换到下一帧的时间], repeat[是否循环], wrapSelector[wrap选择器],
+          childSelector[子元素选择器], slideCallback[切换到下一帧的回调]
+        ]
+    @method
+        swiper.resize(); // 当内容宽度、高度有所变化时，调用
+        swiper.destroy(); // 销毁swiper
     @bug
-        no listener at "transitionEnd" event, the behavior of the timer may be strange when we are away from the page
+        不会监听 "transitionEnd" 事件, 当页面嵌入在app的webview同时启动自动轮询时，因为visibilitychange事件不触发，所以动画会出现一瞬间的跳动。当然，不在webview内，一切正常得很~
 */
 !function(window){
 var Empty = null;
+
+var keyWithPrefix = function(prefix, key){
+    return prefix ? prefix + key.replace(/^./, function(str){return str.toUpperCase()}) : key;
+}
+var prefix = "";
+;(function() {
+var list = ["webkit", "moz", "ms", ""];
+for(var i = 0, max = list.length; i < max; i++){
+    if(document[keyWithPrefix(list[i], "hidden")] !== undefined){
+        prefix = list[i];
+        break;
+    }
+}
+})();
 
 function noop(){ };
 
@@ -24,6 +46,13 @@ function addListener(elem, event, callback, isBubble){
     var arr = event.split(" ");
     arr.forEach(function(event, index){
         elem.addEventListener(event, callback, isBubble || false);
+    });
+};
+
+function removeListener(elem, event, callback, isBubble){
+    var arr = event.split(" ");
+    arr.forEach(function(event, index){
+        elem.removeEventListener(event, callback, isBubble || false);
     });
 };
 
@@ -68,7 +97,7 @@ var cssPrefix = (function(style){
 })(htmlStyle);
 
 function queryPrefix(key) {
-    if (htmlStyle.hasOwnProperty(key)) {
+    if (key in htmlStyle || htmlStyle.hasOwnProperty(key)) {
         return key;
     }
     return cssPrefix + key.slice(0, 1).toUpperCase() + key.slice(1);
@@ -160,8 +189,14 @@ var TouchHolder = (function(){
         addListener(elem, event.start, eventsHandler.onStart);
         addListener(elem, event.move, eventsHandler.onMove);
         addListener(elem, event.end, eventsHandler.onEnd);
-
         !isTouchMode && addListener(elem, event.needCatch, eventsHandler.onPrevent, true);
+
+        holder.destroy = function() {
+            removeListener(elem, event.start, eventsHandler.onStart);
+            removeListener(elem, event.move, eventsHandler.onMove);
+            removeListener(elem, event.end, eventsHandler.onEnd);
+            !isTouchMode && removeListener(elem, event.needCatch, eventsHandler.onPrevent, true);
+        };
 
         return holder;
     };
@@ -217,6 +252,17 @@ Swiper.prototype = {
         this.setIndex(this.index);
         this.startTimer();
         this.init = noop;
+
+        var ctx = this;
+        // 页面突然可见了
+        ctx.fnPageshow = function() {
+            // NOTICE: 事件是全部小写的
+            if (!document[keyWithPrefix(prefix, "hidden")]) {
+                ctx.stopTimer();
+                ctx.setIndex(ctx.index, false);
+                ctx.startTimer();
+            }
+        };
     },
     reset: function(options){
         options = options || { };
@@ -257,7 +303,7 @@ Swiper.prototype = {
         }
 
         // 如果数量不足，就强制进入非循环模式
-        if ((this.visibleCount - 1) * 2 + 1 > this.length) {
+        if (this.visibleCount + 2 > this.length) {
             this.repeat = false;
         }
 
@@ -313,7 +359,7 @@ Swiper.prototype = {
 
         // @notice 性能不好的浏览器，moving 时，会有些许卡顿，所以，缩减了移动点的间距，使之没那么卡
         spaceX *= 0.85;
-        
+
         // 添加阻力效果
         if (!self.repeat) {
             var elastic = self.elastic;
@@ -329,16 +375,19 @@ Swiper.prototype = {
     },
     moveEnd: function(point){
         var self = this, spaceX = point.spaceX;
-        if (Math.abs(spaceX) > self.nextDistance) {
-            if (spaceX > 0) {
-                self.prev();
-            } else {
-                self.next();
-            }
-        } else {
-            self.$moves.forEach(function(child){
-                setTranslateX(child, +child.dataset.startx, self.resetTime);
-            });
+        // 如果移动，没有被阻止，则继续
+        if (!self.isPreventMoving) {
+          if (Math.abs(spaceX) > self.nextDistance) {
+              if (spaceX > 0) {
+                  self.prev();
+              } else {
+                  self.next();
+              }
+          } else {
+              self.$moves.forEach(function(child){
+                  setTranslateX(child, +child.dataset.startx, self.resetTime);
+              });
+          }
         }
         self.isPreventMoving = false;
         self.startTimer();
@@ -366,7 +415,7 @@ Swiper.prototype = {
         self.$oldMoves = self.$moves;
         self.$moves = [];
 
-        var edgeCount = self.visibleCount - 1;
+        var edgeCount = Math.max(Math.ceil(self.visibleCount / 2), 1);
         edgeCount <= 0 && (edgeCount = 1);
 
         var start = index - edgeCount;
@@ -447,12 +496,22 @@ Swiper.prototype = {
                 this.next();
                 this.startTimer();
             }.bind(this), this.interval);
+
+            document.addEventListener(prefix + "visibilitychange", this.fnPageshow, false);
         }
     },
     stopTimer: function(){
         if (this.interval) {
             window.clearTimeout(this.timer);
+            document.removeEventListener(prefix + "visibilitychange", this.fnPageshow, false);
         }
+    },
+    // 销毁
+    destroy: function() {
+        this.stopTimer();
+        var holder = this.touchHolder;
+        holder && holder.destroy();
+        this.touchHolder = null;
     }
 };
 
