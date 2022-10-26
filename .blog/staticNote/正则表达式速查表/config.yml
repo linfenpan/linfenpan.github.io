@@ -1,0 +1,22 @@
+id: 1666765044934
+type: note
+time: 2022-10-26 14:17
+# 首页
+main: index.md
+# 默认模板
+template: article.html
+# 海报地址
+# poster: ./assert/help.png
+
+tags:
+    - 前端
+
+# 每个页面特有的参数
+options:
+    index.md:
+        author: da宗熊
+        title: 正则表达式速查表
+        keywords: 正则,备忘
+        description: 网上摘抄的一些正则规则，用于备忘
+        # 是否不显示首页描述 withoutHomeDescription: true
+        # 首页描述 homeDescription:
